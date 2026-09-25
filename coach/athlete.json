@@ -16,8 +16,8 @@
   "volume": {
     "start_run_km": 34,
     "peak_run_km": 62,
-    "start_hours": 10.5,
-    "peak_hours": 13.5,
+    "start_hours": 13.0,
+    "peak_hours": 16.0,
     "long_run_cap_km": 24
   },
   "notifications": {
@@ -25,66 +25,71 @@
     "weekly_review_weekday": 6,
     "weekly_review_hour": 19
   },
-  "sailing_source": "Google Sheet 'Team HL Planungstabelle 26/27' – Regatten + Helms Vorschlag; Vilamoura-Blöcke ca. 10 Tage",
+  "sailing_source": "Trainings- und Regattatermine laut Karl (Stand 25.09.2026)",
   "sailing": [
     {
-      "title": "Optiregatta",
-      "start": "2026-10-10",
-      "end": "2026-10-11",
-      "regatta_from": "2026-10-10"
+      "title": "Segeltraining",
+      "start": "2026-09-26",
+      "end": "2026-09-27"
     },
     {
-      "title": "IDM Chiemsee? / Reise + Vilamoura",
-      "start": "2026-10-15",
-      "end": "2026-10-26",
-      "regatta_from": "2026-10-15",
-      "tentative": true,
-      "regatta_to": "2026-10-18"
+      "title": "Training Vilamoura",
+      "start": "2026-10-17",
+      "end": "2026-11-01"
     },
     {
       "title": "Junior Europeans Vilamoura",
-      "start": "2026-11-10",
-      "end": "2026-11-19",
-      "regatta_from": "2026-11-15"
+      "start": "2026-11-07",
+      "end": "2026-11-14",
+      "regatta_from": "2026-11-10"
     },
     {
       "title": "GP1 Vilamoura",
-      "start": "2026-11-26",
-      "end": "2026-12-05",
-      "regatta_from": "2026-12-02"
+      "start": "2026-11-21",
+      "end": "2026-11-29",
+      "regatta_from": "2026-11-26"
     },
     {
-      "title": "Youth Worlds Vilamoura? + Camp Sagres/Portimão",
-      "start": "2026-12-12",
-      "end": "2026-12-25",
-      "regatta_from": "2026-12-12",
-      "regatta_to": "2026-12-15",
-      "tentative": true
+      "title": "Segeltraining",
+      "start": "2026-12-16",
+      "end": "2026-12-23"
+    },
+    {
+      "title": "Segeltraining",
+      "start": "2027-01-29",
+      "end": "2027-02-07"
     },
     {
       "title": "GP2 Vilamoura",
-      "start": "2027-02-17",
-      "end": "2027-02-26",
-      "regatta_from": "2027-02-23"
+      "start": "2027-02-13",
+      "end": "2027-02-21",
+      "regatta_from": "2027-02-17"
     },
     {
-      "title": "Vilamoura (oder Abi-Fokus?)",
-      "start": "2027-03-01",
-      "end": "2027-03-10",
-      "tentative": true
+      "title": "Training Mallorca",
+      "start": "2027-02-27",
+      "end": "2027-03-07"
     },
     {
-      "title": "MSC?",
+      "title": "MSC",
       "start": "2027-03-11",
       "end": "2027-03-14",
-      "regatta_from": "2027-03-11",
-      "tentative": true
+      "regatta_from": "2027-03-11"
     },
     {
-      "title": "Vilamoura geblieben? (Helms Vorschlag)",
-      "start": "2027-03-15",
-      "end": "2027-03-20",
-      "tentative": true
+      "title": "PST",
+      "start": "2027-03-20",
+      "end": "2027-03-30",
+      "regatta_from": "2027-03-26"
     }
-  ]
+  ],
+  "body": {
+    "start_kg": 78.0,
+    "target_kg": 85.0,
+    "rate_kg_week": 0.5,
+    "start_date": "2026-09-28",
+    "surplus_kcal": 500,
+    "protein_g_per_kg": 2.0,
+    "reminder_hour": 7
+  }
 }

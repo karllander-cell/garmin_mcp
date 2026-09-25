@@ -11,7 +11,7 @@ from datetime import date, datetime, timedelta
 from .config import Config
 from .plan import build_plan
 
-TYPE_KEYS = {"run": "running", "bike": "road_biking", "strength": "strength_training", "row": "indoor_rowing", "sail": "sailing_v2"}
+TYPE_KEYS = {"run": "running", "bike": "road_biking", "strength": "strength_training", "row": "indoor_rowing", "sail": "sailing_v2", "swim": "lap_swimming"}
 
 # Zone split (share of time Z1..Z5) and aerobic/anaerobic TE per profile.
 ZONES = {
@@ -93,7 +93,7 @@ class FakeGarmin:
         secs = minutes * 60
         act = {
             "activityId": aid,
-            "activityName": {"run": "Lauf", "bike": "Radfahrt", "strength": "Krafttraining", "row": "Rudern", "sail": "Segeln"}[sport],
+            "activityName": {"run": "Lauf", "bike": "Radfahrt", "strength": "Krafttraining", "row": "Rudern", "sail": "Segeln", "swim": "Schwimmen"}[sport],
             "startTimeLocal": f"{d.isoformat()} {hour:02d}:{rng.randint(0, 59):02d}:00",
             "activityType": {"typeKey": TYPE_KEYS[sport]},
             "duration": secs * 1.03,
@@ -114,7 +114,9 @@ class FakeGarmin:
             act["averageSpeed"] = rng.uniform(7.6, 8.9)
             act["distance"] = act["averageSpeed"] * secs
             act["avgPower"] = rng.randint(135, 165)
-        if sport in ("strength", "row"):
+        if sport == "swim":
+            act["distance"] = minutes * 50
+        if sport in ("strength", "row", "swim"):
             act["activityTrainingLoad"] = round(act["activityTrainingLoad"] * 0.5)
         elif sport == "sail":
             act["activityTrainingLoad"] = round(act["activityTrainingLoad"] * 0.3)
@@ -143,7 +145,8 @@ class FakeGarmin:
 
     def get_user_summary(self, iso: str):
         w = self._w(iso)
-        return {"restingHeartRate": w["rhr"], "bodyBatteryHighestValue": w["bb"]} if w else {}
+        return {"restingHeartRate": w["rhr"], "bodyBatteryHighestValue": w["bb"], "totalKilocalories": 3100 + (hash(iso) % 600),
+                "activeKilocalories": 900 + (hash(iso) % 500)} if w else {}
 
     def get_lactate_threshold(self, latest: bool = True, **_):
         return {"speed_and_heart_rate": {"speed": 1 / 4.02, "heartRate": 176}}

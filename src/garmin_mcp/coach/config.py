@@ -29,6 +29,7 @@ class Config:
     weekly_review_weekday: int
     weekly_review_hour: int
     sailing: list[dict] = field(default_factory=list)
+    body: dict = field(default_factory=dict)
 
 
 def load_config(path: str | Path | None = None) -> Config:
@@ -55,6 +56,8 @@ def load_config(path: str | Path | None = None) -> Config:
         weekly_review_weekday=int(notif.get("weekly_review_weekday", 6)),
         weekly_review_hour=int(notif.get("weekly_review_hour", 19)),
         sailing=[_sailing_block(b) for b in raw.get("sailing") or []],
+        body={"start_kg": 78.0, "target_kg": 85.0, "rate_kg_week": 0.5, "start_date": raw["plan_start"],
+              "surplus_kcal": 500, "protein_g_per_kg": 2.0, "reminder_hour": 7, **(raw.get("body") or {})},
     )
 
 

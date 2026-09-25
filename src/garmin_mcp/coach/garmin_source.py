@@ -120,6 +120,8 @@ def fetch_wellness(garmin: Garmin, day: date) -> dict:
     summary = _safe(garmin.get_user_summary, iso) or {}
     out["rhr"] = summary.get("restingHeartRate")
     out["body_battery"] = summary.get("bodyBatteryHighestValue")
+    out["kcal_total"] = summary.get("totalKilocalories")
+    out["kcal_active"] = summary.get("activeKilocalories")
     return {k: v for k, v in out.items() if v is not None}
 
 

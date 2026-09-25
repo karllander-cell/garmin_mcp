@@ -19,10 +19,10 @@
  "today": {
   "date": "2026-11-05",
   "readiness": {
-   "score": 36,
+   "score": 30,
    "level": "red",
    "reasons": [
-    "Garmin Readiness 36"
+    "Garmin Readiness 30"
    ]
   },
   "wellness": {
@@ -34,10 +34,12 @@
    "hrv_high": 66,
    "sleep_score": 52,
    "sleep_h": 7.2,
-   "readiness": 36,
+   "readiness": 30,
    "readiness_level": "LOW",
-   "rhr": 55,
-   "body_battery": 44
+   "rhr": 53,
+   "body_battery": 41,
+   "kcal_total": 3670,
+   "kcal_active": 1070
   },
   "note": "Rote Ampel – Schlüsseleinheit auf Freitag verschoben, heute nur locker.",
   "sessions": [
@@ -57,8 +59,22 @@
      255
     ],
     "pace_label": "4:08–4:15 /km",
-    "adjusted": "Readiness 36: statt Schwelle kurz",
+    "adjusted": "Readiness 30: statt Schwelle kurz",
     "status": "today"
+   },
+   {
+    "id": "2026-11-05-strength-stabi",
+    "date": "2026-11-05",
+    "sport": "strength",
+    "profile": "stabi",
+    "key": false,
+    "title": "Mobility & Faszienrolle",
+    "detail": "20' Mobilisation, kein schweres Heben",
+    "duration_min": 20,
+    "adjusted": "Readiness 30: statt Stabi – Rumpf & Hüfte",
+    "status": "done",
+    "activity_id": "20000834262",
+    "score": 61
    }
   ],
   "next": "Heute: Lockerer Regenerationslauf (5,8 km)"
@@ -67,23 +83,62 @@
   "start": "2026-11-02",
   "phase_label": "Grundlage 1",
   "deload": true,
-  "planned_km": 31.2,
-  "planned_h": 8.3,
+  "planned_km": 24.1,
+  "planned_h": 9.9,
   "actual": {
-   "run_km": 6.3,
-   "hours": 4.0,
+   "run_km": 8.9,
+   "hours": 4.7,
    "sail_h": 0.0,
    "by_sport": {
-    "strength": 1.05,
-    "run": 0.57,
-    "bike": 2.35
+    "strength": 2.54,
+    "swim": 0.55,
+    "run": 0.84,
+    "bike": 0.8
    }
   },
   "days": [
    {
     "date": "2026-11-02",
     "weekday": "Mo",
-    "sessions": [],
+    "sessions": [
+     {
+      "id": "2026-11-02-strength-gym_a",
+      "date": "2026-11-02",
+      "sport": "strength",
+      "profile": "gym_a",
+      "key": false,
+      "title": "Kraft A – Brust & Rücken",
+      "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+      "duration_min": 45,
+      "status": "done",
+      "activity_id": "20000795973",
+      "score": 100
+     },
+     {
+      "id": "2026-11-02-strength-stabi",
+      "date": "2026-11-02",
+      "sport": "strength",
+      "profile": "stabi",
+      "key": false,
+      "title": "Stabi – Rumpf & Hüfte",
+      "detail": "Planks, Side Planks, Dead Bug, Pallof Press, Copenhagen Plank, einbeinige Glute Bridge – 3 Runden",
+      "duration_min": 30,
+      "status": "missed"
+     },
+     {
+      "id": "2026-11-02-swim-easy",
+      "date": "2026-11-02",
+      "sport": "swim",
+      "profile": "easy",
+      "key": false,
+      "title": "Schwimmen",
+      "detail": "Locker & Technik, 2–2,5 km, Zone 1–2",
+      "duration_min": 35,
+      "status": "done",
+      "activity_id": "20000798453",
+      "score": 82
+     }
+    ],
     "unplanned": [],
     "note": null
    },
@@ -92,46 +147,60 @@
     "weekday": "Di",
     "sessions": [
      {
-      "id": "2026-11-03-run-easy",
+      "id": "2026-11-03-strength-gym_c",
+      "date": "2026-11-03",
+      "sport": "strength",
+      "profile": "gym_c",
+      "key": false,
+      "title": "Kraft C – Beine & Rumpf",
+      "detail": "Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber",
+      "duration_min": 45,
+      "status": "done",
+      "activity_id": "20000804077",
+      "score": 100
+     },
+     {
+      "id": "2026-11-03-run-long",
       "date": "2026-11-03",
       "sport": "run",
-      "profile": "easy",
-      "key": false,
-      "title": "Lockerer Lauf + Steigerungen",
-      "detail": "locker, am Ende 8×20\" Steigerungen",
-      "distance_km": 7.5,
-      "duration_min": 39,
+      "profile": "long",
+      "key": true,
+      "title": "Langer Lauf (Entlastung)",
+      "detail": "gleichmäßig locker",
+      "distance_km": 8.5,
+      "duration_min": 45,
       "pace_key": "easy",
       "pace_range": [
        301,
        331
       ],
       "pace_label": "5:01–5:31 /km",
+      "adjusted": "Readiness 51: Hauptteil ~¼ kürzer, Tempo am langsamen Ende des Bereichs",
       "status": "done",
-      "activity_id": "20000615958",
-      "score": 76
-     },
-     {
-      "id": "2026-11-03-strength-strength",
-      "date": "2026-11-03",
-      "sport": "strength",
-      "profile": "strength",
-      "key": false,
-      "title": "Krafttraining A",
-      "detail": "Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben",
-      "duration_min": 60,
-      "status": "done",
-      "activity_id": "20000621951",
+      "activity_id": "20000810981",
       "score": 100
      }
     ],
     "unplanned": [],
-    "note": null
+    "note": "Gelbe Ampel – Schlüsseleinheit etwas entschärft."
    },
    {
     "date": "2026-11-04",
     "weekday": "Mi",
     "sessions": [
+     {
+      "id": "2026-11-04-strength-gym_b",
+      "date": "2026-11-04",
+      "sport": "strength",
+      "profile": "gym_b",
+      "key": false,
+      "title": "Kraft B – Schultern & Arme",
+      "detail": "Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12",
+      "duration_min": 45,
+      "status": "done",
+      "activity_id": "20000815941",
+      "score": 97
+     },
      {
       "id": "2026-11-04-bike-z2",
       "date": "2026-11-04",
@@ -140,14 +209,15 @@
       "key": false,
       "title": "Rad Grundlage",
       "detail": "GA1, Trittfrequenz 85–95, Puls Zone 2",
-      "duration_min": 145,
+      "duration_min": 52,
+      "adjusted": "Readiness 50: etwas kürzer, streng Zone 1–2",
       "status": "done",
-      "activity_id": "20000629028",
+      "activity_id": "20000822286",
       "score": 100
      }
     ],
     "unplanned": [],
-    "note": null
+    "note": "Gelbe Ampel – Nebeneinheiten etwas kürzer."
    },
    {
     "date": "2026-11-05",
@@ -169,8 +239,22 @@
        255
       ],
       "pace_label": "4:08–4:15 /km",
-      "adjusted": "Readiness 36: statt Schwelle kurz",
+      "adjusted": "Readiness 30: statt Schwelle kurz",
       "status": "today"
+     },
+     {
+      "id": "2026-11-05-strength-stabi",
+      "date": "2026-11-05",
+      "sport": "strength",
+      "profile": "stabi",
+      "key": false,
+      "title": "Mobility & Faszienrolle",
+      "detail": "20' Mobilisation, kein schweres Heben",
+      "duration_min": 20,
+      "adjusted": "Readiness 30: statt Stabi – Rumpf & Hüfte",
+      "status": "done",
+      "activity_id": "20000834262",
+      "score": 61
      }
     ],
     "unplanned": [],
@@ -196,29 +280,29 @@
        255
       ],
       "pace_label": "4:08–4:15 /km",
-      "adjusted": "Von Donnerstag verschoben (Readiness 36)",
+      "adjusted": "Von Donnerstag verschoben (Readiness 30)",
       "status": "planned"
      },
      {
-      "id": "2026-11-06-strength-strength",
+      "id": "2026-11-06-strength-gym_a",
       "date": "2026-11-06",
       "sport": "strength",
-      "profile": "strength",
+      "profile": "gym_a",
       "key": false,
-      "title": "Krafttraining B",
-      "detail": "Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings)",
-      "duration_min": 60,
+      "title": "Kraft A – Brust & Rücken",
+      "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+      "duration_min": 45,
       "status": "planned"
      },
      {
-      "id": "2026-11-06-row-z2",
+      "id": "2026-11-06-strength-bodyweight",
       "date": "2026-11-06",
-      "sport": "row",
-      "profile": "z2",
+      "sport": "strength",
+      "profile": "bodyweight",
       "key": false,
-      "title": "Rudern/Rad locker",
-      "detail": "Zone 1–2, locker bleiben",
-      "duration_min": 75,
+      "title": "Kraftausdauer & Prophylaxe",
+      "detail": "Körpergewicht-Zirkel 40''/20'': Ausfallschritte, Step-downs, einbeiniges RDL, exzentrisches Wadenheben, Tibialis Raises, Liegestütze, Hüft- & Fußmobility – 3–4 Runden",
+      "duration_min": 45,
       "status": "planned"
      }
     ],
@@ -230,15 +314,38 @@
     "weekday": "Sa",
     "sessions": [
      {
+      "id": "2026-11-07-sail-training",
+      "date": "2026-11-07",
+      "sport": "sail",
+      "profile": "sail",
+      "key": false,
+      "priority": true,
+      "title": "Segeltraining: Junior Europeans Vilamoura",
+      "detail": "Segeln hat Priorität – Training am Wasser",
+      "duration_min": 240,
+      "status": "planned"
+     },
+     {
+      "id": "2026-11-07-strength-mobility",
+      "date": "2026-11-07",
+      "sport": "strength",
+      "profile": "mobility",
+      "key": false,
+      "title": "Stabi & Mobility",
+      "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+      "duration_min": 20,
+      "status": "planned"
+     },
+     {
       "id": "2026-11-07-run-easy",
       "date": "2026-11-07",
       "sport": "run",
       "profile": "easy",
       "key": false,
-      "title": "Lockerer Lauf + Steigerungen",
-      "detail": "locker, am Ende 5×20\" Steigerungen",
-      "distance_km": 5.6,
-      "duration_min": 30,
+      "title": "Morgenlauf",
+      "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
+      "distance_km": 6.0,
+      "duration_min": 32,
       "pace_key": "easy",
       "pace_range": [
        301,
@@ -256,21 +363,37 @@
     "weekday": "So",
     "sessions": [
      {
-      "id": "2026-11-08-run-long",
+      "id": "2026-11-08-sail-training",
       "date": "2026-11-08",
-      "sport": "run",
-      "profile": "long",
-      "key": true,
-      "title": "Langer Lauf (Entlastung)",
-      "detail": "gleichmäßig locker",
-      "distance_km": 10.6,
-      "duration_min": 56,
-      "pace_key": "easy",
-      "pace_range": [
-       301,
-       331
-      ],
-      "pace_label": "5:01–5:31 /km",
+      "sport": "sail",
+      "profile": "sail",
+      "key": false,
+      "priority": true,
+      "title": "Segeltraining: Junior Europeans Vilamoura",
+      "detail": "Segeln hat Priorität – Training am Wasser",
+      "duration_min": 240,
+      "status": "planned"
+     },
+     {
+      "id": "2026-11-08-strength-mobility",
+      "date": "2026-11-08",
+      "sport": "strength",
+      "profile": "mobility",
+      "key": false,
+      "title": "Stabi & Mobility",
+      "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+      "duration_min": 20,
+      "status": "planned"
+     },
+     {
+      "id": "2026-11-08-strength-gym_a",
+      "date": "2026-11-08",
+      "sport": "strength",
+      "profile": "gym_a",
+      "key": false,
+      "title": "Kraft A – Brust & Rücken",
+      "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+      "duration_min": 45,
       "status": "planned"
      }
     ],
@@ -288,7 +411,7 @@
    "deload": false,
    "race_week": false,
    "run_km": 27.1,
-   "hours": 8.9,
+   "hours": 11.1,
    "scale": 1.0,
    "reentry": false,
    "sailing_days": 0,
@@ -304,14 +427,13 @@
     }
    ],
    "actual": {
-    "run_km": 20.5,
-    "hours": 7.2,
+    "run_km": 22.9,
+    "hours": 8.3,
     "sail_h": 0.0,
     "by_sport": {
-     "strength": 0.8,
-     "bike": 3.28,
-     "run": 1.9,
-     "row": 1.25
+     "strength": 3.97,
+     "run": 2.11,
+     "bike": 2.23
     }
    }
   },
@@ -322,18 +444,16 @@
    "phase_label": "Übergang",
    "deload": false,
    "race_week": false,
-   "run_km": 22.2,
-   "hours": 7.2,
+   "run_km": 27.1,
+   "hours": 11.1,
    "scale": 1.0,
    "reentry": false,
-   "sailing_days": 2,
-   "sailing": [
-    "Optiregatta"
-   ],
+   "sailing_days": 0,
+   "sailing": [],
    "status": "past",
    "key_sessions": [
     {
-     "day": "Fr",
+     "day": "So",
      "title": "Langer Lauf",
      "detail": "locker, gerne im Gelände",
      "distance_km": 9.2,
@@ -341,14 +461,14 @@
     }
    ],
    "actual": {
-    "run_km": 27.3,
-    "hours": 6.4,
-    "sail_h": 10.3,
+    "run_km": 15.9,
+    "hours": 8.6,
+    "sail_h": 0.0,
     "by_sport": {
-     "run": 2.49,
-     "strength": 1.53,
-     "bike": 2.36,
-     "sail": 10.28
+     "strength": 4.04,
+     "swim": 0.74,
+     "run": 1.46,
+     "bike": 2.37
     }
    }
   },
@@ -359,13 +479,13 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "race_week": false,
-   "run_km": 8.0,
-   "hours": 4.2,
+   "run_km": 22.0,
+   "hours": 10.9,
    "scale": 0.92,
    "reentry": false,
-   "sailing_days": 4,
+   "sailing_days": 2,
    "sailing": [
-    "IDM Chiemsee? / Reise + Vilamoura"
+    "Training Vilamoura"
    ],
    "status": "past",
    "key_sessions": [
@@ -375,17 +495,25 @@
      "detail": "2–3 km ein, 8×10 s bergauf maximal, dazwischen voll erholen, 2 km aus",
      "distance_km": 8.0,
      "pace_label": "5:01–5:31 /km"
+    },
+    {
+     "day": "Do",
+     "title": "Steigerungslauf",
+     "detail": "locker beginnen, letzte 10' @ M-Tempo",
+     "distance_km": 8.0,
+     "pace_label": "4:27–4:36 /km"
     }
    ],
    "actual": {
-    "run_km": 14.5,
-    "hours": 5.1,
-    "sail_h": 19.6,
+    "run_km": 23.8,
+    "hours": 11.0,
+    "sail_h": 8.2,
     "by_sport": {
-     "run": 1.33,
-     "strength": 1.07,
-     "bike": 2.67,
-     "sail": 19.64
+     "strength": 6.69,
+     "swim": 0.7,
+     "run": 2.11,
+     "bike": 1.53,
+     "sail": 8.24
     }
    }
   },
@@ -396,23 +524,24 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "race_week": false,
-   "run_km": 13.0,
-   "hours": 1.1,
+   "run_km": 18.0,
+   "hours": 6.2,
    "scale": 0.957,
    "reentry": false,
    "sailing_days": 7,
    "sailing": [
-    "IDM Chiemsee? / Reise + Vilamoura"
+    "Training Vilamoura"
    ],
    "status": "past",
    "key_sessions": [],
    "actual": {
-    "run_km": 12.7,
-    "hours": 1.2,
-    "sail_h": 26.1,
+    "run_km": 16.2,
+    "hours": 5.3,
+    "sail_h": 27.3,
     "by_sport": {
-     "sail": 26.15,
-     "run": 1.16
+     "sail": 27.31,
+     "strength": 3.79,
+     "run": 1.52
     }
    }
   },
@@ -423,48 +552,24 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "race_week": false,
-   "run_km": 39.4,
-   "hours": 9.9,
+   "run_km": 18.0,
+   "hours": 6.2,
    "scale": 0.995,
    "reentry": true,
-   "sailing_days": 1,
+   "sailing_days": 7,
    "sailing": [
-    "IDM Chiemsee? / Reise + Vilamoura"
+    "Training Vilamoura"
    ],
    "status": "past",
-   "key_sessions": [
-    {
-     "day": "Di",
-     "title": "Bergläufe",
-     "detail": "2–3 km ein, 6×45 s zügig bergauf, Trab zurück, 2 km aus",
-     "distance_km": 7.9,
-     "pace_label": "5:01–5:31 /km"
-    },
-    {
-     "day": "Do",
-     "title": "Steigerungslauf",
-     "detail": "locker beginnen, letzte 20' @ M-Tempo",
-     "distance_km": 7.9,
-     "pace_label": "4:27–4:36 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf",
-     "detail": "gleichmäßig locker",
-     "distance_km": 11.2,
-     "pace_label": "5:01–5:31 /km"
-    }
-   ],
+   "key_sessions": [],
    "actual": {
-    "run_km": 38.7,
-    "hours": 9.8,
-    "sail_h": 4.2,
+    "run_km": 17.2,
+    "hours": 5.9,
+    "sail_h": 27.8,
     "by_sport": {
-     "sail": 4.21,
-     "run": 3.45,
-     "strength": 1.93,
-     "bike": 3.09,
-     "row": 1.3
+     "sail": 27.82,
+     "strength": 4.28,
+     "run": 1.57
     }
    }
   },
@@ -475,37 +580,40 @@
    "phase_label": "Grundlage 1",
    "deload": true,
    "race_week": false,
-   "run_km": 31.2,
-   "hours": 8.3,
+   "run_km": 24.1,
+   "hours": 9.9,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 0,
-   "sailing": [],
+   "sailing_days": 2,
+   "sailing": [
+    "Junior Europeans Vilamoura"
+   ],
    "status": "current",
    "key_sessions": [
+    {
+     "day": "Di",
+     "title": "Langer Lauf (Entlastung)",
+     "detail": "gleichmäßig locker",
+     "distance_km": 10.6,
+     "pace_label": "5:01–5:31 /km"
+    },
     {
      "day": "Do",
      "title": "Schwelle kurz",
      "detail": "2 km ein, 2×8' @ T-Tempo 2' Trabpause, 2 km aus",
      "distance_km": 7.5,
      "pace_label": "4:08–4:15 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf (Entlastung)",
-     "detail": "gleichmäßig locker",
-     "distance_km": 10.6,
-     "pace_label": "5:01–5:31 /km"
     }
    ],
    "actual": {
-    "run_km": 6.3,
-    "hours": 4.0,
+    "run_km": 8.9,
+    "hours": 4.7,
     "sail_h": 0.0,
     "by_sport": {
-     "strength": 1.05,
-     "run": 0.57,
-     "bike": 2.35
+     "strength": 2.54,
+     "swim": 0.55,
+     "run": 0.84,
+     "bike": 0.8
     }
    }
   },
@@ -516,8 +624,8 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "race_week": false,
-   "run_km": 27.5,
-   "hours": 2.4,
+   "run_km": 20.5,
+   "hours": 4.7,
    "scale": 1.035,
    "reentry": false,
    "sailing_days": 6,
@@ -527,7 +635,7 @@
    "status": "future",
    "key_sessions": [
     {
-     "day": "Mo",
+     "day": "So",
      "title": "Langer Lauf",
      "detail": "gleichmäßig locker",
      "distance_km": 14.5,
@@ -542,29 +650,29 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "race_week": false,
-   "run_km": 28.4,
-   "hours": 5.8,
+   "run_km": 24.0,
+   "hours": 10.9,
    "scale": 1.035,
    "reentry": true,
-   "sailing_days": 4,
+   "sailing_days": 2,
    "sailing": [
-    "Junior Europeans Vilamoura"
+    "GP1 Vilamoura"
    ],
    "status": "future",
    "key_sessions": [
     {
-     "day": "Fr",
+     "day": "Di",
      "title": "Fahrtspiel",
      "detail": "2–3 km ein, 10×1' zügig / 1' locker, 2 km aus",
      "distance_km": 9.0,
      "pace_label": "3:47–3:55 /km"
     },
     {
-     "day": "So",
-     "title": "Langer Lauf",
-     "detail": "gleichmäßig locker",
-     "distance_km": 12.7,
-     "pace_label": "5:01–5:31 /km"
+     "day": "Do",
+     "title": "Steigerungslauf",
+     "detail": "locker beginnen, letzte 25' @ M-Tempo",
+     "distance_km": 9.0,
+     "pace_label": "4:27–4:36 /km"
     }
    ]
   },
@@ -575,24 +683,16 @@
    "phase_label": "Grundlage 2",
    "deload": false,
    "race_week": false,
-   "run_km": 17.4,
-   "hours": 4.9,
+   "run_km": 12.0,
+   "hours": 3.8,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 4,
+   "sailing_days": 7,
    "sailing": [
     "GP1 Vilamoura"
    ],
    "status": "future",
-   "key_sessions": [
-    {
-     "day": "Di",
-     "title": "Intervalle 800 m",
-     "detail": "2–3 km ein, 6×800 m @ I-Tempo, 2' Trabpause, 2 km aus",
-     "distance_km": 10.9,
-     "pace_label": "3:47–3:55 /km"
-    }
-   ]
+   "key_sessions": []
   },
   {
    "start": "2026-11-30",
@@ -601,16 +701,21 @@
    "phase_label": "Grundlage 2",
    "deload": true,
    "race_week": false,
-   "run_km": 18.4,
-   "hours": 1.6,
+   "run_km": 35.0,
+   "hours": 11.0,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 6,
-   "sailing": [
-    "GP1 Vilamoura"
-   ],
+   "sailing_days": 0,
+   "sailing": [],
    "status": "future",
    "key_sessions": [
+    {
+     "day": "Do",
+     "title": "Schwelle kurz",
+     "detail": "2 km ein, 2×8' @ T-Tempo 2' Trabpause, 2 km aus",
+     "distance_km": 8.4,
+     "pace_label": "4:08–4:15 /km"
+    },
     {
      "day": "So",
      "title": "Langer Lauf (Entlastung)",
@@ -627,29 +732,34 @@
    "phase_label": "Grundlage 2",
    "deload": false,
    "race_week": false,
-   "run_km": 19.4,
-   "hours": 7.2,
+   "run_km": 47.8,
+   "hours": 14.7,
    "scale": 1.035,
-   "reentry": true,
-   "sailing_days": 2,
-   "sailing": [
-    "Youth Worlds Vilamoura? + Camp Sagres/Portimão"
-   ],
+   "reentry": false,
+   "sailing_days": 0,
+   "sailing": [],
    "status": "future",
    "key_sessions": [
     {
      "day": "Di",
      "title": "Intervalle 800 m",
      "detail": "2–3 km ein, 7×800 m @ I-Tempo, 2' Trabpause, 2 km aus",
-     "distance_km": 9.7,
+     "distance_km": 11.5,
      "pace_label": "3:47–3:55 /km"
     },
     {
      "day": "Do",
      "title": "Schwelle",
      "detail": "2–3 km ein, 3×10' @ T-Tempo, 2' Trabpause, 2 km aus",
-     "distance_km": 9.7,
+     "distance_km": 11.5,
      "pace_label": "4:08–4:15 /km"
+    },
+    {
+     "day": "So",
+     "title": "Langer Lauf",
+     "detail": "letzte 3 km @ M-Tempo",
+     "distance_km": 16.2,
+     "pace_label": "5:01–5:31 /km"
     }
    ]
   },
@@ -660,16 +770,24 @@
    "phase_label": "Grundlage 2",
    "deload": false,
    "race_week": false,
-   "run_km": 13.0,
-   "hours": 1.1,
+   "run_km": 29.8,
+   "hours": 8.9,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 7,
+   "sailing_days": 5,
    "sailing": [
-    "Youth Worlds Vilamoura? + Camp Sagres/Portimão"
+    "Segeltraining"
    ],
    "status": "future",
-   "key_sessions": []
+   "key_sessions": [
+    {
+     "day": "Di",
+     "title": "Intervalle 1000 m",
+     "detail": "2–3 km ein, 5×1000 m @ I-Tempo, 2:30' Trabpause, 2 km aus",
+     "distance_km": 11.8,
+     "pace_label": "3:47–3:55 /km"
+    }
+   ]
   },
   {
    "start": "2026-12-21",
@@ -678,16 +796,23 @@
    "phase_label": "Grundlage 2",
    "deload": false,
    "race_week": false,
-   "run_km": 35.2,
-   "hours": 4.4,
+   "run_km": 44.5,
+   "hours": 9.5,
    "scale": 1.035,
    "reentry": true,
-   "sailing_days": 5,
+   "sailing_days": 3,
    "sailing": [
-    "Youth Worlds Vilamoura? + Camp Sagres/Portimão"
+    "Segeltraining"
    ],
    "status": "future",
    "key_sessions": [
+    {
+     "day": "Do",
+     "title": "Schwelle",
+     "detail": "2–3 km ein, 2×15' @ T-Tempo, 3' Trabpause, 2 km aus",
+     "distance_km": 10.3,
+     "pace_label": "4:08–4:15 /km"
+    },
     {
      "day": "So",
      "title": "Langer Lauf",
@@ -704,10 +829,10 @@
    "phase_label": "Grundlage 2",
    "deload": true,
    "race_week": false,
-   "run_km": 32.9,
-   "hours": 8.0,
+   "run_km": 38.8,
+   "hours": 11.4,
    "scale": 1.035,
-   "reentry": true,
+   "reentry": false,
    "sailing_days": 0,
    "sailing": [],
    "status": "future",
@@ -716,14 +841,14 @@
      "day": "Do",
      "title": "Schwelle kurz",
      "detail": "2 km ein, 2×8' @ T-Tempo 2' Trabpause, 2 km aus",
-     "distance_km": 7.9,
+     "distance_km": 9.3,
      "pace_label": "4:08–4:15 /km"
     },
     {
      "day": "So",
      "title": "Langer Lauf (Entlastung)",
      "detail": "gleichmäßig locker",
-     "distance_km": 11.2,
+     "distance_km": 13.2,
      "pace_label": "5:01–5:31 /km"
     }
    ]
@@ -736,7 +861,7 @@
    "deload": false,
    "race_week": false,
    "run_km": 52.9,
-   "hours": 12.0,
+   "hours": 15.1,
    "scale": 1.035,
    "reentry": false,
    "sailing_days": 0,
@@ -774,7 +899,7 @@
    "deload": false,
    "race_week": false,
    "run_km": 54.1,
-   "hours": 12.1,
+   "hours": 15.2,
    "scale": 1.035,
    "reentry": false,
    "sailing_days": 0,
@@ -812,7 +937,7 @@
    "deload": false,
    "race_week": false,
    "run_km": 55.4,
-   "hours": 12.2,
+   "hours": 15.3,
    "scale": 1.035,
    "reentry": false,
    "sailing_days": 0,
@@ -849,27 +974,29 @@
    "phase_label": "Aufbau",
    "deload": true,
    "race_week": false,
-   "run_km": 42.4,
-   "hours": 9.9,
+   "run_km": 36.6,
+   "hours": 10.0,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 0,
-   "sailing": [],
+   "sailing_days": 3,
+   "sailing": [
+    "Segeltraining"
+   ],
    "status": "future",
    "key_sessions": [
+    {
+     "day": "Di",
+     "title": "Langer Lauf (Entlastung)",
+     "detail": "gleichmäßig locker",
+     "distance_km": 14.4,
+     "pace_label": "5:01–5:31 /km"
+    },
     {
      "day": "Do",
      "title": "Schwelle kurz",
      "detail": "2 km ein, 2×8' @ T-Tempo 2' Trabpause, 2 km aus",
      "distance_km": 10.2,
      "pace_label": "4:08–4:15 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf (Entlastung)",
-     "detail": "gleichmäßig locker",
-     "distance_km": 14.4,
-     "pace_label": "5:01–5:31 /km"
     }
    ]
   },
@@ -880,36 +1007,16 @@
    "phase_label": "Aufbau",
    "deload": false,
    "race_week": false,
-   "run_km": 57.9,
-   "hours": 12.4,
+   "run_km": 18.0,
+   "hours": 6.2,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 0,
-   "sailing": [],
+   "sailing_days": 7,
+   "sailing": [
+    "Segeltraining"
+   ],
    "status": "future",
-   "key_sessions": [
-    {
-     "day": "Di",
-     "title": "VO2max 1000 m",
-     "detail": "2–3 km ein, 7×1000 m @ I-Tempo, 2:30' Trabpause, 2 km aus",
-     "distance_km": 13.9,
-     "pace_label": "3:47–3:55 /km"
-    },
-    {
-     "day": "Do",
-     "title": "Schwelle",
-     "detail": "2–3 km ein, 2×20' @ T-Tempo, 3' Trabpause, 2 km aus",
-     "distance_km": 13.9,
-     "pace_label": "4:08–4:15 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf",
-     "detail": "letzte 4 km @ HM-Tempo",
-     "distance_km": 19.7,
-     "pace_label": "5:01–5:31 /km"
-    }
-   ]
+   "key_sessions": []
   },
   {
    "start": "2027-02-08",
@@ -918,34 +1025,29 @@
    "phase_label": "Aufbau",
    "deload": false,
    "race_week": false,
-   "run_km": 59.1,
-   "hours": 12.5,
+   "run_km": 30.2,
+   "hours": 11.5,
    "scale": 1.035,
-   "reentry": false,
-   "sailing_days": 0,
-   "sailing": [],
+   "reentry": true,
+   "sailing_days": 2,
+   "sailing": [
+    "GP2 Vilamoura"
+   ],
    "status": "future",
    "key_sessions": [
     {
      "day": "Di",
      "title": "VO2max 1200 m",
      "detail": "2–3 km ein, 6×1200 m @ I-Tempo, 3' Trabpause, 2 km aus",
-     "distance_km": 14.2,
+     "distance_km": 12.1,
      "pace_label": "3:47–3:55 /km"
     },
     {
      "day": "Do",
      "title": "Schwelle",
      "detail": "2–3 km ein, 4×10' @ T-Tempo, 90\" Trabpause, 2 km aus",
-     "distance_km": 14.2,
+     "distance_km": 12.1,
      "pace_label": "4:08–4:15 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf",
-     "detail": "gleichmäßig locker",
-     "distance_km": 20.1,
-     "pace_label": "5:01–5:31 /km"
     }
    ]
   },
@@ -956,24 +1058,16 @@
    "phase_label": "Aufbau",
    "deload": false,
    "race_week": false,
-   "run_km": 27.5,
-   "hours": 3.1,
+   "run_km": 6.0,
+   "hours": 3.2,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 5,
+   "sailing_days": 7,
    "sailing": [
     "GP2 Vilamoura"
    ],
    "status": "future",
-   "key_sessions": [
-    {
-     "day": "Di",
-     "title": "VO2max 2000 m",
-     "detail": "2–3 km ein, 3×2000 m @ I-Tempo, 4' Trabpause, 2 km aus",
-     "distance_km": 14.5,
-     "pace_label": "3:47–3:55 /km"
-    }
-   ]
+   "key_sessions": []
   },
   {
    "start": "2027-02-22",
@@ -982,22 +1076,29 @@
    "phase_label": "HM-spezifisch",
    "deload": true,
    "race_week": false,
-   "run_km": 27.0,
-   "hours": 2.4,
+   "run_km": 32.8,
+   "hours": 10.9,
    "scale": 1.035,
-   "reentry": true,
-   "sailing_days": 5,
+   "reentry": false,
+   "sailing_days": 2,
    "sailing": [
-    "GP2 Vilamoura"
+    "Training Mallorca"
    ],
    "status": "future",
    "key_sessions": [
     {
-     "day": "So",
+     "day": "Di",
      "title": "Langer Lauf (Entlastung)",
      "detail": "gleichmäßig locker",
-     "distance_km": 13.4,
+     "distance_km": 15.7,
      "pace_label": "5:01–5:31 /km"
+    },
+    {
+     "day": "Do",
+     "title": "Schwelle kurz",
+     "detail": "2 km ein, 2×8' @ T-Tempo 2' Trabpause, 2 km aus",
+     "distance_km": 11.1,
+     "pace_label": "4:08–4:15 /km"
     }
    ]
   },
@@ -1008,13 +1109,13 @@
    "phase_label": "HM-spezifisch",
    "deload": false,
    "race_week": false,
-   "run_km": 13.0,
-   "hours": 1.1,
+   "run_km": 18.0,
+   "hours": 6.2,
    "scale": 1.035,
-   "reentry": true,
+   "reentry": false,
    "sailing_days": 7,
    "sailing": [
-    "Vilamoura (oder Abi-Fokus?)"
+    "Training Mallorca"
    ],
    "status": "future",
    "key_sessions": []
@@ -1026,17 +1127,24 @@
    "phase_label": "HM-spezifisch",
    "deload": false,
    "race_week": false,
-   "run_km": 6.5,
-   "hours": 0.6,
+   "run_km": 13.1,
+   "hours": 7.5,
    "scale": 1.035,
    "reentry": true,
-   "sailing_days": 7,
+   "sailing_days": 4,
    "sailing": [
-    "MSC?",
-    "Vilamoura (oder Abi-Fokus?)"
+    "MSC"
    ],
    "status": "future",
-   "key_sessions": []
+   "key_sessions": [
+    {
+     "day": "Di",
+     "title": "HM-Tempo 3 km",
+     "detail": "2–3 km ein, 4×3 km @ HM-Tempo, 2' Trabpause, 2 km aus",
+     "distance_km": 13.1,
+     "pace_label": "4:12–4:18 /km"
+    }
+   ]
   },
   {
    "start": "2027-03-15",
@@ -1045,22 +1153,29 @@
    "phase_label": "HM-spezifisch",
    "deload": false,
    "race_week": false,
-   "run_km": 31.5,
-   "hours": 2.8,
+   "run_km": 36.8,
+   "hours": 12.5,
    "scale": 1.035,
-   "reentry": true,
-   "sailing_days": 6,
+   "reentry": false,
+   "sailing_days": 2,
    "sailing": [
-    "Vilamoura geblieben? (Helms Vorschlag)"
+    "PST"
    ],
    "status": "future",
    "key_sessions": [
     {
-     "day": "So",
-     "title": "Langer Lauf HM-spezifisch",
-     "detail": "darin 10 km @ HM-Tempo",
-     "distance_km": 18.5,
-     "pace_label": "5:01–5:31 /km"
+     "day": "Di",
+     "title": "HM-Tempo 5 km",
+     "detail": "2–3 km ein, 2×5 km @ HM-Tempo, 3' Trabpause, 2 km aus",
+     "distance_km": 15.4,
+     "pace_label": "4:12–4:18 /km"
+    },
+    {
+     "day": "Do",
+     "title": "VO2max-Erhalt",
+     "detail": "2–3 km ein, 6×1000 m @ I-Tempo, 2:30' Trabpause, 2 km aus",
+     "distance_km": 15.4,
+     "pace_label": "3:47–3:55 /km"
     }
    ]
   },
@@ -1071,36 +1186,16 @@
    "phase_label": "Taper",
    "deload": false,
    "race_week": false,
-   "run_km": 38.3,
-   "hours": 8.3,
+   "run_km": 12.0,
+   "hours": 4.7,
    "scale": 1.035,
-   "reentry": true,
-   "sailing_days": 0,
-   "sailing": [],
+   "reentry": false,
+   "sailing_days": 7,
+   "sailing": [
+    "PST"
+   ],
    "status": "future",
-   "key_sessions": [
-    {
-     "day": "Di",
-     "title": "HM-Schärfe",
-     "detail": "2–3 km ein, 3×2 km @ HM-Tempo, 2' Trabpause, 2 km aus",
-     "distance_km": 9.2,
-     "pace_label": "4:12–4:18 /km"
-    },
-    {
-     "day": "Do",
-     "title": "Schwelle kurz",
-     "detail": "2–3 km ein, 3×1600 m @ T-Tempo, 90\" Trabpause, 2 km aus",
-     "distance_km": 9.2,
-     "pace_label": "4:08–4:15 /km"
-    },
-    {
-     "day": "So",
-     "title": "Langer Lauf kurz",
-     "detail": "darin 5 km @ HM-Tempo",
-     "distance_km": 13.0,
-     "pace_label": "5:01–5:31 /km"
-    }
-   ]
+   "key_sessions": []
   },
   {
    "start": "2027-03-29",
@@ -1110,15 +1205,17 @@
    "deload": false,
    "race_week": true,
    "run_km": 33.1,
-   "hours": 3.2,
+   "hours": 4.6,
    "scale": 1.035,
    "reentry": false,
-   "sailing_days": 0,
-   "sailing": [],
+   "sailing_days": 2,
+   "sailing": [
+    "PST"
+   ],
    "status": "future",
    "key_sessions": [
     {
-     "day": "Di",
+     "day": "Mi",
      "title": "Aktivierung",
      "detail": "2 km ein, 4×1 km @ HM-Tempo, 2' Trabpause, 2 km aus",
      "distance_km": 5.4,
@@ -1140,19 +1237,17 @@
    "phase": "base1",
    "phase_label": "Grundlage 1",
    "deload": false,
-   "sailing_days": 1,
-   "planned_km": 39.4,
-   "planned_h": 9.9,
+   "sailing_days": 7,
+   "planned_km": 18.0,
+   "planned_h": 6.2,
    "actual": {
-    "run_km": 38.7,
-    "hours": 9.8,
-    "sail_h": 4.2,
+    "run_km": 17.2,
+    "hours": 5.9,
+    "sail_h": 27.8,
     "by_sport": {
-     "sail": 4.21,
-     "run": 3.45,
-     "strength": 1.93,
-     "bike": 3.09,
-     "row": 1.3
+     "sail": 27.82,
+     "strength": 4.28,
+     "run": 1.57
     }
    },
    "days": [
@@ -1167,12 +1262,25 @@
        "profile": "sail",
        "key": false,
        "priority": true,
-       "title": "Segeltraining: IDM Chiemsee? / Reise + Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser (Termin noch offen)",
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
        "duration_min": 240,
        "status": "done",
-       "activity_id": "20000566758",
+       "activity_id": "20000693620",
        "score": null
+      },
+      {
+       "id": "2026-10-26-strength-mobility",
+       "date": "2026-10-26",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000699991",
+       "score": 96
       },
       {
        "id": "2026-10-26-run-easy",
@@ -1182,8 +1290,8 @@
        "key": false,
        "title": "Morgenlauf",
        "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
-       "distance_km": 6.5,
-       "duration_min": 34,
+       "distance_km": 6.0,
+       "duration_min": 32,
        "pace_key": "easy",
        "pace_range": [
         301,
@@ -1191,8 +1299,8 @@
        ],
        "pace_label": "5:01–5:31 /km",
        "status": "done",
-       "activity_id": "20000570322",
-       "score": 100
+       "activity_id": "20000703599",
+       "score": 94
       }
      ],
      "unplanned": [],
@@ -1203,37 +1311,44 @@
      "weekday": "Di",
      "sessions": [
       {
-       "id": "2026-10-27-run-hills",
+       "id": "2026-10-27-sail-training",
        "date": "2026-10-27",
-       "sport": "run",
-       "profile": "hills",
-       "key": true,
-       "title": "Bergläufe",
-       "detail": "2–3 km ein, 6×45 s zügig bergauf, Trab zurück, 2 km aus",
-       "distance_km": 7.9,
-       "duration_min": 42,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "done",
-       "activity_id": "20000575567",
+       "activity_id": "20000710169",
+       "score": null
+      },
+      {
+       "id": "2026-10-27-strength-mobility",
+       "date": "2026-10-27",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000711848",
        "score": 100
       },
       {
-       "id": "2026-10-27-strength-strength",
+       "id": "2026-10-27-strength-gym_a",
        "date": "2026-10-27",
        "sport": "strength",
-       "profile": "strength",
+       "profile": "gym_a",
        "key": false,
-       "title": "Krafttraining A",
-       "detail": "Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben",
-       "duration_min": 60,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
        "status": "done",
-       "activity_id": "20000577438",
-       "score": 96
+       "activity_id": "20000719880",
+       "score": 97
       }
      ],
      "unplanned": [],
@@ -1244,16 +1359,50 @@
      "weekday": "Mi",
      "sessions": [
       {
-       "id": "2026-10-28-bike-z2",
+       "id": "2026-10-28-sail-training",
        "date": "2026-10-28",
-       "sport": "bike",
-       "profile": "z2",
+       "sport": "sail",
+       "profile": "sail",
        "key": false,
-       "title": "Rad Grundlage",
-       "detail": "GA1, Trittfrequenz 85–95, Puls Zone 2",
-       "duration_min": 150,
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "done",
-       "activity_id": "20000582335",
+       "activity_id": "20000726572",
+       "score": null
+      },
+      {
+       "id": "2026-10-28-strength-mobility",
+       "date": "2026-10-28",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000734862",
+       "score": 100
+      },
+      {
+       "id": "2026-10-28-run-easy",
+       "date": "2026-10-28",
+       "sport": "run",
+       "profile": "easy",
+       "key": false,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln",
+       "distance_km": 6.0,
+       "duration_min": 32,
+       "pace_key": "easy",
+       "pace_range": [
+        301,
+        331
+       ],
+       "pace_label": "5:01–5:31 /km",
+       "status": "done",
+       "activity_id": "20000739048",
        "score": 100
       }
      ],
@@ -1265,58 +1414,98 @@
      "weekday": "Do",
      "sessions": [
       {
-       "id": "2026-10-29-run-steady",
+       "id": "2026-10-29-sail-training",
        "date": "2026-10-29",
-       "sport": "run",
-       "profile": "steady",
-       "key": true,
-       "title": "Steigerungslauf",
-       "detail": "locker beginnen, letzte 20' @ M-Tempo",
-       "distance_km": 6.3,
-       "duration_min": 31,
-       "pace_key": "marathon",
-       "pace_range": [
-        268,
-        276
-       ],
-       "pace_label": "4:28–4:36 /km",
-       "adjusted": "Readiness 58: Hauptteil ~¼ kürzer, Tempo am langsamen Ende des Bereichs",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "done",
-       "activity_id": "20000586247",
-       "score": 89
+       "activity_id": "20000747964",
+       "score": null
+      },
+      {
+       "id": "2026-10-29-strength-mobility",
+       "date": "2026-10-29",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000752672",
+       "score": 100
+      },
+      {
+       "id": "2026-10-29-strength-gym_b",
+       "date": "2026-10-29",
+       "sport": "strength",
+       "profile": "gym_b",
+       "key": false,
+       "title": "Kraft B – Schultern & Arme",
+       "detail": "Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12",
+       "duration_min": 45,
+       "status": "done",
+       "activity_id": "20000758586",
+       "score": 100
       }
      ],
      "unplanned": [],
-     "note": "Gelbe Ampel – Schlüsseleinheit etwas entschärft."
+     "note": null
     },
     {
      "date": "2026-10-30",
      "weekday": "Fr",
      "sessions": [
       {
-       "id": "2026-10-30-strength-strength",
+       "id": "2026-10-30-sail-training",
+       "date": "2026-10-30",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "done",
+       "activity_id": "20000764515",
+       "score": null
+      },
+      {
+       "id": "2026-10-30-strength-mobility",
        "date": "2026-10-30",
        "sport": "strength",
-       "profile": "strength",
+       "profile": "mobility",
        "key": false,
-       "title": "Krafttraining B",
-       "detail": "Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings)",
-       "duration_min": 60,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
        "status": "done",
-       "activity_id": "20000594946",
+       "activity_id": "20000770320",
        "score": 100
       },
       {
-       "id": "2026-10-30-row-z2",
+       "id": "2026-10-30-run-easy",
        "date": "2026-10-30",
-       "sport": "row",
-       "profile": "z2",
+       "sport": "run",
+       "profile": "easy",
        "key": false,
-       "title": "Rudern/Rad locker",
-       "detail": "Zone 1–2, locker bleiben",
-       "duration_min": 75,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln",
+       "distance_km": 6.0,
+       "duration_min": 32,
+       "pace_key": "easy",
+       "pace_range": [
+        301,
+        331
+       ],
+       "pace_label": "5:01–5:31 /km",
        "status": "done",
-       "activity_id": "20000596510",
+       "activity_id": "20000773563",
        "score": 100
       }
      ],
@@ -1328,36 +1517,43 @@
      "weekday": "Sa",
      "sessions": [
       {
-       "id": "2026-10-31-run-easy",
+       "id": "2026-10-31-sail-training",
        "date": "2026-10-31",
-       "sport": "run",
-       "profile": "easy",
+       "sport": "sail",
+       "profile": "sail",
        "key": false,
-       "title": "Lockerer Lauf + Steigerungen",
-       "detail": "locker, am Ende 5×20\" Steigerungen",
-       "distance_km": 5.9,
-       "duration_min": 31,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "done",
-       "activity_id": "20000604196",
-       "score": 100
+       "activity_id": "20000775034",
+       "score": null
       },
       {
-       "id": "2026-10-31-bike-z2",
+       "id": "2026-10-31-strength-mobility",
        "date": "2026-10-31",
-       "sport": "bike",
-       "profile": "z2",
+       "sport": "strength",
+       "profile": "mobility",
        "key": false,
-       "title": "Rad locker (optional)",
-       "detail": "Zone 1–2",
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000780462",
+       "score": 97
+      },
+      {
+       "id": "2026-10-31-strength-gym_c",
+       "date": "2026-10-31",
+       "sport": "strength",
+       "profile": "gym_c",
+       "key": false,
+       "title": "Kraft C – Beine & Rumpf",
+       "detail": "Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber",
        "duration_min": 45,
        "status": "done",
-       "activity_id": "20000608277",
+       "activity_id": "20000784091",
        "score": 100
       }
      ],
@@ -1369,23 +1565,30 @@
      "weekday": "So",
      "sessions": [
       {
-       "id": "2026-11-01-run-long",
+       "id": "2026-11-01-sail-training",
        "date": "2026-11-01",
-       "sport": "run",
-       "profile": "long",
-       "key": true,
-       "title": "Langer Lauf",
-       "detail": "gleichmäßig locker",
-       "distance_km": 11.2,
-       "duration_min": 59,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Training Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "done",
-       "activity_id": "20000609976",
+       "activity_id": "20000786311",
+       "score": null
+      },
+      {
+       "id": "2026-11-01-strength-mobility",
+       "date": "2026-11-01",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "done",
+       "activity_id": "20000788590",
        "score": 100
       }
      ],
@@ -1399,24 +1602,63 @@
    "phase": "base1",
    "phase_label": "Grundlage 1",
    "deload": true,
-   "sailing_days": 0,
-   "planned_km": 31.2,
-   "planned_h": 8.3,
+   "sailing_days": 2,
+   "planned_km": 24.1,
+   "planned_h": 9.9,
    "actual": {
-    "run_km": 6.3,
-    "hours": 4.0,
+    "run_km": 8.9,
+    "hours": 4.7,
     "sail_h": 0.0,
     "by_sport": {
-     "strength": 1.05,
-     "run": 0.57,
-     "bike": 2.35
+     "strength": 2.54,
+     "swim": 0.55,
+     "run": 0.84,
+     "bike": 0.8
     }
    },
    "days": [
     {
      "date": "2026-11-02",
      "weekday": "Mo",
-     "sessions": [],
+     "sessions": [
+      {
+       "id": "2026-11-02-strength-gym_a",
+       "date": "2026-11-02",
+       "sport": "strength",
+       "profile": "gym_a",
+       "key": false,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
+       "status": "done",
+       "activity_id": "20000795973",
+       "score": 100
+      },
+      {
+       "id": "2026-11-02-strength-stabi",
+       "date": "2026-11-02",
+       "sport": "strength",
+       "profile": "stabi",
+       "key": false,
+       "title": "Stabi – Rumpf & Hüfte",
+       "detail": "Planks, Side Planks, Dead Bug, Pallof Press, Copenhagen Plank, einbeinige Glute Bridge – 3 Runden",
+       "duration_min": 30,
+       "status": "missed"
+      },
+      {
+       "id": "2026-11-02-swim-easy",
+       "date": "2026-11-02",
+       "sport": "swim",
+       "profile": "easy",
+       "key": false,
+       "title": "Schwimmen",
+       "detail": "Locker & Technik, 2–2,5 km, Zone 1–2",
+       "duration_min": 35,
+       "status": "done",
+       "activity_id": "20000798453",
+       "score": 82
+      }
+     ],
      "unplanned": [],
      "note": null
     },
@@ -1425,46 +1667,60 @@
      "weekday": "Di",
      "sessions": [
       {
-       "id": "2026-11-03-run-easy",
+       "id": "2026-11-03-strength-gym_c",
+       "date": "2026-11-03",
+       "sport": "strength",
+       "profile": "gym_c",
+       "key": false,
+       "title": "Kraft C – Beine & Rumpf",
+       "detail": "Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber",
+       "duration_min": 45,
+       "status": "done",
+       "activity_id": "20000804077",
+       "score": 100
+      },
+      {
+       "id": "2026-11-03-run-long",
        "date": "2026-11-03",
        "sport": "run",
-       "profile": "easy",
-       "key": false,
-       "title": "Lockerer Lauf + Steigerungen",
-       "detail": "locker, am Ende 8×20\" Steigerungen",
-       "distance_km": 7.5,
-       "duration_min": 39,
+       "profile": "long",
+       "key": true,
+       "title": "Langer Lauf (Entlastung)",
+       "detail": "gleichmäßig locker",
+       "distance_km": 8.5,
+       "duration_min": 45,
        "pace_key": "easy",
        "pace_range": [
         301,
         331
        ],
        "pace_label": "5:01–5:31 /km",
+       "adjusted": "Readiness 51: Hauptteil ~¼ kürzer, Tempo am langsamen Ende des Bereichs",
        "status": "done",
-       "activity_id": "20000615958",
-       "score": 76
-      },
-      {
-       "id": "2026-11-03-strength-strength",
-       "date": "2026-11-03",
-       "sport": "strength",
-       "profile": "strength",
-       "key": false,
-       "title": "Krafttraining A",
-       "detail": "Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben",
-       "duration_min": 60,
-       "status": "done",
-       "activity_id": "20000621951",
+       "activity_id": "20000810981",
        "score": 100
       }
      ],
      "unplanned": [],
-     "note": null
+     "note": "Gelbe Ampel – Schlüsseleinheit etwas entschärft."
     },
     {
      "date": "2026-11-04",
      "weekday": "Mi",
      "sessions": [
+      {
+       "id": "2026-11-04-strength-gym_b",
+       "date": "2026-11-04",
+       "sport": "strength",
+       "profile": "gym_b",
+       "key": false,
+       "title": "Kraft B – Schultern & Arme",
+       "detail": "Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12",
+       "duration_min": 45,
+       "status": "done",
+       "activity_id": "20000815941",
+       "score": 97
+      },
       {
        "id": "2026-11-04-bike-z2",
        "date": "2026-11-04",
@@ -1473,14 +1729,15 @@
        "key": false,
        "title": "Rad Grundlage",
        "detail": "GA1, Trittfrequenz 85–95, Puls Zone 2",
-       "duration_min": 145,
+       "duration_min": 52,
+       "adjusted": "Readiness 50: etwas kürzer, streng Zone 1–2",
        "status": "done",
-       "activity_id": "20000629028",
+       "activity_id": "20000822286",
        "score": 100
       }
      ],
      "unplanned": [],
-     "note": null
+     "note": "Gelbe Ampel – Nebeneinheiten etwas kürzer."
     },
     {
      "date": "2026-11-05",
@@ -1502,8 +1759,22 @@
         255
        ],
        "pace_label": "4:08–4:15 /km",
-       "adjusted": "Readiness 36: statt Schwelle kurz",
+       "adjusted": "Readiness 30: statt Schwelle kurz",
        "status": "today"
+      },
+      {
+       "id": "2026-11-05-strength-stabi",
+       "date": "2026-11-05",
+       "sport": "strength",
+       "profile": "stabi",
+       "key": false,
+       "title": "Mobility & Faszienrolle",
+       "detail": "20' Mobilisation, kein schweres Heben",
+       "duration_min": 20,
+       "adjusted": "Readiness 30: statt Stabi – Rumpf & Hüfte",
+       "status": "done",
+       "activity_id": "20000834262",
+       "score": 61
       }
      ],
      "unplanned": [],
@@ -1529,29 +1800,29 @@
         255
        ],
        "pace_label": "4:08–4:15 /km",
-       "adjusted": "Von Donnerstag verschoben (Readiness 36)",
+       "adjusted": "Von Donnerstag verschoben (Readiness 30)",
        "status": "planned"
       },
       {
-       "id": "2026-11-06-strength-strength",
+       "id": "2026-11-06-strength-gym_a",
        "date": "2026-11-06",
        "sport": "strength",
-       "profile": "strength",
+       "profile": "gym_a",
        "key": false,
-       "title": "Krafttraining B",
-       "detail": "Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings)",
-       "duration_min": 60,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
        "status": "planned"
       },
       {
-       "id": "2026-11-06-row-z2",
+       "id": "2026-11-06-strength-bodyweight",
        "date": "2026-11-06",
-       "sport": "row",
-       "profile": "z2",
+       "sport": "strength",
+       "profile": "bodyweight",
        "key": false,
-       "title": "Rudern/Rad locker",
-       "detail": "Zone 1–2, locker bleiben",
-       "duration_min": 75,
+       "title": "Kraftausdauer & Prophylaxe",
+       "detail": "Körpergewicht-Zirkel 40''/20'': Ausfallschritte, Step-downs, einbeiniges RDL, exzentrisches Wadenheben, Tibialis Raises, Liegestütze, Hüft- & Fußmobility – 3–4 Runden",
+       "duration_min": 45,
        "status": "planned"
       }
      ],
@@ -1563,15 +1834,38 @@
      "weekday": "Sa",
      "sessions": [
       {
+       "id": "2026-11-07-sail-training",
+       "date": "2026-11-07",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-07-strength-mobility",
+       "date": "2026-11-07",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
        "id": "2026-11-07-run-easy",
        "date": "2026-11-07",
        "sport": "run",
        "profile": "easy",
        "key": false,
-       "title": "Lockerer Lauf + Steigerungen",
-       "detail": "locker, am Ende 5×20\" Steigerungen",
-       "distance_km": 5.6,
-       "duration_min": 30,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
+       "distance_km": 6.0,
+       "duration_min": 32,
        "pace_key": "easy",
        "pace_range": [
         301,
@@ -1589,21 +1883,37 @@
      "weekday": "So",
      "sessions": [
       {
-       "id": "2026-11-08-run-long",
+       "id": "2026-11-08-sail-training",
        "date": "2026-11-08",
-       "sport": "run",
-       "profile": "long",
-       "key": true,
-       "title": "Langer Lauf (Entlastung)",
-       "detail": "gleichmäßig locker",
-       "distance_km": 10.6,
-       "duration_min": 56,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-08-strength-mobility",
+       "date": "2026-11-08",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-08-strength-gym_a",
+       "date": "2026-11-08",
+       "sport": "strength",
+       "profile": "gym_a",
+       "key": false,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
        "status": "planned"
       }
      ],
@@ -1618,8 +1928,8 @@
    "phase_label": "Grundlage 1",
    "deload": false,
    "sailing_days": 6,
-   "planned_km": 27.5,
-   "planned_h": 2.4,
+   "planned_km": 20.5,
+   "planned_h": 4.7,
    "actual": null,
    "days": [
     {
@@ -1627,8 +1937,212 @@
      "weekday": "Mo",
      "sessions": [
       {
-       "id": "2026-11-09-run-long",
+       "id": "2026-11-09-sail-training",
        "date": "2026-11-09",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-09-strength-mobility",
+       "date": "2026-11-09",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-09-run-easy",
+       "date": "2026-11-09",
+       "sport": "run",
+       "profile": "easy",
+       "key": false,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
+       "distance_km": 6.0,
+       "duration_min": 32,
+       "pace_key": "easy",
+       "pace_range": [
+        301,
+        331
+       ],
+       "pace_label": "5:01–5:31 /km",
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-10",
+     "weekday": "Di",
+     "sessions": [
+      {
+       "id": "2026-11-10-sail-regatta",
+       "date": "2026-11-10",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-10-strength-activation",
+       "date": "2026-11-10",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-11",
+     "weekday": "Mi",
+     "sessions": [
+      {
+       "id": "2026-11-11-sail-regatta",
+       "date": "2026-11-11",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-11-strength-activation",
+       "date": "2026-11-11",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-12",
+     "weekday": "Do",
+     "sessions": [
+      {
+       "id": "2026-11-12-sail-regatta",
+       "date": "2026-11-12",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-12-strength-activation",
+       "date": "2026-11-12",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-13",
+     "weekday": "Fr",
+     "sessions": [
+      {
+       "id": "2026-11-13-sail-regatta",
+       "date": "2026-11-13",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-13-strength-activation",
+       "date": "2026-11-13",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-14",
+     "weekday": "Sa",
+     "sessions": [
+      {
+       "id": "2026-11-14-sail-regatta",
+       "date": "2026-11-14",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: Junior Europeans Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-14-strength-activation",
+       "date": "2026-11-14",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-15",
+     "weekday": "So",
+     "sessions": [
+      {
+       "id": "2026-11-15-run-long",
+       "date": "2026-11-15",
        "sport": "run",
        "profile": "long",
        "key": true,
@@ -1642,182 +2156,17 @@
         331
        ],
        "pace_label": "5:01–5:31 /km",
-       "adjusted": "Von Sonntag verschoben – Segeln hat Priorität",
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-10",
-     "weekday": "Di",
-     "sessions": [
-      {
-       "id": "2026-11-10-sail-training",
-       "date": "2026-11-10",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-11",
-     "weekday": "Mi",
-     "sessions": [
-      {
-       "id": "2026-11-11-sail-training",
-       "date": "2026-11-11",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
        "status": "planned"
       },
       {
-       "id": "2026-11-11-run-easy",
-       "date": "2026-11-11",
-       "sport": "run",
-       "profile": "easy",
-       "key": false,
-       "title": "Morgenlauf",
-       "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
-       "distance_km": 6.5,
-       "duration_min": 34,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-12",
-     "weekday": "Do",
-     "sessions": [
-      {
-       "id": "2026-11-12-sail-training",
-       "date": "2026-11-12",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-13",
-     "weekday": "Fr",
-     "sessions": [
-      {
-       "id": "2026-11-13-sail-training",
-       "date": "2026-11-13",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-14",
-     "weekday": "Sa",
-     "sessions": [
-      {
-       "id": "2026-11-14-sail-training",
-       "date": "2026-11-14",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-14-run-easy",
-       "date": "2026-11-14",
-       "sport": "run",
-       "profile": "easy",
-       "key": false,
-       "title": "Morgenlauf",
-       "detail": "35' locker morgens vor dem Segeln",
-       "distance_km": 6.5,
-       "duration_min": 34,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-15",
-     "weekday": "So",
-     "sessions": [
-      {
-       "id": "2026-11-15-sail-regatta",
+       "id": "2026-11-15-bike-z2",
        "date": "2026-11-15",
-       "sport": "sail",
-       "profile": "sail",
+       "sport": "bike",
+       "profile": "z2",
        "key": false,
-       "priority": true,
-       "title": "Regatta: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Wettkampftag",
-       "duration_min": 300,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-15-run-recovery",
-       "date": "2026-11-15",
-       "sport": "run",
-       "profile": "recovery",
-       "key": false,
-       "title": "Optional: Aktivierung",
-       "detail": "20' ganz locker + Mobility vor dem Auslaufen",
-       "distance_km": 3.5,
-       "duration_min": 18,
-       "pace_key": "recovery",
-       "pace_range": [
-        331,
-        350
-       ],
-       "pace_label": "5:31–5:50 /km",
-       "optional": true,
+       "title": "Rad locker – Regeneration",
+       "detail": "Zone 1, lockeres Kurbeln nach dem langen Lauf",
+       "duration_min": 75,
        "status": "planned"
       }
      ],
@@ -1831,9 +2180,9 @@
    "phase": "base1",
    "phase_label": "Grundlage 1",
    "deload": false,
-   "sailing_days": 4,
-   "planned_km": 28.4,
-   "planned_h": 5.8,
+   "sailing_days": 2,
+   "planned_km": 24.0,
+   "planned_h": 10.9,
    "actual": null,
    "days": [
     {
@@ -1841,34 +2190,36 @@
      "weekday": "Mo",
      "sessions": [
       {
-       "id": "2026-11-16-sail-regatta",
+       "id": "2026-11-16-strength-gym_a",
        "date": "2026-11-16",
-       "sport": "sail",
-       "profile": "sail",
+       "sport": "strength",
+       "profile": "gym_a",
        "key": false,
-       "priority": true,
-       "title": "Regatta: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Wettkampftag",
-       "duration_min": 300,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 60,
        "status": "planned"
       },
       {
-       "id": "2026-11-16-run-recovery",
+       "id": "2026-11-16-strength-stabi",
        "date": "2026-11-16",
-       "sport": "run",
-       "profile": "recovery",
+       "sport": "strength",
+       "profile": "stabi",
        "key": false,
-       "title": "Optional: Aktivierung",
-       "detail": "20' ganz locker + Mobility vor dem Auslaufen",
-       "distance_km": 3.5,
-       "duration_min": 18,
-       "pace_key": "recovery",
-       "pace_range": [
-        331,
-        350
-       ],
-       "pace_label": "5:31–5:50 /km",
-       "optional": true,
+       "title": "Stabi – Rumpf & Hüfte",
+       "detail": "Planks, Side Planks, Dead Bug, Pallof Press, Copenhagen Plank, einbeinige Glute Bridge – 3 Runden",
+       "duration_min": 30,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-16-swim-easy",
+       "date": "2026-11-16",
+       "sport": "swim",
+       "profile": "easy",
+       "key": false,
+       "title": "Schwimmen",
+       "detail": "Locker & Technik, 2–2,5 km, Zone 1–2",
+       "duration_min": 45,
        "status": "planned"
       }
      ],
@@ -1880,147 +2231,8 @@
      "weekday": "Di",
      "sessions": [
       {
-       "id": "2026-11-17-sail-regatta",
+       "id": "2026-11-17-run-vo2",
        "date": "2026-11-17",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Regatta: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Wettkampftag",
-       "duration_min": 300,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-17-run-recovery",
-       "date": "2026-11-17",
-       "sport": "run",
-       "profile": "recovery",
-       "key": false,
-       "title": "Optional: Aktivierung",
-       "detail": "20' ganz locker + Mobility vor dem Auslaufen",
-       "distance_km": 3.5,
-       "duration_min": 18,
-       "pace_key": "recovery",
-       "pace_range": [
-        331,
-        350
-       ],
-       "pace_label": "5:31–5:50 /km",
-       "optional": true,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-18",
-     "weekday": "Mi",
-     "sessions": [
-      {
-       "id": "2026-11-18-sail-regatta",
-       "date": "2026-11-18",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Regatta: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Wettkampftag",
-       "duration_min": 300,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-18-run-recovery",
-       "date": "2026-11-18",
-       "sport": "run",
-       "profile": "recovery",
-       "key": false,
-       "title": "Optional: Aktivierung",
-       "detail": "20' ganz locker + Mobility vor dem Auslaufen",
-       "distance_km": 3.5,
-       "duration_min": 18,
-       "pace_key": "recovery",
-       "pace_range": [
-        331,
-        350
-       ],
-       "pace_label": "5:31–5:50 /km",
-       "optional": true,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-19",
-     "weekday": "Do",
-     "sessions": [
-      {
-       "id": "2026-11-19-sail-regatta",
-       "date": "2026-11-19",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Regatta: Junior Europeans Vilamoura",
-       "detail": "Segeln hat Priorität – Wettkampftag",
-       "duration_min": 300,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-19-run-recovery",
-       "date": "2026-11-19",
-       "sport": "run",
-       "profile": "recovery",
-       "key": false,
-       "title": "Optional: Aktivierung",
-       "detail": "20' ganz locker + Mobility vor dem Auslaufen",
-       "distance_km": 3.5,
-       "duration_min": 18,
-       "pace_key": "recovery",
-       "pace_range": [
-        331,
-        350
-       ],
-       "pace_label": "5:31–5:50 /km",
-       "optional": true,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-20",
-     "weekday": "Fr",
-     "sessions": [
-      {
-       "id": "2026-11-20-strength-strength",
-       "date": "2026-11-20",
-       "sport": "strength",
-       "profile": "strength",
-       "key": false,
-       "title": "Krafttraining B",
-       "detail": "Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings)",
-       "duration_min": 60,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-20-row-z2",
-       "date": "2026-11-20",
-       "sport": "row",
-       "profile": "z2",
-       "key": false,
-       "title": "Rudern/Rad locker",
-       "detail": "Zone 1–2, locker bleiben",
-       "duration_min": 75,
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-20-run-vo2",
-       "date": "2026-11-20",
        "sport": "run",
        "profile": "vo2",
        "key": true,
@@ -2034,7 +2246,114 @@
         235
        ],
        "pace_label": "3:47–3:55 /km",
-       "adjusted": "Von Dienstag verschoben – Segeln hat Priorität",
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-17-strength-gym_c",
+       "date": "2026-11-17",
+       "sport": "strength",
+       "profile": "gym_c",
+       "key": false,
+       "title": "Kraft C – Beine & Rumpf",
+       "detail": "Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber",
+       "duration_min": 60,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-18",
+     "weekday": "Mi",
+     "sessions": [
+      {
+       "id": "2026-11-18-strength-gym_b",
+       "date": "2026-11-18",
+       "sport": "strength",
+       "profile": "gym_b",
+       "key": false,
+       "title": "Kraft B – Schultern & Arme",
+       "detail": "Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12",
+       "duration_min": 60,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-18-bike-z2",
+       "date": "2026-11-18",
+       "sport": "bike",
+       "profile": "z2",
+       "key": false,
+       "title": "Rad Grundlage",
+       "detail": "GA1, Trittfrequenz 85–95, Puls Zone 2",
+       "duration_min": 60,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-19",
+     "weekday": "Do",
+     "sessions": [
+      {
+       "id": "2026-11-19-run-steady",
+       "date": "2026-11-19",
+       "sport": "run",
+       "profile": "steady",
+       "key": true,
+       "title": "Steigerungslauf",
+       "detail": "locker beginnen, letzte 25' @ M-Tempo",
+       "distance_km": 9.0,
+       "duration_min": 44,
+       "pace_key": "marathon",
+       "pace_range": [
+        267,
+        276
+       ],
+       "pace_label": "4:27–4:36 /km",
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-19-strength-stabi",
+       "date": "2026-11-19",
+       "sport": "strength",
+       "profile": "stabi",
+       "key": false,
+       "title": "Stabi – Rumpf & Hüfte",
+       "detail": "Planks, Side Planks, Dead Bug, Pallof Press, Copenhagen Plank, einbeinige Glute Bridge – 3 Runden",
+       "duration_min": 30,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-20",
+     "weekday": "Fr",
+     "sessions": [
+      {
+       "id": "2026-11-20-strength-gym_a",
+       "date": "2026-11-20",
+       "sport": "strength",
+       "profile": "gym_a",
+       "key": false,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 60,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-20-strength-bodyweight",
+       "date": "2026-11-20",
+       "sport": "strength",
+       "profile": "bodyweight",
+       "key": false,
+       "title": "Kraftausdauer & Prophylaxe",
+       "detail": "Körpergewicht-Zirkel 40''/20'': Ausfallschritte, Step-downs, einbeiniges RDL, exzentrisches Wadenheben, Tibialis Raises, Liegestütze, Hüft- & Fußmobility – 3–4 Runden",
+       "duration_min": 45,
        "status": "planned"
       }
      ],
@@ -2046,32 +2365,44 @@
      "weekday": "Sa",
      "sessions": [
       {
+       "id": "2026-11-21-sail-training",
+       "date": "2026-11-21",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-21-strength-mobility",
+       "date": "2026-11-21",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
        "id": "2026-11-21-run-easy",
        "date": "2026-11-21",
        "sport": "run",
        "profile": "easy",
        "key": false,
-       "title": "Lockerer Lauf + Steigerungen",
-       "detail": "locker, am Ende 5×20\" Steigerungen",
-       "distance_km": 6.7,
-       "duration_min": 35,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
+       "distance_km": 6.0,
+       "duration_min": 32,
        "pace_key": "easy",
        "pace_range": [
         301,
         331
        ],
        "pace_label": "5:01–5:31 /km",
-       "status": "planned"
-      },
-      {
-       "id": "2026-11-21-bike-z2",
-       "date": "2026-11-21",
-       "sport": "bike",
-       "profile": "z2",
-       "key": false,
-       "title": "Rad locker (optional)",
-       "detail": "Zone 1–2",
-       "duration_min": 70,
        "status": "planned"
       }
      ],
@@ -2083,21 +2414,37 @@
      "weekday": "So",
      "sessions": [
       {
-       "id": "2026-11-22-run-long",
+       "id": "2026-11-22-sail-training",
        "date": "2026-11-22",
-       "sport": "run",
-       "profile": "long",
-       "key": true,
-       "title": "Langer Lauf",
-       "detail": "gleichmäßig locker",
-       "distance_km": 12.7,
-       "duration_min": 67,
-       "pace_key": "easy",
-       "pace_range": [
-        301,
-        331
-       ],
-       "pace_label": "5:01–5:31 /km",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-22-strength-mobility",
+       "date": "2026-11-22",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-22-strength-gym_a",
+       "date": "2026-11-22",
+       "sport": "strength",
+       "profile": "gym_a",
+       "key": false,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
        "status": "planned"
       }
      ],
@@ -2111,120 +2458,48 @@
    "phase": "base2",
    "phase_label": "Grundlage 2",
    "deload": false,
-   "sailing_days": 4,
-   "planned_km": 17.4,
-   "planned_h": 4.9,
+   "sailing_days": 7,
+   "planned_km": 12.0,
+   "planned_h": 3.8,
    "actual": null,
    "days": [
     {
      "date": "2026-11-23",
      "weekday": "Mo",
-     "sessions": [],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-24",
-     "weekday": "Di",
      "sessions": [
       {
-       "id": "2026-11-24-run-vo2",
-       "date": "2026-11-24",
-       "sport": "run",
-       "profile": "vo2",
-       "key": true,
-       "title": "Intervalle 800 m",
-       "detail": "2–3 km ein, 6×800 m @ I-Tempo, 2' Trabpause, 2 km aus",
-       "distance_km": 10.9,
-       "duration_min": 50,
-       "pace_key": "interval",
-       "pace_range": [
-        227,
-        235
-       ],
-       "pace_label": "3:47–3:55 /km",
+       "id": "2026-11-23-sail-training",
+       "date": "2026-11-23",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
        "status": "planned"
       },
       {
-       "id": "2026-11-24-strength-strength",
-       "date": "2026-11-24",
+       "id": "2026-11-23-strength-mobility",
+       "date": "2026-11-23",
        "sport": "strength",
-       "profile": "strength",
+       "profile": "mobility",
        "key": false,
-       "title": "Krafttraining A",
-       "detail": "Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben",
-       "duration_min": 60,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-25",
-     "weekday": "Mi",
-     "sessions": [
-      {
-       "id": "2026-11-25-bike-z2",
-       "date": "2026-11-25",
-       "sport": "bike",
-       "profile": "z2",
-       "key": false,
-       "title": "Rad Grundlage",
-       "detail": "GA1, Trittfrequenz 85–95, Puls Zone 2",
-       "duration_min": 150,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-26",
-     "weekday": "Do",
-     "sessions": [
-      {
-       "id": "2026-11-26-sail-training",
-       "date": "2026-11-26",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: GP1 Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
-       "status": "planned"
-      }
-     ],
-     "unplanned": [],
-     "note": null
-    },
-    {
-     "date": "2026-11-27",
-     "weekday": "Fr",
-     "sessions": [
-      {
-       "id": "2026-11-27-sail-training",
-       "date": "2026-11-27",
-       "sport": "sail",
-       "profile": "sail",
-       "key": false,
-       "priority": true,
-       "title": "Segeltraining: GP1 Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
        "status": "planned"
       },
       {
-       "id": "2026-11-27-run-easy",
-       "date": "2026-11-27",
+       "id": "2026-11-23-run-easy",
+       "date": "2026-11-23",
        "sport": "run",
        "profile": "easy",
        "key": false,
        "title": "Morgenlauf",
        "detail": "35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen",
-       "distance_km": 6.5,
-       "duration_min": 34,
+       "distance_km": 6.0,
+       "duration_min": 32,
        "pace_key": "easy",
        "pace_range": [
         301,
@@ -2238,12 +2513,12 @@
      "note": null
     },
     {
-     "date": "2026-11-28",
-     "weekday": "Sa",
+     "date": "2026-11-24",
+     "weekday": "Di",
      "sessions": [
       {
-       "id": "2026-11-28-sail-training",
-       "date": "2026-11-28",
+       "id": "2026-11-24-sail-training",
+       "date": "2026-11-24",
        "sport": "sail",
        "profile": "sail",
        "key": false,
@@ -2251,6 +2526,170 @@
        "title": "Segeltraining: GP1 Vilamoura",
        "detail": "Segeln hat Priorität – Training am Wasser",
        "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-24-strength-mobility",
+       "date": "2026-11-24",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-24-strength-gym_a",
+       "date": "2026-11-24",
+       "sport": "strength",
+       "profile": "gym_a",
+       "key": false,
+       "title": "Kraft A – Brust & Rücken",
+       "detail": "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10",
+       "duration_min": 45,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-25",
+     "weekday": "Mi",
+     "sessions": [
+      {
+       "id": "2026-11-25-sail-training",
+       "date": "2026-11-25",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Segeltraining: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Training am Wasser",
+       "duration_min": 240,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-25-strength-mobility",
+       "date": "2026-11-25",
+       "sport": "strength",
+       "profile": "mobility",
+       "key": false,
+       "title": "Stabi & Mobility",
+       "detail": "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle",
+       "duration_min": 20,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-25-run-easy",
+       "date": "2026-11-25",
+       "sport": "run",
+       "profile": "easy",
+       "key": false,
+       "title": "Morgenlauf",
+       "detail": "35' locker morgens vor dem Segeln",
+       "distance_km": 6.0,
+       "duration_min": 32,
+       "pace_key": "easy",
+       "pace_range": [
+        301,
+        331
+       ],
+       "pace_label": "5:01–5:31 /km",
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-26",
+     "weekday": "Do",
+     "sessions": [
+      {
+       "id": "2026-11-26-sail-regatta",
+       "date": "2026-11-26",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-26-strength-activation",
+       "date": "2026-11-26",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-27",
+     "weekday": "Fr",
+     "sessions": [
+      {
+       "id": "2026-11-27-sail-regatta",
+       "date": "2026-11-27",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-27-strength-activation",
+       "date": "2026-11-27",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
+       "status": "planned"
+      }
+     ],
+     "unplanned": [],
+     "note": null
+    },
+    {
+     "date": "2026-11-28",
+     "weekday": "Sa",
+     "sessions": [
+      {
+       "id": "2026-11-28-sail-regatta",
+       "date": "2026-11-28",
+       "sport": "sail",
+       "profile": "sail",
+       "key": false,
+       "priority": true,
+       "title": "Regatta: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-28-strength-activation",
+       "date": "2026-11-28",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
        "status": "planned"
       }
      ],
@@ -2262,15 +2701,26 @@
      "weekday": "So",
      "sessions": [
       {
-       "id": "2026-11-29-sail-training",
+       "id": "2026-11-29-sail-regatta",
        "date": "2026-11-29",
        "sport": "sail",
        "profile": "sail",
        "key": false,
        "priority": true,
-       "title": "Segeltraining: GP1 Vilamoura",
-       "detail": "Segeln hat Priorität – Training am Wasser",
-       "duration_min": 240,
+       "title": "Regatta: GP1 Vilamoura",
+       "detail": "Segeln hat Priorität – Wettkampftag",
+       "duration_min": 300,
+       "status": "planned"
+      },
+      {
+       "id": "2026-11-29-strength-activation",
+       "date": "2026-11-29",
+       "sport": "strength",
+       "profile": "activation",
+       "key": false,
+       "title": "Aktivierung",
+       "detail": "15' Mobility & Aktivierung vor dem Auslaufen",
+       "duration_min": 15,
        "status": "planned"
       }
      ],
@@ -2361,85 +2811,85 @@
   },
   {
    "start": "2026-09-28",
-   "run_km": 20.5,
-   "hours": 7.2,
+   "run_km": 22.9,
+   "hours": 8.3,
    "sail_h": 0.0,
    "by_sport": {
-    "strength": 0.8,
-    "bike": 3.28,
-    "run": 1.9,
-    "row": 1.25
+    "strength": 3.97,
+    "run": 2.11,
+    "bike": 2.23
    },
    "planned_km": 27.1,
-   "planned_h": 8.9
+   "planned_h": 11.1
   },
   {
    "start": "2026-10-05",
-   "run_km": 27.3,
-   "hours": 6.4,
-   "sail_h": 10.3,
+   "run_km": 15.9,
+   "hours": 8.6,
+   "sail_h": 0.0,
    "by_sport": {
-    "run": 2.49,
-    "strength": 1.53,
-    "bike": 2.36,
-    "sail": 10.28
+    "strength": 4.04,
+    "swim": 0.74,
+    "run": 1.46,
+    "bike": 2.37
    },
-   "planned_km": 22.2,
-   "planned_h": 7.2
+   "planned_km": 27.1,
+   "planned_h": 11.1
   },
   {
    "start": "2026-10-12",
-   "run_km": 14.5,
-   "hours": 5.1,
-   "sail_h": 19.6,
+   "run_km": 23.8,
+   "hours": 11.0,
+   "sail_h": 8.2,
    "by_sport": {
-    "run": 1.33,
-    "strength": 1.07,
-    "bike": 2.67,
-    "sail": 19.64
+    "strength": 6.69,
+    "swim": 0.7,
+    "run": 2.11,
+    "bike": 1.53,
+    "sail": 8.24
    },
-   "planned_km": 8.0,
-   "planned_h": 4.2
+   "planned_km": 22.0,
+   "planned_h": 10.9
   },
   {
    "start": "2026-10-19",
-   "run_km": 12.7,
-   "hours": 1.2,
-   "sail_h": 26.1,
+   "run_km": 16.2,
+   "hours": 5.3,
+   "sail_h": 27.3,
    "by_sport": {
-    "sail": 26.15,
-    "run": 1.16
+    "sail": 27.31,
+    "strength": 3.79,
+    "run": 1.52
    },
-   "planned_km": 13.0,
-   "planned_h": 1.1
+   "planned_km": 18.0,
+   "planned_h": 6.2
   },
   {
    "start": "2026-10-26",
-   "run_km": 38.7,
-   "hours": 9.8,
-   "sail_h": 4.2,
+   "run_km": 17.2,
+   "hours": 5.9,
+   "sail_h": 27.8,
    "by_sport": {
-    "sail": 4.21,
-    "run": 3.45,
-    "strength": 1.93,
-    "bike": 3.09,
-    "row": 1.3
+    "sail": 27.82,
+    "strength": 4.28,
+    "run": 1.57
    },
-   "planned_km": 39.4,
-   "planned_h": 9.9
+   "planned_km": 18.0,
+   "planned_h": 6.2
   },
   {
    "start": "2026-11-02",
-   "run_km": 6.3,
-   "hours": 4.0,
+   "run_km": 8.9,
+   "hours": 4.7,
    "sail_h": 0.0,
    "by_sport": {
-    "strength": 1.05,
-    "run": 0.57,
-    "bike": 2.35
+    "strength": 2.54,
+    "swim": 0.55,
+    "run": 0.84,
+    "bike": 0.8
    },
-   "planned_km": 31.2,
-   "planned_h": 8.3
+   "planned_km": 24.1,
+   "planned_h": 9.9
   }
  ],
  "pmc": [
@@ -3012,286 +3462,286 @@
   },
   {
    "date": "2026-09-28",
-   "load": 0.0,
-   "ctl": 58.1,
-   "atl": 66.3,
+   "load": 22.0,
+   "ctl": 58.6,
+   "atl": 69.2,
    "tsb": -16.9
   },
   {
    "date": "2026-09-29",
-   "load": 28.0,
-   "ctl": 57.4,
-   "atl": 61.2,
-   "tsb": -8.2
+   "load": 83.0,
+   "ctl": 59.2,
+   "atl": 71.0,
+   "tsb": -10.6
   },
   {
    "date": "2026-09-30",
-   "load": 164.0,
-   "ctl": 59.9,
-   "atl": 74.9,
-   "tsb": -3.8
+   "load": 130.0,
+   "ctl": 60.9,
+   "atl": 78.9,
+   "tsb": -11.8
   },
   {
    "date": "2026-10-01",
-   "load": 56.0,
-   "ctl": 59.8,
-   "atl": 72.3,
-   "tsb": -15.0
+   "load": 66.0,
+   "ctl": 61.0,
+   "atl": 77.2,
+   "tsb": -18.0
   },
   {
    "date": "2026-10-02",
-   "load": 46.0,
-   "ctl": 59.5,
-   "atl": 68.8,
-   "tsb": -12.5
+   "load": 28.0,
+   "ctl": 60.2,
+   "atl": 70.6,
+   "tsb": -16.2
   },
   {
    "date": "2026-10-03",
-   "load": 107.0,
-   "ctl": 60.6,
-   "atl": 73.9,
-   "tsb": -9.4
+   "load": 24.0,
+   "ctl": 59.4,
+   "atl": 64.4,
+   "tsb": -10.4
   },
   {
    "date": "2026-10-04",
-   "load": 62.0,
-   "ctl": 60.6,
-   "atl": 72.3,
-   "tsb": -13.3
+   "load": 136.0,
+   "ctl": 61.2,
+   "atl": 73.9,
+   "tsb": -5.1
   },
   {
    "date": "2026-10-05",
-   "load": 0.0,
-   "ctl": 59.2,
-   "atl": 62.7,
-   "tsb": -11.7
-  },
-  {
-   "date": "2026-10-06",
-   "load": 63.0,
-   "ctl": 59.3,
-   "atl": 62.7,
-   "tsb": -3.5
-  },
-  {
-   "date": "2026-10-07",
-   "load": 175.0,
-   "ctl": 62.0,
-   "atl": 77.7,
-   "tsb": -3.4
-  },
-  {
-   "date": "2026-10-08",
-   "load": 42.0,
-   "ctl": 61.6,
-   "atl": 72.9,
-   "tsb": -15.7
-  },
-  {
-   "date": "2026-10-09",
-   "load": 88.0,
-   "ctl": 62.2,
-   "atl": 74.9,
-   "tsb": -11.4
-  },
-  {
-   "date": "2026-10-10",
-   "load": 130.0,
-   "ctl": 63.8,
-   "atl": 82.3,
+   "load": 46.0,
+   "ctl": 60.8,
+   "atl": 70.2,
    "tsb": -12.8
   },
   {
+   "date": "2026-10-06",
+   "load": 72.0,
+   "ctl": 61.1,
+   "atl": 70.5,
+   "tsb": -9.4
+  },
+  {
+   "date": "2026-10-07",
+   "load": 124.0,
+   "ctl": 62.5,
+   "atl": 77.6,
+   "tsb": -9.4
+  },
+  {
+   "date": "2026-10-08",
+   "load": 16.0,
+   "ctl": 61.5,
+   "atl": 69.4,
+   "tsb": -15.0
+  },
+  {
+   "date": "2026-10-09",
+   "load": 56.0,
+   "ctl": 61.3,
+   "atl": 67.6,
+   "tsb": -7.9
+  },
+  {
+   "date": "2026-10-10",
+   "load": 0.0,
+   "ctl": 59.9,
+   "atl": 58.6,
+   "tsb": -6.3
+  },
+  {
    "date": "2026-10-11",
-   "load": 128.0,
-   "ctl": 65.3,
-   "atl": 88.4,
-   "tsb": -18.5
+   "load": 132.0,
+   "ctl": 61.6,
+   "atl": 68.4,
+   "tsb": 1.3
   },
   {
    "date": "2026-10-12",
-   "load": 0.0,
-   "ctl": 63.7,
-   "atl": 76.6,
-   "tsb": -23.1
+   "load": 91.0,
+   "ctl": 62.3,
+   "atl": 71.4,
+   "tsb": -6.8
   },
   {
    "date": "2026-10-13",
    "load": 96.0,
-   "ctl": 64.5,
-   "atl": 79.2,
-   "tsb": -12.9
+   "ctl": 63.1,
+   "atl": 74.7,
+   "tsb": -9.1
   },
   {
    "date": "2026-10-14",
-   "load": 200.0,
-   "ctl": 67.7,
-   "atl": 95.3,
-   "tsb": -14.7
+   "load": 140.0,
+   "ctl": 64.9,
+   "atl": 83.4,
+   "tsb": -11.6
   },
   {
    "date": "2026-10-15",
-   "load": 113.0,
-   "ctl": 68.8,
-   "atl": 97.6,
-   "tsb": -27.6
+   "load": 86.0,
+   "ctl": 65.4,
+   "atl": 83.7,
+   "tsb": -18.5
   },
   {
    "date": "2026-10-16",
-   "load": 105.0,
-   "ctl": 69.6,
-   "atl": 98.6,
-   "tsb": -28.9
+   "load": 55.0,
+   "ctl": 65.1,
+   "atl": 79.9,
+   "tsb": -18.3
   },
   {
    "date": "2026-10-17",
-   "load": 95.0,
-   "ctl": 70.2,
-   "atl": 98.1,
-   "tsb": -29.0
+   "load": 137.0,
+   "ctl": 66.8,
+   "atl": 87.5,
+   "tsb": -14.8
   },
   {
    "date": "2026-10-18",
-   "load": 139.0,
-   "ctl": 71.8,
-   "atl": 103.6,
-   "tsb": -27.9
+   "load": 131.0,
+   "ctl": 68.3,
+   "atl": 93.3,
+   "tsb": -20.7
   },
   {
    "date": "2026-10-19",
-   "load": 69.0,
-   "ctl": 71.8,
-   "atl": 99.0,
-   "tsb": -31.7
+   "load": 128.0,
+   "ctl": 69.7,
+   "atl": 97.9,
+   "tsb": -25.0
   },
   {
    "date": "2026-10-20",
-   "load": 133.0,
-   "ctl": 73.2,
-   "atl": 103.5,
-   "tsb": -27.2
-  },
-  {
-   "date": "2026-10-21",
-   "load": 80.0,
-   "ctl": 73.4,
-   "atl": 100.4,
-   "tsb": -30.3
-  },
-  {
-   "date": "2026-10-22",
-   "load": 77.0,
-   "ctl": 73.4,
+   "load": 93.0,
+   "ctl": 70.3,
    "atl": 97.3,
-   "tsb": -27.0
-  },
-  {
-   "date": "2026-10-23",
-   "load": 108.0,
-   "ctl": 74.3,
-   "atl": 98.7,
-   "tsb": -23.8
-  },
-  {
-   "date": "2026-10-24",
-   "load": 75.0,
-   "ctl": 74.3,
-   "atl": 95.5,
-   "tsb": -24.4
-  },
-  {
-   "date": "2026-10-25",
-   "load": 74.0,
-   "ctl": 74.3,
-   "atl": 92.7,
-   "tsb": -21.3
-  },
-  {
-   "date": "2026-10-26",
-   "load": 131.0,
-   "ctl": 75.6,
-   "atl": 97.8,
-   "tsb": -18.4
-  },
-  {
-   "date": "2026-10-27",
-   "load": 83.0,
-   "ctl": 75.8,
-   "atl": 95.8,
-   "tsb": -22.2
-  },
-  {
-   "date": "2026-10-28",
-   "load": 175.0,
-   "ctl": 78.1,
-   "atl": 106.3,
-   "tsb": -20.0
-  },
-  {
-   "date": "2026-10-29",
-   "load": 59.0,
-   "ctl": 77.7,
-   "atl": 100.0,
    "tsb": -28.2
   },
   {
-   "date": "2026-10-30",
-   "load": 82.0,
+   "date": "2026-10-21",
+   "load": 120.0,
+   "ctl": 71.4,
+   "atl": 100.3,
+   "tsb": -27.0
+  },
+  {
+   "date": "2026-10-22",
+   "load": 125.0,
+   "ctl": 72.7,
+   "atl": 103.6,
+   "tsb": -28.8
+  },
+  {
+   "date": "2026-10-23",
+   "load": 137.0,
+   "ctl": 74.2,
+   "atl": 108.0,
+   "tsb": -30.9
+  },
+  {
+   "date": "2026-10-24",
+   "load": 114.0,
+   "ctl": 75.2,
+   "atl": 108.8,
+   "tsb": -33.8
+  },
+  {
+   "date": "2026-10-25",
+   "load": 89.0,
+   "ctl": 75.5,
+   "atl": 106.2,
+   "tsb": -33.7
+  },
+  {
+   "date": "2026-10-26",
+   "load": 128.0,
+   "ctl": 76.7,
+   "atl": 109.1,
+   "tsb": -30.7
+  },
+  {
+   "date": "2026-10-27",
+   "load": 122.0,
    "ctl": 77.8,
-   "atl": 97.6,
-   "tsb": -22.4
+   "atl": 110.8,
+   "tsb": -32.4
+  },
+  {
+   "date": "2026-10-28",
+   "load": 134.0,
+   "ctl": 79.1,
+   "atl": 113.9,
+   "tsb": -33.0
+  },
+  {
+   "date": "2026-10-29",
+   "load": 124.0,
+   "ctl": 80.2,
+   "atl": 115.2,
+   "tsb": -34.8
+  },
+  {
+   "date": "2026-10-30",
+   "load": 134.0,
+   "ctl": 81.4,
+   "atl": 117.7,
+   "tsb": -35.1
   },
   {
    "date": "2026-10-31",
-   "load": 84.0,
-   "ctl": 77.9,
-   "atl": 95.8,
-   "tsb": -19.9
+   "load": 110.0,
+   "ctl": 82.1,
+   "atl": 116.7,
+   "tsb": -36.3
   },
   {
    "date": "2026-11-01",
-   "load": 73.0,
-   "ctl": 77.8,
-   "atl": 92.8,
-   "tsb": -17.9
+   "load": 92.0,
+   "ctl": 82.3,
+   "atl": 113.4,
+   "tsb": -34.6
   },
   {
    "date": "2026-11-02",
-   "load": 0.0,
-   "ctl": 76.0,
-   "atl": 80.4,
-   "tsb": -15.0
+   "load": 55.0,
+   "ctl": 81.7,
+   "atl": 105.6,
+   "tsb": -31.1
   },
   {
    "date": "2026-11-03",
-   "load": 84.0,
-   "ctl": 76.2,
-   "atl": 80.9,
-   "tsb": -4.5
+   "load": 94.0,
+   "ctl": 82.0,
+   "atl": 104.1,
+   "tsb": -23.9
   },
   {
    "date": "2026-11-04",
-   "load": 153.0,
-   "ctl": 78.0,
-   "atl": 90.5,
-   "tsb": -4.8
+   "load": 84.0,
+   "ctl": 82.0,
+   "atl": 101.4,
+   "tsb": -22.1
   },
   {
    "date": "2026-11-05",
-   "load": 0.0,
-   "ctl": 76.1,
-   "atl": 78.5,
-   "tsb": -12.5
+   "load": 18.0,
+   "ctl": 80.5,
+   "atl": 90.3,
+   "tsb": -19.4
   }
  ],
  "metrics": {
   "lt_pace": 249,
   "lt_hr": 176,
   "vo2max": 52.4,
-  "ctl": 76.1,
-  "atl": 78.5,
-  "tsb": -12.5,
-  "acwr": 1.03,
+  "ctl": 80.5,
+  "atl": 90.3,
+  "tsb": -19.4,
+  "acwr": 1.12,
   "scale": 1.035
  },
  "paces": [
@@ -3329,17 +3779,19 @@
  "wellness": [
   {
    "date": "2026-10-07",
-   "hrv": 54,
+   "hrv": 61,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
    "sleep_score": 88,
    "sleep_h": 8.4,
-   "readiness": 58,
+   "readiness": 68,
    "readiness_level": "MODERATE",
    "rhr": 46,
-   "body_battery": 97
+   "body_battery": 72,
+   "kcal_total": 3275,
+   "kcal_active": 1075
   },
   {
    "date": "2026-10-08",
@@ -3348,100 +3800,114 @@
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 83,
-   "sleep_h": 8.3,
-   "readiness": 80,
+   "sleep_score": 90,
+   "sleep_h": 8.5,
+   "readiness": 82,
    "readiness_level": "HIGH",
-   "rhr": 46,
-   "body_battery": 75
+   "rhr": 45,
+   "body_battery": 97,
+   "kcal_total": 3473,
+   "kcal_active": 1173
   },
   {
    "date": "2026-10-09",
-   "hrv": 56,
+   "hrv": 52,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 81,
-   "sleep_h": 8.2,
-   "readiness": 64,
+   "sleep_score": 71,
+   "sleep_h": 7.9,
+   "readiness": 54,
    "readiness_level": "MODERATE",
-   "rhr": 46,
-   "body_battery": 86
+   "rhr": 45,
+   "body_battery": 89,
+   "kcal_total": 3241,
+   "kcal_active": 1241
   },
   {
    "date": "2026-10-10",
-   "hrv": 57,
+   "hrv": 55,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
    "sleep_score": 75,
    "sleep_h": 8.0,
-   "readiness": 80,
+   "readiness": 76,
    "readiness_level": "HIGH",
-   "rhr": 45,
-   "body_battery": 78
+   "rhr": 46,
+   "body_battery": 76,
+   "kcal_total": 3643,
+   "kcal_active": 943
   },
   {
    "date": "2026-10-11",
-   "hrv": 54,
+   "hrv": 61,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 84,
+   "sleep_score": 83,
    "sleep_h": 8.3,
-   "readiness": 65,
+   "readiness": 57,
    "readiness_level": "MODERATE",
    "rhr": 45,
-   "body_battery": 75
+   "body_battery": 74,
+   "kcal_total": 3114,
+   "kcal_active": 1214
   },
   {
    "date": "2026-10-12",
-   "hrv": 67,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 84,
-   "sleep_h": 8.3,
-   "readiness": 82,
-   "readiness_level": "HIGH",
-   "rhr": 50,
-   "body_battery": 70
-  },
-  {
-   "date": "2026-10-13",
    "hrv": 65,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 75,
-   "sleep_h": 8.0,
+   "sleep_score": 84,
+   "sleep_h": 8.3,
    "readiness": 53,
    "readiness_level": "MODERATE",
-   "rhr": 49,
-   "body_battery": 98
+   "rhr": 45,
+   "body_battery": 81,
+   "kcal_total": 3444,
+   "kcal_active": 944
   },
   {
-   "date": "2026-10-14",
-   "hrv": 53,
+   "date": "2026-10-13",
+   "hrv": 67,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 70,
-   "sleep_h": 7.8,
-   "readiness": 56,
+   "sleep_score": 73,
+   "sleep_h": 7.9,
+   "readiness": 66,
    "readiness_level": "MODERATE",
-   "rhr": 49,
-   "body_battery": 94
+   "rhr": 45,
+   "body_battery": 90,
+   "kcal_total": 3410,
+   "kcal_active": 1310
+  },
+  {
+   "date": "2026-10-14",
+   "hrv": 64,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 88,
+   "sleep_h": 8.4,
+   "readiness": 62,
+   "readiness_level": "MODERATE",
+   "rhr": 46,
+   "body_battery": 84,
+   "kcal_total": 3510,
+   "kcal_active": 1010
   },
   {
    "date": "2026-10-15",
-   "hrv": 58,
+   "hrv": 68,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
@@ -3450,8 +3916,10 @@
    "sleep_h": 8.0,
    "readiness": 67,
    "readiness_level": "MODERATE",
-   "rhr": 45,
-   "body_battery": 71
+   "rhr": 47,
+   "body_battery": 79,
+   "kcal_total": 3246,
+   "kcal_active": 1146
   },
   {
    "date": "2026-10-16",
@@ -3460,211 +3928,65 @@
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 71,
-   "sleep_h": 7.9,
-   "readiness": 58,
+   "sleep_score": 77,
+   "sleep_h": 8.1,
+   "readiness": 61,
    "readiness_level": "MODERATE",
    "rhr": 50,
-   "body_battery": 76
+   "body_battery": 79,
+   "kcal_total": 3528,
+   "kcal_active": 1228
   },
   {
    "date": "2026-10-17",
-   "hrv": 68,
+   "hrv": 65,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 71,
-   "sleep_h": 7.9,
-   "readiness": 79,
-   "readiness_level": "HIGH",
-   "rhr": 47,
-   "body_battery": 85
+   "sleep_score": 90,
+   "sleep_h": 8.5,
+   "readiness": 67,
+   "readiness_level": "MODERATE",
+   "rhr": 49,
+   "body_battery": 88,
+   "kcal_total": 3170,
+   "kcal_active": 1270
   },
   {
    "date": "2026-10-18",
-   "hrv": 68,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 74,
-   "sleep_h": 8.0,
-   "readiness": 52,
-   "readiness_level": "MODERATE",
-   "rhr": 47,
-   "body_battery": 94
-  },
-  {
-   "date": "2026-10-19",
-   "hrv": 45,
-   "hrv_week": 58,
-   "hrv_status": "UNBALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 47,
-   "sleep_h": 7.1,
-   "readiness": 31,
-   "readiness_level": "LOW",
-   "rhr": 52,
-   "body_battery": 60
-  },
-  {
-   "date": "2026-10-20",
-   "hrv": 64,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 80,
-   "sleep_h": 8.2,
-   "readiness": 58,
-   "readiness_level": "MODERATE",
-   "rhr": 50,
-   "body_battery": 72
-  },
-  {
-   "date": "2026-10-21",
-   "hrv": 68,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 72,
-   "sleep_h": 7.9,
-   "readiness": 72,
-   "readiness_level": "MODERATE",
-   "rhr": 48,
-   "body_battery": 91
-  },
-  {
-   "date": "2026-10-22",
-   "hrv": 66,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 88,
-   "sleep_h": 8.4,
-   "readiness": 73,
-   "readiness_level": "MODERATE",
-   "rhr": 50,
-   "body_battery": 77
-  },
-  {
-   "date": "2026-10-23",
    "hrv": 62,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 87,
-   "sleep_h": 8.4,
-   "readiness": 67,
-   "readiness_level": "MODERATE",
-   "rhr": 49,
-   "body_battery": 81
-  },
-  {
-   "date": "2026-10-24",
-   "hrv": 58,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 80,
-   "sleep_h": 8.2,
-   "readiness": 69,
-   "readiness_level": "MODERATE",
-   "rhr": 48,
-   "body_battery": 71
-  },
-  {
-   "date": "2026-10-25",
-   "hrv": 56,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 76,
-   "sleep_h": 8.0,
-   "readiness": 53,
-   "readiness_level": "MODERATE",
-   "rhr": 49,
-   "body_battery": 93
-  },
-  {
-   "date": "2026-10-26",
-   "hrv": 59,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 89,
-   "sleep_h": 8.5,
-   "readiness": 78,
-   "readiness_level": "HIGH",
-   "rhr": 50,
-   "body_battery": 90
-  },
-  {
-   "date": "2026-10-27",
-   "hrv": 67,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 82,
-   "sleep_h": 8.2,
-   "readiness": 79,
-   "readiness_level": "HIGH",
-   "rhr": 45,
-   "body_battery": 89
-  },
-  {
-   "date": "2026-10-28",
-   "hrv": 55,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 86,
-   "sleep_h": 8.4,
-   "readiness": 74,
-   "readiness_level": "MODERATE",
-   "rhr": 48,
-   "body_battery": 87
-  },
-  {
-   "date": "2026-10-29",
-   "hrv": 64,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 84,
-   "sleep_h": 8.3,
+   "sleep_score": 68,
+   "sleep_h": 7.8,
    "readiness": 63,
    "readiness_level": "MODERATE",
-   "rhr": 45,
-   "body_battery": 93
+   "rhr": 48,
+   "body_battery": 96,
+   "kcal_total": 3286,
+   "kcal_active": 1286
   },
   {
-   "date": "2026-10-30",
-   "hrv": 60,
+   "date": "2026-10-19",
+   "hrv": 43,
    "hrv_week": 58,
-   "hrv_status": "BALANCED",
+   "hrv_status": "UNBALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 71,
-   "sleep_h": 7.9,
-   "readiness": 74,
-   "readiness_level": "MODERATE",
-   "rhr": 46,
-   "body_battery": 79
+   "sleep_score": 55,
+   "sleep_h": 7.3,
+   "readiness": 29,
+   "readiness_level": "LOW",
+   "rhr": 52,
+   "body_battery": 48,
+   "kcal_total": 3310,
+   "kcal_active": 1210
   },
   {
-   "date": "2026-10-31",
+   "date": "2026-10-20",
    "hrv": 63,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
@@ -3675,63 +3997,249 @@
    "readiness": 61,
    "readiness_level": "MODERATE",
    "rhr": 50,
-   "body_battery": 96
+   "body_battery": 96,
+   "kcal_total": 3276,
+   "kcal_active": 1376
   },
   {
-   "date": "2026-11-01",
-   "hrv": 62,
+   "date": "2026-10-21",
+   "hrv": 63,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
-   "sleep_score": 83,
-   "sleep_h": 8.3,
-   "readiness": 71,
+   "sleep_score": 75,
+   "sleep_h": 8.0,
+   "readiness": 69,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 79,
+   "kcal_total": 3570,
+   "kcal_active": 1170
+  },
+  {
+   "date": "2026-10-22",
+   "hrv": 63,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 72,
+   "sleep_h": 7.9,
+   "readiness": 80,
+   "readiness_level": "HIGH",
+   "rhr": 46,
+   "body_battery": 98,
+   "kcal_total": 3523,
+   "kcal_active": 1323
+  },
+  {
+   "date": "2026-10-23",
+   "hrv": 67,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 75,
+   "sleep_h": 8.0,
+   "readiness": 61,
    "readiness_level": "MODERATE",
    "rhr": 48,
-   "body_battery": 83
+   "body_battery": 75,
+   "kcal_total": 3638,
+   "kcal_active": 938
+  },
+  {
+   "date": "2026-10-24",
+   "hrv": 56,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 78,
+   "sleep_h": 8.1,
+   "readiness": 78,
+   "readiness_level": "HIGH",
+   "rhr": 45,
+   "body_battery": 97,
+   "kcal_total": 3663,
+   "kcal_active": 963
+  },
+  {
+   "date": "2026-10-25",
+   "hrv": 53,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 80,
+   "sleep_h": 8.2,
+   "readiness": 57,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 87,
+   "kcal_total": 3645,
+   "kcal_active": 1245
+  },
+  {
+   "date": "2026-10-26",
+   "hrv": 58,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 69,
+   "sleep_h": 7.8,
+   "readiness": 57,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 90,
+   "kcal_total": 3316,
+   "kcal_active": 1316
+  },
+  {
+   "date": "2026-10-27",
+   "hrv": 64,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 82,
+   "sleep_h": 8.2,
+   "readiness": 78,
+   "readiness_level": "HIGH",
+   "rhr": 45,
+   "body_battery": 70,
+   "kcal_total": 3224,
+   "kcal_active": 1324
+  },
+  {
+   "date": "2026-10-28",
+   "hrv": 53,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 79,
+   "sleep_h": 8.1,
+   "readiness": 63,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 92,
+   "kcal_total": 3684,
+   "kcal_active": 984
+  },
+  {
+   "date": "2026-10-29",
+   "hrv": 67,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 89,
+   "sleep_h": 8.5,
+   "readiness": 80,
+   "readiness_level": "HIGH",
+   "rhr": 46,
+   "body_battery": 74,
+   "kcal_total": 3238,
+   "kcal_active": 1338
+  },
+  {
+   "date": "2026-10-30",
+   "hrv": 64,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 80,
+   "sleep_h": 8.2,
+   "readiness": 67,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 82,
+   "kcal_total": 3350,
+   "kcal_active": 950
+  },
+  {
+   "date": "2026-10-31",
+   "hrv": 58,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 75,
+   "sleep_h": 8.0,
+   "readiness": 76,
+   "readiness_level": "HIGH",
+   "rhr": 47,
+   "body_battery": 89,
+   "kcal_total": 3386,
+   "kcal_active": 1286
+  },
+  {
+   "date": "2026-11-01",
+   "hrv": 63,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 80,
+   "sleep_h": 8.2,
+   "readiness": 88,
+   "readiness_level": "HIGH",
+   "rhr": 49,
+   "body_battery": 97,
+   "kcal_total": 3283,
+   "kcal_active": 1183
   },
   {
    "date": "2026-11-02",
-   "hrv": 56,
+   "hrv": 67,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 86,
+   "sleep_h": 8.4,
+   "readiness": 88,
+   "readiness_level": "HIGH",
+   "rhr": 49,
+   "body_battery": 76,
+   "kcal_total": 3529,
+   "kcal_active": 1029
+  },
+  {
+   "date": "2026-11-03",
+   "hrv": 64,
+   "hrv_week": 58,
+   "hrv_status": "BALANCED",
+   "hrv_low": 52,
+   "hrv_high": 66,
+   "sleep_score": 71,
+   "sleep_h": 7.9,
+   "readiness": 56,
+   "readiness_level": "MODERATE",
+   "rhr": 50,
+   "body_battery": 72,
+   "kcal_total": 3369,
+   "kcal_active": 1369
+  },
+  {
+   "date": "2026-11-04",
+   "hrv": 60,
    "hrv_week": 58,
    "hrv_status": "BALANCED",
    "hrv_low": 52,
    "hrv_high": 66,
    "sleep_score": 84,
    "sleep_h": 8.3,
-   "readiness": 72,
-   "readiness_level": "MODERATE",
-   "rhr": 47,
-   "body_battery": 90
-  },
-  {
-   "date": "2026-11-03",
-   "hrv": 52,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 74,
-   "sleep_h": 8.0,
-   "readiness": 52,
-   "readiness_level": "MODERATE",
-   "rhr": 45,
-   "body_battery": 90
-  },
-  {
-   "date": "2026-11-04",
-   "hrv": 58,
-   "hrv_week": 58,
-   "hrv_status": "BALANCED",
-   "hrv_low": 52,
-   "hrv_high": 66,
-   "sleep_score": 83,
-   "sleep_h": 8.3,
-   "readiness": 71,
+   "readiness": 55,
    "readiness_level": "MODERATE",
    "rhr": 50,
-   "body_battery": 76
+   "body_battery": 93,
+   "kcal_total": 3420,
+   "kcal_active": 1120
   },
   {
    "date": "2026-11-05",
@@ -3742,393 +4250,137 @@
    "hrv_high": 66,
    "sleep_score": 52,
    "sleep_h": 7.2,
-   "readiness": 36,
+   "readiness": 30,
    "readiness_level": "LOW",
-   "rhr": 55,
-   "body_battery": 44
+   "rhr": 53,
+   "body_battery": 41,
+   "kcal_total": 3670,
+   "kcal_active": 1070
   }
  ],
  "sailing": [
   {
-   "title": "Optiregatta",
-   "start": "2026-10-10",
-   "end": "2026-10-11",
+   "title": "Segeltraining",
+   "start": "2026-09-26",
+   "end": "2026-09-27",
    "tentative": false,
-   "regatta_from": "2026-10-10"
+   "regatta_from": null
   },
   {
-   "title": "IDM Chiemsee? / Reise + Vilamoura",
-   "start": "2026-10-15",
-   "end": "2026-10-26",
-   "tentative": true,
-   "regatta_from": "2026-10-15"
+   "title": "Training Vilamoura",
+   "start": "2026-10-17",
+   "end": "2026-11-01",
+   "tentative": false,
+   "regatta_from": null
   },
   {
    "title": "Junior Europeans Vilamoura",
-   "start": "2026-11-10",
-   "end": "2026-11-19",
+   "start": "2026-11-07",
+   "end": "2026-11-14",
    "tentative": false,
-   "regatta_from": "2026-11-15"
+   "regatta_from": "2026-11-10"
   },
   {
    "title": "GP1 Vilamoura",
-   "start": "2026-11-26",
-   "end": "2026-12-05",
+   "start": "2026-11-21",
+   "end": "2026-11-29",
    "tentative": false,
-   "regatta_from": "2026-12-02"
+   "regatta_from": "2026-11-26"
   },
   {
-   "title": "Youth Worlds Vilamoura? + Camp Sagres/Portimão",
-   "start": "2026-12-12",
-   "end": "2026-12-25",
-   "tentative": true,
-   "regatta_from": "2026-12-12"
+   "title": "Segeltraining",
+   "start": "2026-12-16",
+   "end": "2026-12-23",
+   "tentative": false,
+   "regatta_from": null
+  },
+  {
+   "title": "Segeltraining",
+   "start": "2027-01-29",
+   "end": "2027-02-07",
+   "tentative": false,
+   "regatta_from": null
   },
   {
    "title": "GP2 Vilamoura",
-   "start": "2027-02-17",
-   "end": "2027-02-26",
+   "start": "2027-02-13",
+   "end": "2027-02-21",
    "tentative": false,
-   "regatta_from": "2027-02-23"
+   "regatta_from": "2027-02-17"
   },
   {
-   "title": "Vilamoura (oder Abi-Fokus?)",
-   "start": "2027-03-01",
-   "end": "2027-03-10",
-   "tentative": true,
+   "title": "Training Mallorca",
+   "start": "2027-02-27",
+   "end": "2027-03-07",
+   "tentative": false,
    "regatta_from": null
   },
   {
-   "title": "MSC?",
+   "title": "MSC",
    "start": "2027-03-11",
    "end": "2027-03-14",
-   "tentative": true,
+   "tentative": false,
    "regatta_from": "2027-03-11"
   },
   {
-   "title": "Vilamoura geblieben? (Helms Vorschlag)",
-   "start": "2027-03-15",
-   "end": "2027-03-20",
-   "tentative": true,
-   "regatta_from": null
+   "title": "PST",
+   "start": "2027-03-20",
+   "end": "2027-03-30",
+   "tentative": false,
+   "regatta_from": "2027-03-26"
   }
  ],
  "activities": [
   {
-   "id": "20000629028",
-   "name": "Radfahrt",
-   "sport": "bike",
-   "sport_label": "Rad",
-   "start": "2026-11-04 18:42:00",
-   "distance_km": 65.74,
-   "duration": "2:20:49",
-   "pace": null,
-   "avg_hr": 123,
-   "load": 153,
-   "te_aerobic": 2.4,
-   "te_anaerobic": 0,
-   "hr_zones_s": [
-    2535,
-    5069,
-    845,
-    0,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Rad am Mittwoch: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Rad Grundlage – GA1, Trittfrequenz 85–95, Puls Zone 2 · 145'",
-    "**Ist:** 65,7 km · 2:20:49 · Ø 28,0 km/h · Ø 150 W · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.4 · anaerob 0.0 · Load 153"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000615958",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-11-03 18:14:00",
-   "distance_km": 6.25,
-   "duration": "34:04",
-   "pace": "5:27",
-   "avg_hr": 130,
-   "load": 48,
-   "te_aerobic": 3.2,
-   "te_anaerobic": 0.5,
-   "hr_zones_s": [
-    307,
-    817,
-    613,
-    307,
-    0
-   ],
-   "score": 76,
-   "rating": "Gut umgesetzt",
-   "headline": "Lauf am Dienstag: 76/100 – Gut umgesetzt",
-   "lines": [
-    "**Plan:** Lockerer Lauf + Steigerungen – locker, am Ende 8×20\" Steigerungen · 7,5 km · Ziel 5:01–5:31 /km",
-    "**Ist:** 6,3 km · 34:04 · Ø 5:27 /km · Ø HF 130",
-    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
-    "**Training Effect:** aerob 3.2 · anaerob 0.5 · Load 48"
-   ],
-   "tips": [
-    "Umfang bei 83% des Plans – kein Nachholen, die Woche läuft normal weiter.",
-    "Nur 55% in Z1–2 (Ziel ≥ 75%) – locker heißt wirklich locker, sonst fehlt die Frische für die Schlüsseleinheiten."
-   ]
-  },
-  {
-   "id": "20000621951",
+   "id": "20000834262",
    "name": "Krafttraining",
    "sport": "strength",
    "sport_label": "Kraft",
-   "start": "2026-11-03 07:38:00",
+   "start": "2026-11-05 07:28:00",
    "distance_km": 0.0,
-   "duration": "1:03:18",
+   "duration": "31:19",
    "pace": null,
-   "avg_hr": 123,
-   "load": 36,
-   "te_aerobic": 1.4,
-   "te_anaerobic": 1.0,
-   "hr_zones_s": [
-    2279,
-    1139,
-    380,
-    0,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Kraft am Dienstag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Krafttraining A – Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben · 60'",
-    "**Ist:** 1:03:18 · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.4 · anaerob 1.0 · Load 36"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000609976",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-11-01 18:23:00",
-   "distance_km": 11.26,
-   "duration": "1:01:06",
-   "pace": "5:26",
-   "avg_hr": 123,
-   "load": 73,
-   "te_aerobic": 3.3,
-   "te_anaerobic": 0.3,
-   "hr_zones_s": [
-    733,
-    2016,
-    660,
-    257,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Sonntag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Langer Lauf – gleichmäßig locker · 11,2 km · Ziel 5:02–5:32 /km",
-    "**Ist:** 11,3 km · 1:01:06 · Ø 5:26 /km · Ø HF 123",
-    "**Zonen:** Z1–2 75% · Z3 18% · Z4–5 7%",
-    "**Training Effect:** aerob 3.3 · anaerob 0.3 · Load 73"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000604196",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-31 18:48:00",
-   "distance_km": 5.69,
-   "duration": "30:15",
-   "pace": "5:19",
-   "avg_hr": 122,
-   "load": 35,
-   "te_aerobic": 2.4,
-   "te_anaerobic": 0.5,
-   "hr_zones_s": [
-    635,
-    907,
-    218,
-    54,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Samstag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Lockerer Lauf + Steigerungen – locker, am Ende 5×20\" Steigerungen · 5,9 km · Ziel 5:02–5:32 /km",
-    "**Ist:** 5,7 km · 30:15 · Ø 5:19 /km · Ø HF 122",
-    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
-    "**Training Effect:** aerob 2.4 · anaerob 0.5 · Load 35"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000608277",
-   "name": "Radfahrt",
-   "sport": "bike",
-   "sport_label": "Rad",
-   "start": "2026-10-31 18:27:00",
-   "distance_km": 19.51,
-   "duration": "40:19",
-   "pace": null,
-   "avg_hr": 121,
-   "load": 49,
-   "te_aerobic": 2.4,
-   "te_anaerobic": 0.3,
-   "hr_zones_s": [
-    726,
-    1452,
-    242,
-    0,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Rad am Samstag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Rad locker (optional) – Zone 1–2 · 45'",
-    "**Ist:** 19,5 km · 40:19 · Ø 29,0 km/h · Ø 155 W · Ø HF 121",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.4 · anaerob 0.3 · Load 49"
-   ],
-   "tips": [
-    "Umfang bei 90% des Plans – kein Nachholen, die Woche läuft normal weiter."
-   ]
-  },
-  {
-   "id": "20000596510",
-   "name": "Rudern",
-   "sport": "row",
-   "sport_label": "Rudern",
-   "start": "2026-10-30 18:40:00",
-   "distance_km": 0.0,
-   "duration": "1:17:43",
-   "pace": null,
-   "avg_hr": 118,
-   "load": 48,
+   "avg_hr": 125,
+   "load": 18,
    "te_aerobic": 2.5,
-   "te_anaerobic": 0.2,
+   "te_anaerobic": 0.1,
    "hr_zones_s": [
-    1399,
-    2798,
-    466,
-    0,
+    658,
+    939,
+    225,
+    56,
     0
    ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Rudern am Freitag: 100/100 – Volltreffer",
+   "score": 61,
+   "rating": "Okay – mit Abweichungen",
+   "headline": "Kraft am Donnerstag: 61/100 – Okay – mit Abweichungen",
    "lines": [
-    "**Plan:** Rudern/Rad locker – Zone 1–2, locker bleiben · 75'",
-    "**Ist:** 1:17:43 · Ø HF 118",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.5 · anaerob 0.2 · Load 48"
+    "**Plan:** Mobility & Faszienrolle – 20' Mobilisation, kein schweres Heben · 20'",
+    "**Ist:** 31:19 · Ø HF 125",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.5 · anaerob 0.1 · Load 18"
    ],
    "tips": [
-    "Genau so geplant umgesetzt – weiter so."
+    "Umfang bei 157% des Plans – mehr ist nicht automatisch besser, Erholung sichern."
    ]
   },
   {
-   "id": "20000594946",
-   "name": "Krafttraining",
-   "sport": "strength",
-   "sport_label": "Kraft",
-   "start": "2026-10-30 07:14:00",
-   "distance_km": 0.0,
-   "duration": "1:04:10",
-   "pace": null,
-   "avg_hr": 123,
-   "load": 34,
-   "te_aerobic": 1.9,
-   "te_anaerobic": 0.8,
-   "hr_zones_s": [
-    2310,
-    1155,
-    385,
-    0,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Kraft am Freitag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Krafttraining B – Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings) · 60'",
-    "**Ist:** 1:04:10 · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.9 · anaerob 0.8 · Load 34"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000586247",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-29 18:16:00",
-   "distance_km": 7.84,
-   "duration": "39:52",
-   "pace": "5:05",
-   "avg_hr": 131,
-   "load": 59,
-   "te_aerobic": 3.2,
-   "te_anaerobic": 0.5,
-   "hr_zones_s": [
-    359,
-    837,
-    837,
-    359,
-    0
-   ],
-   "score": 89,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Donnerstag: 89/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Steigerungslauf – locker beginnen, letzte 20' @ M-Tempo · 6,3 km · Ziel 4:28–4:36 /km",
-    "**Ist:** 7,8 km · 39:52 · Ø 5:05 /km · Ø HF 131",
-    "**Zonen:** Z1–2 50% · Z3 35% · Z4–5 15%",
-    "**Training Effect:** aerob 3.2 · anaerob 0.5 · Load 59"
-   ],
-   "tips": [
-    "Umfang bei 124% des Plans – mehr ist nicht automatisch besser, Erholung sichern."
-   ]
-  },
-  {
-   "id": "20000582335",
+   "id": "20000822286",
    "name": "Radfahrt",
    "sport": "bike",
    "sport_label": "Rad",
-   "start": "2026-10-28 18:40:00",
-   "distance_km": 71.37,
-   "duration": "2:25:10",
+   "start": "2026-11-04 18:20:00",
+   "distance_km": 23.58,
+   "duration": "48:05",
    "pace": null,
-   "avg_hr": 122,
-   "load": 175,
+   "avg_hr": 119,
+   "load": 54,
    "te_aerobic": 2.3,
    "te_anaerobic": 0.0,
    "hr_zones_s": [
-    2613,
-    5226,
-    871,
+    866,
+    1731,
+    289,
     0,
     0
    ],
@@ -4136,674 +4388,1234 @@
    "rating": "Volltreffer",
    "headline": "Rad am Mittwoch: 100/100 – Volltreffer",
    "lines": [
-    "**Plan:** Rad Grundlage – GA1, Trittfrequenz 85–95, Puls Zone 2 · 150'",
-    "**Ist:** 71,4 km · 2:25:10 · Ø 29,5 km/h · Ø 156 W · Ø HF 122",
+    "**Plan:** Rad Grundlage – GA1, Trittfrequenz 85–95, Puls Zone 2 · 52'",
+    "**Ist:** 23,6 km · 48:05 · Ø 29,4 km/h · Ø 160 W · Ø HF 119",
     "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.3 · anaerob 0.0 · Load 175"
+    "**Training Effect:** aerob 2.3 · anaerob 0.0 · Load 54"
    ],
    "tips": [
     "Genau so geplant umgesetzt – weiter so."
    ]
   },
   {
-   "id": "20000575567",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-27 18:59:00",
-   "distance_km": 8.1,
-   "duration": "43:14",
-   "pace": "5:20",
-   "avg_hr": 131,
-   "load": 55,
-   "te_aerobic": 3.2,
-   "te_anaerobic": 1.7,
-   "hr_zones_s": [
-    778,
-    1037,
-    389,
-    259,
-    130
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Dienstag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Bergläufe – 2–3 km ein, 6×45 s zügig bergauf, Trab zurück, 2 km aus · 7,9 km",
-    "**Ist:** 8,1 km · 43:14 · Ø 5:20 /km · Ø HF 131",
-    "**Zonen:** Z1–2 70% · Z3 15% · Z4–5 15%",
-    "**Training Effect:** aerob 3.2 · anaerob 1.7 · Load 55"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000577438",
+   "id": "20000815941",
    "name": "Krafttraining",
    "sport": "strength",
    "sport_label": "Kraft",
-   "start": "2026-10-27 07:34:00",
+   "start": "2026-11-04 07:48:00",
    "distance_km": 0.0,
-   "duration": "51:32",
+   "duration": "38:50",
    "pace": null,
-   "avg_hr": 119,
-   "load": 28,
-   "te_aerobic": 1.7,
-   "te_anaerobic": 1.1,
+   "avg_hr": 129,
+   "load": 30,
+   "te_aerobic": 3.0,
+   "te_anaerobic": 0.4,
    "hr_zones_s": [
-    1855,
-    927,
-    309,
-    0,
+    349,
+    932,
+    699,
+    349,
     0
    ],
-   "score": 96,
+   "score": 97,
    "rating": "Volltreffer",
-   "headline": "Kraft am Dienstag: 96/100 – Volltreffer",
+   "headline": "Kraft am Mittwoch: 97/100 – Volltreffer",
    "lines": [
-    "**Plan:** Krafttraining A – Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben · 60'",
-    "**Ist:** 51:32 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.7 · anaerob 1.1 · Load 28"
+    "**Plan:** Kraft B – Schultern & Arme – Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12 · 45'",
+    "**Ist:** 38:50 · Ø HF 129",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.0 · anaerob 0.4 · Load 30"
    ],
    "tips": [
     "Umfang bei 86% des Plans – kein Nachholen, die Woche läuft normal weiter."
    ]
   },
   {
-   "id": "20000566758",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-26 10:41:00",
-   "distance_km": 0.0,
-   "duration": "4:12:27",
-   "pace": null,
-   "avg_hr": 121,
-   "load": 90,
-   "te_aerobic": 2.2,
-   "te_anaerobic": 0.7,
-   "hr_zones_s": [
-    8331,
-    5301,
-    1515,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 4:12:27",
-   "lines": [
-    "**Ist:** 4:12:27 · Ø HF 121",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.2 · anaerob 0.7 · Load 90"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000570322",
+   "id": "20000810981",
    "name": "Lauf",
    "sport": "run",
    "sport_label": "Lauf",
-   "start": "2026-10-26 07:57:00",
-   "distance_km": 5.82,
-   "duration": "32:45",
-   "pace": "5:37",
-   "avg_hr": 122,
-   "load": 41,
-   "te_aerobic": 2.8,
-   "te_anaerobic": 0.4,
+   "start": "2026-11-03 18:02:00",
+   "distance_km": 8.93,
+   "duration": "50:27",
+   "pace": "5:39",
+   "avg_hr": 128,
+   "load": 66,
+   "te_aerobic": 3.7,
+   "te_anaerobic": 0.1,
    "hr_zones_s": [
-    688,
-    983,
-    236,
-    59,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Montag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen · 6,5 km · Ziel 5:02–5:32 /km",
-    "**Ist:** 5,8 km · 32:45 · Ø 5:37 /km · Ø HF 122",
-    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
-    "**Training Effect:** aerob 2.8 · anaerob 0.4 · Load 41"
-   ],
-   "tips": [
-    "Umfang bei 90% des Plans – kein Nachholen, die Woche läuft normal weiter."
-   ]
-  },
-  {
-   "id": "20000558549",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-25 10:15:00",
-   "distance_km": 0.0,
-   "duration": "3:24:18",
-   "pace": null,
-   "avg_hr": 123,
-   "load": 74,
-   "te_aerobic": 2.0,
-   "te_anaerobic": 0.6,
-   "hr_zones_s": [
-    6742,
-    4290,
-    1226,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 3:24:18",
-   "lines": [
-    "**Ist:** 3:24:18 · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.0 · anaerob 0.6 · Load 74"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000554234",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-24 10:50:00",
-   "distance_km": 0.0,
-   "duration": "3:46:02",
-   "pace": null,
-   "avg_hr": 120,
-   "load": 75,
-   "te_aerobic": 1.8,
-   "te_anaerobic": 0.9,
-   "hr_zones_s": [
-    7459,
-    4747,
-    1356,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 3:46:02",
-   "lines": [
-    "**Ist:** 3:46:02 · Ø HF 120",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.8 · anaerob 0.9 · Load 75"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000550531",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-23 10:12:00",
-   "distance_km": 0.0,
-   "duration": "3:37:02",
-   "pace": null,
-   "avg_hr": 119,
-   "load": 70,
-   "te_aerobic": 2.3,
-   "te_anaerobic": 0.9,
-   "hr_zones_s": [
-    7162,
-    4558,
-    1302,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 3:37:02",
-   "lines": [
-    "**Ist:** 3:37:02 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.3 · anaerob 0.9 · Load 70"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000553131",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-23 07:50:00",
-   "distance_km": 6.25,
-   "duration": "33:47",
-   "pace": "5:24",
-   "avg_hr": 121,
-   "load": 38,
-   "te_aerobic": 2.5,
-   "te_anaerobic": 0.2,
-   "hr_zones_s": [
-    709,
-    1013,
-    243,
-    61,
-    0
-   ],
-   "score": 100,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Freitag: 100/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln · 6,5 km · Ziel 5:04–5:35 /km",
-    "**Ist:** 6,2 km · 33:47 · Ø 5:24 /km · Ø HF 121",
-    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
-    "**Training Effect:** aerob 2.5 · anaerob 0.2 · Load 38"
-   ],
-   "tips": [
-    "Genau so geplant umgesetzt – weiter so."
-   ]
-  },
-  {
-   "id": "20000548213",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-22 10:19:00",
-   "distance_km": 0.0,
-   "duration": "3:34:34",
-   "pace": null,
-   "avg_hr": 122,
-   "load": 77,
-   "te_aerobic": 2.2,
-   "te_anaerobic": 0.7,
-   "hr_zones_s": [
-    7081,
-    4506,
-    1287,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 3:34:34",
-   "lines": [
-    "**Ist:** 3:34:34 · Ø HF 122",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.2 · anaerob 0.7 · Load 77"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000543054",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-21 10:10:00",
-   "distance_km": 0.0,
-   "duration": "4:04:57",
-   "pace": null,
-   "avg_hr": 120,
-   "load": 80,
-   "te_aerobic": 2.1,
-   "te_anaerobic": 0.5,
-   "hr_zones_s": [
-    8084,
-    5144,
-    1470,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 4:04:57",
-   "lines": [
-    "**Ist:** 4:04:57 · Ø HF 120",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.1 · anaerob 0.5 · Load 80"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000529277",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-20 10:01:00",
-   "distance_km": 0.0,
-   "duration": "4:13:03",
-   "pace": null,
-   "avg_hr": 119,
-   "load": 88,
-   "te_aerobic": 1.9,
-   "te_anaerobic": 0.6,
-   "hr_zones_s": [
-    8350,
-    5314,
-    1518,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 4:13:03",
-   "lines": [
-    "**Ist:** 4:13:03 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.9 · anaerob 0.6 · Load 88"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000537518",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-20 07:08:00",
-   "distance_km": 6.41,
-   "duration": "35:49",
-   "pace": "5:35",
-   "avg_hr": 122,
-   "load": 45,
-   "te_aerobic": 2.8,
-   "te_anaerobic": 0.5,
-   "hr_zones_s": [
-    752,
-    1075,
-    258,
-    64,
+    605,
+    1665,
+    545,
+    212,
     0
    ],
    "score": 100,
    "rating": "Volltreffer",
    "headline": "Lauf am Dienstag: 100/100 – Volltreffer",
    "lines": [
-    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen · 6,5 km · Ziel 5:04–5:35 /km",
-    "**Ist:** 6,4 km · 35:49 · Ø 5:35 /km · Ø HF 122",
-    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
-    "**Training Effect:** aerob 2.8 · anaerob 0.5 · Load 45"
+    "**Plan:** Langer Lauf (Entlastung) – gleichmäßig locker · 8,5 km · Ziel 5:01–5:31 /km",
+    "**Ist:** 8,9 km · 50:27 · Ø 5:39 /km · Ø HF 128",
+    "**Zonen:** Z1–2 75% · Z3 18% · Z4–5 7%",
+    "**Training Effect:** aerob 3.7 · anaerob 0.1 · Load 66"
    ],
    "tips": [
     "Genau so geplant umgesetzt – weiter so."
    ]
   },
   {
-   "id": "20000524819",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-19 10:50:00",
+   "id": "20000804077",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-11-03 07:58:00",
    "distance_km": 0.0,
-   "duration": "3:28:28",
+   "duration": "40:40",
    "pace": null,
-   "avg_hr": 123,
-   "load": 69,
-   "te_aerobic": 2.0,
-   "te_anaerobic": 0.4,
-   "hr_zones_s": [
-    6879,
-    4378,
-    1251,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 3:28:28",
-   "lines": [
-    "**Ist:** 3:28:28 · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.0 · anaerob 0.4 · Load 69"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000517538",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-18 18:53:00",
-   "distance_km": 3.34,
-   "duration": "17:40",
-   "pace": "5:17",
-   "avg_hr": 119,
-   "load": 21,
-   "te_aerobic": 1.8,
-   "te_anaerobic": 0,
-   "hr_zones_s": [
-    636,
-    403,
-    21,
-    0,
-    0
-   ],
-   "score": 85,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Sonntag: 85/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Optional: Aktivierung – 20' ganz locker + Mobility vor dem Auslaufen · 3,5 km · Ziel 5:39–5:58 /km",
-    "**Ist:** 3,3 km · 17:40 · Ø 5:17 /km · Ø HF 119",
-    "**Zonen:** Z1–2 98% · Z3 2% · Z4–5 0%",
-    "**Training Effect:** aerob 1.8 · anaerob 0.0 · Load 21"
-   ],
-   "tips": [
-    "Ø-Tempo 5:17 schneller als der Lockerbereich (5:39–5:58 /km)."
-   ]
-  },
-  {
-   "id": "20000511684",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-18 10:00:00",
-   "distance_km": 0.0,
-   "duration": "5:22:28",
-   "pace": null,
-   "avg_hr": 119,
-   "load": 118,
-   "te_aerobic": 1.8,
-   "te_anaerobic": 0.7,
-   "hr_zones_s": [
-    10642,
-    6772,
-    1935,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 5:22:28",
-   "lines": [
-    "**Ist:** 5:22:28 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.8 · anaerob 0.7 · Load 118"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000504536",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-17 10:36:00",
-   "distance_km": 0.0,
-   "duration": "4:18:19",
-   "pace": null,
-   "avg_hr": 119,
-   "load": 95,
-   "te_aerobic": 2.2,
-   "te_anaerobic": 0.4,
-   "hr_zones_s": [
-    8525,
-    5425,
-    1550,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 4:18:19",
-   "lines": [
-    "**Ist:** 4:18:19 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.2 · anaerob 0.4 · Load 95"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000497764",
-   "name": "Lauf",
-   "sport": "run",
-   "sport_label": "Lauf",
-   "start": "2026-10-16 18:38:00",
-   "distance_km": 3.22,
-   "duration": "17:33",
-   "pace": "5:27",
-   "avg_hr": 118,
-   "load": 18,
-   "te_aerobic": 2.0,
-   "te_anaerobic": 0.1,
-   "hr_zones_s": [
-    632,
-    400,
-    21,
-    0,
-    0
-   ],
-   "score": 94,
-   "rating": "Volltreffer",
-   "headline": "Lauf am Freitag: 94/100 – Volltreffer",
-   "lines": [
-    "**Plan:** Optional: Aktivierung – 20' ganz locker + Mobility vor dem Auslaufen · 3,5 km · Ziel 5:39–5:58 /km",
-    "**Ist:** 3,2 km · 17:33 · Ø 5:27 /km · Ø HF 118",
-    "**Zonen:** Z1–2 98% · Z3 2% · Z4–5 0%",
-    "**Training Effect:** aerob 2.0 · anaerob 0.1 · Load 18"
-   ],
-   "tips": [
-    "Ø-Tempo 5:27 schneller als der Lockerbereich (5:39–5:58 /km)."
-   ]
-  },
-  {
-   "id": "20000489307",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-16 10:27:00",
-   "distance_km": 0.0,
-   "duration": "4:37:01",
-   "pace": null,
-   "avg_hr": 119,
-   "load": 87,
-   "te_aerobic": 1.9,
-   "te_anaerobic": 0.9,
-   "hr_zones_s": [
-    9142,
-    5817,
-    1662,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 4:37:01",
-   "lines": [
-    "**Ist:** 4:37:01 · Ø HF 119",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 1.9 · anaerob 0.9 · Load 87"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000485895",
-   "name": "Segeln",
-   "sport": "sail",
-   "sport_label": "Segeln",
-   "start": "2026-10-15 10:58:00",
-   "distance_km": 0.0,
-   "duration": "5:20:30",
-   "pace": null,
-   "avg_hr": 122,
-   "load": 113,
-   "te_aerobic": 2.1,
-   "te_anaerobic": 0.8,
-   "hr_zones_s": [
-    10576,
-    6730,
-    1923,
-    0,
-    0
-   ],
-   "score": null,
-   "rating": "Segeln",
-   "headline": "Segeln erfasst: 5:20:30",
-   "lines": [
-    "**Ist:** 5:20:30 · Ø HF 122",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.1 · anaerob 0.8 · Load 113"
-   ],
-   "tips": [
-    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
-   ]
-  },
-  {
-   "id": "20000484613",
-   "name": "Radfahrt",
-   "sport": "bike",
-   "sport_label": "Rad",
-   "start": "2026-10-14 18:34:00",
-   "distance_km": 84.97,
-   "duration": "2:40:26",
-   "pace": null,
-   "avg_hr": 123,
-   "load": 200,
-   "te_aerobic": 2.1,
+   "avg_hr": 133,
+   "load": 28,
+   "te_aerobic": 3.1,
    "te_anaerobic": 0.3,
    "hr_zones_s": [
-    2888,
-    5776,
-    963,
-    0,
+    366,
+    976,
+    732,
+    366,
     0
    ],
    "score": 100,
    "rating": "Volltreffer",
-   "headline": "Rad am Mittwoch: 100/100 – Volltreffer",
+   "headline": "Kraft am Dienstag: 100/100 – Volltreffer",
    "lines": [
-    "**Plan:** Rad Grundlage – GA1, Trittfrequenz 85–95, Puls Zone 2 · 150'",
-    "**Ist:** 85,0 km · 2:40:26 · Ø 31,8 km/h · Ø 138 W · Ø HF 123",
-    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
-    "**Training Effect:** aerob 2.1 · anaerob 0.3 · Load 200"
+    "**Plan:** Kraft C – Beine & Rumpf – Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber · 45'",
+    "**Ist:** 40:40 · Ø HF 133",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.1 · anaerob 0.3 · Load 28"
    ],
    "tips": [
     "Genau so geplant umgesetzt – weiter so."
    ]
+  },
+  {
+   "id": "20000798453",
+   "name": "Schwimmen",
+   "sport": "swim",
+   "sport_label": "Schwimmen",
+   "start": "2026-11-02 18:02:00",
+   "distance_km": 1.64,
+   "duration": "32:48",
+   "pace": null,
+   "avg_hr": 132,
+   "load": 26,
+   "te_aerobic": 3.4,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    295,
+    787,
+    590,
+    295,
+    0
+   ],
+   "score": 82,
+   "rating": "Gut umgesetzt",
+   "headline": "Schwimmen am Montag: 82/100 – Gut umgesetzt",
+   "lines": [
+    "**Plan:** Schwimmen – Locker & Technik, 2–2,5 km, Zone 1–2 · 35'",
+    "**Ist:** 1,6 km · 32:48 · Ø HF 132",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.4 · anaerob 0.3 · Load 26"
+   ],
+   "tips": [
+    "Nur 55% in Z1–2 (Ziel ≥ 75%) – locker heißt wirklich locker, sonst fehlt die Frische für die Schlüsseleinheiten."
+   ]
+  },
+  {
+   "id": "20000795973",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-11-02 07:28:00",
+   "distance_km": 0.0,
+   "duration": "41:09",
+   "pace": null,
+   "avg_hr": 133,
+   "load": 29,
+   "te_aerobic": 3.4,
+   "te_anaerobic": 0.6,
+   "hr_zones_s": [
+    370,
+    988,
+    741,
+    370,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Montag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Kraft A – Brust & Rücken – Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10 · 45'",
+    "**Ist:** 41:09 · Ø HF 133",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.4 · anaerob 0.6 · Load 29"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000786311",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-11-01 10:59:00",
+   "distance_km": 0.0,
+   "duration": "3:37:36",
+   "pace": null,
+   "avg_hr": 123,
+   "load": 77,
+   "te_aerobic": 1.9,
+   "te_anaerobic": 0.4,
+   "hr_zones_s": [
+    7181,
+    4570,
+    1306,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 3:37:36",
+   "lines": [
+    "**Ist:** 3:37:36 · Ø HF 123",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.9 · anaerob 0.4 · Load 77"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000788590",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-11-01 07:17:00",
+   "distance_km": 0.0,
+   "duration": "18:27",
+   "pace": null,
+   "avg_hr": 132,
+   "load": 15,
+   "te_aerobic": 2.9,
+   "te_anaerobic": 0.0,
+   "hr_zones_s": [
+    166,
+    443,
+    332,
+    166,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Sonntag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 18:27 · Ø HF 132",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 2.9 · anaerob 0.0 · Load 15"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000775034",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-31 10:29:00",
+   "distance_km": 0.0,
+   "duration": "4:01:24",
+   "pace": null,
+   "avg_hr": 122,
+   "load": 75,
+   "te_aerobic": 2.3,
+   "te_anaerobic": 0.7,
+   "hr_zones_s": [
+    7966,
+    5070,
+    1448,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 4:01:24",
+   "lines": [
+    "**Ist:** 4:01:24 · Ø HF 122",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 2.3 · anaerob 0.7 · Load 75"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000780462",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-31 07:49:00",
+   "distance_km": 0.0,
+   "duration": "17:24",
+   "pace": null,
+   "avg_hr": 119,
+   "load": 10,
+   "te_aerobic": 2.5,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    365,
+    522,
+    125,
+    31,
+    0
+   ],
+   "score": 97,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Samstag: 97/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 17:24 · Ø HF 119",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.5 · anaerob 0.3 · Load 10"
+   ],
+   "tips": [
+    "Umfang bei 87% des Plans – kein Nachholen, die Woche läuft normal weiter."
+   ]
+  },
+  {
+   "id": "20000784091",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-31 07:12:00",
+   "distance_km": 0.0,
+   "duration": "43:11",
+   "pace": null,
+   "avg_hr": 120,
+   "load": 25,
+   "te_aerobic": 2.4,
+   "te_anaerobic": 0.5,
+   "hr_zones_s": [
+    907,
+    1295,
+    311,
+    78,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Samstag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Kraft C – Beine & Rumpf – Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber · 45'",
+    "**Ist:** 43:11 · Ø HF 120",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.4 · anaerob 0.5 · Load 25"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000764515",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-30 10:14:00",
+   "distance_km": 0.0,
+   "duration": "4:06:35",
+   "pace": null,
+   "avg_hr": 122,
+   "load": 81,
+   "te_aerobic": 1.9,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    8137,
+    5178,
+    1480,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 4:06:35",
+   "lines": [
+    "**Ist:** 4:06:35 · Ø HF 122",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.9 · anaerob 0.3 · Load 81"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000770320",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-30 07:50:00",
+   "distance_km": 0.0,
+   "duration": "21:14",
+   "pace": null,
+   "avg_hr": 119,
+   "load": 14,
+   "te_aerobic": 2.8,
+   "te_anaerobic": 0.5,
+   "hr_zones_s": [
+    446,
+    637,
+    153,
+    38,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Freitag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 21:14 · Ø HF 119",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.8 · anaerob 0.5 · Load 14"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000773563",
+   "name": "Lauf",
+   "sport": "run",
+   "sport_label": "Lauf",
+   "start": "2026-10-30 07:35:00",
+   "distance_km": 6.47,
+   "duration": "35:27",
+   "pace": "5:29",
+   "avg_hr": 123,
+   "load": 39,
+   "te_aerobic": 2.8,
+   "te_anaerobic": 0.2,
+   "hr_zones_s": [
+    745,
+    1064,
+    255,
+    64,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Lauf am Freitag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln · 6,0 km · Ziel 5:02–5:32 /km",
+    "**Ist:** 6,5 km · 35:27 · Ø 5:29 /km · Ø HF 123",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.8 · anaerob 0.2 · Load 39"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000747964",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-29 10:23:00",
+   "distance_km": 0.0,
+   "duration": "4:08:01",
+   "pace": null,
+   "avg_hr": 123,
+   "load": 85,
+   "te_aerobic": 1.8,
+   "te_anaerobic": 0.8,
+   "hr_zones_s": [
+    8184,
+    5208,
+    1488,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 4:08:01",
+   "lines": [
+    "**Ist:** 4:08:01 · Ø HF 123",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.8 · anaerob 0.8 · Load 85"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000752672",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-29 07:36:00",
+   "distance_km": 0.0,
+   "duration": "21:21",
+   "pace": null,
+   "avg_hr": 121,
+   "load": 14,
+   "te_aerobic": 2.5,
+   "te_anaerobic": 0.4,
+   "hr_zones_s": [
+    448,
+    640,
+    154,
+    38,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Donnerstag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 21:21 · Ø HF 121",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.5 · anaerob 0.4 · Load 14"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000758586",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-29 07:00:00",
+   "distance_km": 0.0,
+   "duration": "41:41",
+   "pace": null,
+   "avg_hr": 124,
+   "load": 25,
+   "te_aerobic": 2.7,
+   "te_anaerobic": 0.2,
+   "hr_zones_s": [
+    875,
+    1251,
+    300,
+    75,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Donnerstag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Kraft B – Schultern & Arme – Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12 · 45'",
+    "**Ist:** 41:41 · Ø HF 124",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.7 · anaerob 0.2 · Load 25"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000726572",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-28 10:46:00",
+   "distance_km": 0.0,
+   "duration": "4:11:13",
+   "pace": null,
+   "avg_hr": 122,
+   "load": 87,
+   "te_aerobic": 1.9,
+   "te_anaerobic": 0.6,
+   "hr_zones_s": [
+    8290,
+    5276,
+    1507,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 4:11:13",
+   "lines": [
+    "**Ist:** 4:11:13 · Ø HF 122",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.9 · anaerob 0.6 · Load 87"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000734862",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-28 07:45:00",
+   "distance_km": 0.0,
+   "duration": "18:10",
+   "pace": null,
+   "avg_hr": 119,
+   "load": 12,
+   "te_aerobic": 2.3,
+   "te_anaerobic": 0.5,
+   "hr_zones_s": [
+    382,
+    545,
+    131,
+    33,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Mittwoch: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 18:10 · Ø HF 119",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.3 · anaerob 0.5 · Load 12"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000739048",
+   "name": "Lauf",
+   "sport": "run",
+   "sport_label": "Lauf",
+   "start": "2026-10-28 07:10:00",
+   "distance_km": 5.68,
+   "duration": "30:25",
+   "pace": "5:21",
+   "avg_hr": 125,
+   "load": 35,
+   "te_aerobic": 2.8,
+   "te_anaerobic": 0.4,
+   "hr_zones_s": [
+    639,
+    912,
+    219,
+    55,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Lauf am Mittwoch: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln · 6,0 km · Ziel 5:02–5:32 /km",
+    "**Ist:** 5,7 km · 30:25 · Ø 5:21 /km · Ø HF 125",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.8 · anaerob 0.4 · Load 35"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000710169",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-27 10:37:00",
+   "distance_km": 0.0,
+   "duration": "3:45:22",
+   "pace": null,
+   "avg_hr": 123,
+   "load": 82,
+   "te_aerobic": 2.1,
+   "te_anaerobic": 0.4,
+   "hr_zones_s": [
+    7437,
+    4733,
+    1352,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 3:45:22",
+   "lines": [
+    "**Ist:** 3:45:22 · Ø HF 123",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 2.1 · anaerob 0.4 · Load 82"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000711848",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-27 07:09:00",
+   "distance_km": 0.0,
+   "duration": "19:58",
+   "pace": null,
+   "avg_hr": 132,
+   "load": 16,
+   "te_aerobic": 3.2,
+   "te_anaerobic": 0.0,
+   "hr_zones_s": [
+    180,
+    479,
+    359,
+    180,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Dienstag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 19:58 · Ø HF 132",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.2 · anaerob 0.0 · Load 16"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000719880",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-27 07:08:00",
+   "distance_km": 0.0,
+   "duration": "39:10",
+   "pace": null,
+   "avg_hr": 122,
+   "load": 24,
+   "te_aerobic": 2.5,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    822,
+    1175,
+    282,
+    70,
+    0
+   ],
+   "score": 97,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Dienstag: 97/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Kraft A – Brust & Rücken – Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10 · 45'",
+    "**Ist:** 39:10 · Ø HF 122",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.5 · anaerob 0.3 · Load 24"
+   ],
+   "tips": [
+    "Umfang bei 87% des Plans – kein Nachholen, die Woche läuft normal weiter."
+   ]
+  },
+  {
+   "id": "20000693620",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-26 10:11:00",
+   "distance_km": 0.0,
+   "duration": "3:58:31",
+   "pace": null,
+   "avg_hr": 118,
+   "load": 87,
+   "te_aerobic": 1.8,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    7871,
+    5009,
+    1431,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 3:58:31",
+   "lines": [
+    "**Ist:** 3:58:31 · Ø HF 118",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.8 · anaerob 0.3 · Load 87"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000703599",
+   "name": "Lauf",
+   "sport": "run",
+   "sport_label": "Lauf",
+   "start": "2026-10-26 07:37:00",
+   "distance_km": 5.01,
+   "duration": "28:12",
+   "pace": "5:38",
+   "avg_hr": 125,
+   "load": 31,
+   "te_aerobic": 2.3,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    592,
+    846,
+    203,
+    51,
+    0
+   ],
+   "score": 94,
+   "rating": "Volltreffer",
+   "headline": "Lauf am Montag: 94/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Morgenlauf – 35' locker morgens vor dem Segeln, am Ende 5×20\" Steigerungen · 6,0 km · Ziel 5:02–5:32 /km",
+    "**Ist:** 5,0 km · 28:12 · Ø 5:38 /km · Ø HF 125",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.3 · anaerob 0.3 · Load 31"
+   ],
+   "tips": [
+    "Umfang bei 84% des Plans – kein Nachholen, die Woche läuft normal weiter."
+   ]
+  },
+  {
+   "id": "20000699991",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-26 07:08:00",
+   "distance_km": 0.0,
+   "duration": "17:04",
+   "pace": null,
+   "avg_hr": 124,
+   "load": 10,
+   "te_aerobic": 2.6,
+   "te_anaerobic": 0.2,
+   "hr_zones_s": [
+    358,
+    512,
+    123,
+    31,
+    0
+   ],
+   "score": 96,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Montag: 96/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 17:04 · Ø HF 124",
+    "**Zonen:** Z1–2 85% · Z3 12% · Z4–5 3%",
+    "**Training Effect:** aerob 2.6 · anaerob 0.2 · Load 10"
+   ],
+   "tips": [
+    "Umfang bei 85% des Plans – kein Nachholen, die Woche läuft normal weiter."
+   ]
+  },
+  {
+   "id": "20000682884",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-25 10:36:00",
+   "distance_km": 0.0,
+   "duration": "3:46:25",
+   "pace": null,
+   "avg_hr": 118,
+   "load": 73,
+   "te_aerobic": 1.9,
+   "te_anaerobic": 0.3,
+   "hr_zones_s": [
+    7472,
+    4755,
+    1358,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 3:46:25",
+   "lines": [
+    "**Ist:** 3:46:25 · Ø HF 118",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 1.9 · anaerob 0.3 · Load 73"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
+  },
+  {
+   "id": "20000688870",
+   "name": "Krafttraining",
+   "sport": "strength",
+   "sport_label": "Kraft",
+   "start": "2026-10-25 07:32:00",
+   "distance_km": 0.0,
+   "duration": "20:31",
+   "pace": null,
+   "avg_hr": 134,
+   "load": 16,
+   "te_aerobic": 3.3,
+   "te_anaerobic": 0.4,
+   "hr_zones_s": [
+    185,
+    493,
+    369,
+    185,
+    0
+   ],
+   "score": 100,
+   "rating": "Volltreffer",
+   "headline": "Kraft am Sonntag: 100/100 – Volltreffer",
+   "lines": [
+    "**Plan:** Stabi & Mobility – 15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle · 20'",
+    "**Ist:** 20:31 · Ø HF 134",
+    "**Zonen:** Z1–2 55% · Z3 30% · Z4–5 15%",
+    "**Training Effect:** aerob 3.3 · anaerob 0.4 · Load 16"
+   ],
+   "tips": [
+    "Genau so geplant umgesetzt – weiter so."
+   ]
+  },
+  {
+   "id": "20000667746",
+   "name": "Segeln",
+   "sport": "sail",
+   "sport_label": "Segeln",
+   "start": "2026-10-24 10:30:00",
+   "distance_km": 0.0,
+   "duration": "3:44:13",
+   "pace": null,
+   "avg_hr": 122,
+   "load": 74,
+   "te_aerobic": 2.0,
+   "te_anaerobic": 0.8,
+   "hr_zones_s": [
+    7399,
+    4708,
+    1345,
+    0,
+    0
+   ],
+   "score": null,
+   "rating": "Segeln",
+   "headline": "Segeln erfasst: 3:44:13",
+   "lines": [
+    "**Ist:** 3:44:13 · Ø HF 122",
+    "**Zonen:** Z1–2 90% · Z3 10% · Z4–5 0%",
+    "**Training Effect:** aerob 2.0 · anaerob 0.8 · Load 74"
+   ],
+   "tips": [
+    "Segeln hat Priorität – die Belastung zählt in Fitness/Ermüdung. Morgen früh entscheidet die Readiness, wie viel Laufen drin ist."
+   ]
   }
  ],
+ "body": {
+  "start_kg": 78.0,
+  "target_kg": 85.0,
+  "rate_kg_week": 0.5,
+  "goal_date": "2027-01-04",
+  "today_kg": 80.3,
+  "current_kg": 80.13,
+  "target_today": 80.71,
+  "gap_kg": -0.6,
+  "status": "on_track",
+  "week_change": 0.44,
+  "tdee": 3368,
+  "kcal_target": 3870,
+  "surplus_kcal": 500,
+  "protein_g": 160,
+  "carbs_g": [
+   401,
+   561
+  ],
+  "fat_g": 80,
+  "series": [
+   {
+    "date": "2026-09-28",
+    "kg": null,
+    "avg7": null,
+    "target": 78.0
+   },
+   {
+    "date": "2026-09-29",
+    "kg": null,
+    "avg7": null,
+    "target": 78.07
+   },
+   {
+    "date": "2026-09-30",
+    "kg": null,
+    "avg7": null,
+    "target": 78.14
+   },
+   {
+    "date": "2026-10-01",
+    "kg": null,
+    "avg7": null,
+    "target": 78.21
+   },
+   {
+    "date": "2026-10-02",
+    "kg": null,
+    "avg7": null,
+    "target": 78.29
+   },
+   {
+    "date": "2026-10-03",
+    "kg": null,
+    "avg7": null,
+    "target": 78.36
+   },
+   {
+    "date": "2026-10-04",
+    "kg": null,
+    "avg7": null,
+    "target": 78.43
+   },
+   {
+    "date": "2026-10-05",
+    "kg": null,
+    "avg7": null,
+    "target": 78.5
+   },
+   {
+    "date": "2026-10-06",
+    "kg": null,
+    "avg7": null,
+    "target": 78.57
+   },
+   {
+    "date": "2026-10-07",
+    "kg": null,
+    "avg7": null,
+    "target": 78.64
+   },
+   {
+    "date": "2026-10-08",
+    "kg": null,
+    "avg7": null,
+    "target": 78.71
+   },
+   {
+    "date": "2026-10-09",
+    "kg": null,
+    "avg7": null,
+    "target": 78.79
+   },
+   {
+    "date": "2026-10-10",
+    "kg": null,
+    "avg7": null,
+    "target": 78.86
+   },
+   {
+    "date": "2026-10-11",
+    "kg": null,
+    "avg7": null,
+    "target": 78.93
+   },
+   {
+    "date": "2026-10-12",
+    "kg": null,
+    "avg7": null,
+    "target": 79.0
+   },
+   {
+    "date": "2026-10-13",
+    "kg": null,
+    "avg7": null,
+    "target": 79.07
+   },
+   {
+    "date": "2026-10-14",
+    "kg": null,
+    "avg7": null,
+    "target": 79.14
+   },
+   {
+    "date": "2026-10-15",
+    "kg": 78.8,
+    "avg7": 78.8,
+    "target": 79.21
+   },
+   {
+    "date": "2026-10-16",
+    "kg": null,
+    "avg7": 78.8,
+    "target": 79.29
+   },
+   {
+    "date": "2026-10-17",
+    "kg": 79.5,
+    "avg7": 79.15,
+    "target": 79.36
+   },
+   {
+    "date": "2026-10-18",
+    "kg": 78.9,
+    "avg7": 79.07,
+    "target": 79.43
+   },
+   {
+    "date": "2026-10-19",
+    "kg": null,
+    "avg7": 79.07,
+    "target": 79.5
+   },
+   {
+    "date": "2026-10-20",
+    "kg": 78.9,
+    "avg7": 79.03,
+    "target": 79.57
+   },
+   {
+    "date": "2026-10-21",
+    "kg": 79.6,
+    "avg7": 79.14,
+    "target": 79.64
+   },
+   {
+    "date": "2026-10-22",
+    "kg": 79.8,
+    "avg7": 79.34,
+    "target": 79.71
+   },
+   {
+    "date": "2026-10-23",
+    "kg": 79.9,
+    "avg7": 79.43,
+    "target": 79.79
+   },
+   {
+    "date": "2026-10-24",
+    "kg": 79.5,
+    "avg7": 79.43,
+    "target": 79.86
+   },
+   {
+    "date": "2026-10-25",
+    "kg": 79.8,
+    "avg7": 79.58,
+    "target": 79.93
+   },
+   {
+    "date": "2026-10-26",
+    "kg": 79.4,
+    "avg7": 79.56,
+    "target": 80.0
+   },
+   {
+    "date": "2026-10-27",
+    "kg": 79.9,
+    "avg7": 79.7,
+    "target": 80.07
+   },
+   {
+    "date": "2026-10-28",
+    "kg": 79.5,
+    "avg7": 79.69,
+    "target": 80.14
+   },
+   {
+    "date": "2026-10-29",
+    "kg": 79.8,
+    "avg7": 79.69,
+    "target": 80.21
+   },
+   {
+    "date": "2026-10-30",
+    "kg": 79.6,
+    "avg7": 79.64,
+    "target": 80.29
+   },
+   {
+    "date": "2026-10-31",
+    "kg": 80.3,
+    "avg7": 79.76,
+    "target": 80.36
+   },
+   {
+    "date": "2026-11-01",
+    "kg": 79.7,
+    "avg7": 79.74,
+    "target": 80.43
+   },
+   {
+    "date": "2026-11-02",
+    "kg": 80.2,
+    "avg7": 79.86,
+    "target": 80.5
+   },
+   {
+    "date": "2026-11-03",
+    "kg": 80.5,
+    "avg7": 79.94,
+    "target": 80.57
+   },
+   {
+    "date": "2026-11-04",
+    "kg": 80.3,
+    "avg7": 80.06,
+    "target": 80.64
+   },
+   {
+    "date": "2026-11-05",
+    "kg": 80.3,
+    "avg7": 80.13,
+    "target": 80.71
+   }
+  ],
+  "entries": 20
+ },
+ "commands": {
+  "server": "https://ntfy.sh",
+  "topic": null
+ },
+ "applied_cmds": [],
  "log": [
+  {
+   "at": "2026-11-05T05:30",
+   "kind": "gewicht",
+   "text": "2026-11-05: 80.3 kg"
+  },
   {
    "at": "2026-11-05T05:30",
    "kind": "tag",
    "text": "Donnerstag: Rote Ampel – Schlüsseleinheit auf Freitag verschoben, heute nur locker."
   },
   {
+   "at": "2026-11-04T05:30",
+   "kind": "gewicht",
+   "text": "2026-11-04: 80.3 kg"
+  },
+  {
+   "at": "2026-11-04T05:30",
+   "kind": "tag",
+   "text": "Mittwoch: Gelbe Ampel – Nebeneinheiten etwas kürzer."
+  },
+  {
+   "at": "2026-11-03T05:30",
+   "kind": "gewicht",
+   "text": "2026-11-03: 80.5 kg"
+  },
+  {
+   "at": "2026-11-03T05:30",
+   "kind": "tag",
+   "text": "Dienstag: Gelbe Ampel – Schlüsseleinheit etwas entschärft."
+  },
+  {
+   "at": "2026-11-02T05:30",
+   "kind": "gewicht",
+   "text": "2026-11-02: 80.2 kg"
+  },
+  {
    "at": "2026-11-02T05:30",
    "kind": "umfang",
-   "text": "Umfang ab 02.11.: 100% → 103% (alles umgesetzt, gut erholt, Rückkehr zum geplanten Umfang)"
+   "text": "Umfang ab 02.11.: 100% → 103% (Plan bleibt wie er ist, Rückkehr zum geplanten Umfang)"
   },
   {
    "at": "2026-11-02T05:30",
@@ -4811,9 +5623,39 @@
    "text": "VDOT 51.1 → 51.3 (Laktatschwelle 4:09/km)"
   },
   {
+   "at": "2026-11-01T05:30",
+   "kind": "gewicht",
+   "text": "2026-11-01: 79.7 kg"
+  },
+  {
+   "at": "2026-10-31T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-31: 80.3 kg"
+  },
+  {
+   "at": "2026-10-30T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-30: 79.6 kg"
+  },
+  {
    "at": "2026-10-29T05:30",
-   "kind": "tag",
-   "text": "Donnerstag: Gelbe Ampel – Schlüsseleinheit etwas entschärft."
+   "kind": "gewicht",
+   "text": "2026-10-29: 79.8 kg"
+  },
+  {
+   "at": "2026-10-28T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-28: 79.5 kg"
+  },
+  {
+   "at": "2026-10-27T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-27: 79.9 kg"
+  },
+  {
+   "at": "2026-10-26T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-26: 79.4 kg"
   },
   {
    "at": "2026-10-26T05:30",
@@ -4826,33 +5668,48 @@
    "text": "VDOT 50.6 → 51.1 (Laktatschwelle 4:09/km)"
   },
   {
-   "at": "2026-10-19T05:30",
-   "kind": "umfang",
-   "text": "Umfang ab 19.10.: 92% → 96% (Plan bleibt wie er ist, Rückkehr zum geplanten Umfang)"
+   "at": "2026-10-25T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-25: 79.8 kg"
+  },
+  {
+   "at": "2026-10-24T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-24: 79.5 kg"
+  },
+  {
+   "at": "2026-10-23T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-23: 79.9 kg"
+  },
+  {
+   "at": "2026-10-22T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-22: 79.8 kg"
+  },
+  {
+   "at": "2026-10-21T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-21: 79.6 kg"
+  },
+  {
+   "at": "2026-10-20T05:30",
+   "kind": "gewicht",
+   "text": "2026-10-20: 78.9 kg"
   },
   {
    "at": "2026-10-19T05:30",
-   "kind": "tempo",
-   "text": "VDOT 49.8 → 50.6 (Laktatschwelle 4:09/km)"
-  },
-  {
-   "at": "2026-10-15T05:30",
-   "kind": "umfang",
-   "text": "Umfang ab 12.10.: 100% → 92% (nur 0% der Schlüsseleinheiten geschafft)"
-  },
-  {
-   "at": "2026-10-15T05:30",
-   "kind": "tempo",
-   "text": "VDOT 49.0 → 49.8 (Laktatschwelle 4:09/km)"
+   "kind": "tag",
+   "text": "Montag: Rote Ampel – heute nur locker bzw. Mobility."
   }
  ],
  "last_week": {
   "week": "2026-10-26",
-  "compliance": 1.0,
-  "run_ratio": 1.0242224867364131,
-  "done_km": 38.7,
-  "planned_km": 37.8,
-  "avg_readiness": 69.28571428571429,
-  "reason": "alles umgesetzt, gut erholt, Rückkehr zum geplanten Umfang"
+  "compliance": null,
+  "run_ratio": null,
+  "done_km": 17.2,
+  "planned_km": 18.0,
+  "avg_readiness": 55.0,
+  "reason": "Plan bleibt wie er ist, Rückkehr zum geplanten Umfang"
  }
 }

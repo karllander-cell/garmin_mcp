@@ -85,14 +85,15 @@ def adapt_day(day: date, plan_sessions: dict[str, list[dict]], status: dict) -> 
     """Return overrides ``{date: {"sessions": [...], "note": str}}`` for today (and a moved-to day)."""
     iso = day.isoformat()
     today = plan_sessions.get(iso, [])
-    if status["level"] == "green" or not any(s["sport"] != "sail" and not s.get("optional") for s in today):
+    light = ("mobility", "activation")
+    if status["level"] == "green" or not any(s["sport"] != "sail" and not s.get("optional") and s["profile"] not in light for s in today):
         return {}
     overrides: dict[str, dict] = {}
     label = f"Readiness {status['score']}"
     new_today, note = [], ""
     for s in today:
-        if s["sport"] == "sail":
-            new_today.append(s)  # sailing has priority, readiness never moves it
+        if s["sport"] == "sail" or s["profile"] in light:
+            new_today.append(s)  # sailing has priority; short mobility always fits
             continue
         if status["level"] == "yellow":
             if s.get("key") and s["sport"] == "run":

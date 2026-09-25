@@ -47,12 +47,17 @@ def test_plan_volume_peaks_before_taper(plan):
     assert all(w["run_km"] < peak["run_km"] for w in plan if w["phase"] == "taper")
 
 
-def test_monday_is_rest_day_outside_sailing(cfg, plan):
-    for w in plan:
-        for s in w["sessions"]:
-            d = date.fromisoformat(s["date"])
-            if d.weekday() == 0 and not sailing_day(cfg, d) and not s.get("adjusted"):
-                pytest.fail(f"unexpected Monday session {s['id']}")
+def test_full_week_matches_requested_structure(plan):
+    """Normal week: 5× Arnold split, 4 runs, 2 stabi, 1 bodyweight, 1 swim, 2 bike, 13–16.5 h."""
+    from collections import Counter
+
+    w = next(w for w in plan if w["phase"] == "build" and not w["sailing_days"] and not w["deload"] and not w["reentry"])
+    prof = Counter(s["profile"] for s in w["sessions"])
+    sport = Counter(s["sport"] for s in w["sessions"])
+    assert prof["gym_a"] + prof["gym_b"] + prof["gym_c"] == 5 and prof["gym_c"] == 1
+    assert sport["run"] == 4 and sport["swim"] == 1 and sport["bike"] == 2
+    assert prof["stabi"] == 2 and prof["bodyweight"] == 1
+    assert 13 <= w["hours"] <= 16.5
 
 
 def test_sailing_days_have_priority(cfg, plan):
@@ -66,7 +71,9 @@ def test_sailing_days_have_priority(cfg, plan):
                 sail_days += 1
                 assert any(s["sport"] == "sail" for s in sessions)
                 assert not any(s.get("key") for s in sessions), iso
-                assert not any(s["sport"] in ("strength", "bike", "row") for s in sessions), iso
+                assert not any(s["sport"] in ("bike", "row", "swim") for s in sessions), iso
+                if any(s["profile"] == "sail" and s["title"].startswith("Regatta") for s in sessions):
+                    assert {s["profile"] for s in sessions} <= {"sail", "activation"}, iso
     assert sail_days > 50
 
 
@@ -90,7 +97,8 @@ def test_red_readiness_moves_or_drops_key_session(cfg, plan):
 
 def test_readiness_never_touches_sailing(cfg, plan):
     days = sessions_by_day(plan)
-    sail = next(d for d, ss in days.items() if any(s["sport"] == "sail" for s in ss) and len(ss) == 1)
+    sail = next(d for d, ss in days.items() if any(s["sport"] == "sail" for s in ss)
+                and all(s["sport"] == "sail" or s["profile"] in ("mobility", "activation") for s in ss))
     assert adapt.adapt_day(date.fromisoformat(sail), days, {"score": 10, "level": "red", "reasons": []}) == {}
 
 
@@ -134,7 +142,8 @@ def test_full_pipeline_with_fake_garmin(cfg, monkeypatch):
     monkeypatch.setattr("garmin_mcp.coach.notify.send", lambda title, msg, **kw: sent.append(title) or True)
     now = datetime(2026, 11, 3, 5, 45)
     client = FakeGarmin(cfg, now)
-    state, _ = run_sync(cfg, client, None, now - timedelta(days=1), push=True)
+    client.now = now - timedelta(days=1)
+    state, _ = run_sync(cfg, client, None, client.now, push=True)
     assert state["activities"] and state["evaluations"]
     assert not any(t.startswith(("Lauf", "Kraft", "Rad")) for t in sent)  # history is never pushed
     client.now = now + timedelta(hours=14)
@@ -291,3 +300,17 @@ def test_user_override_survives_daily_adaptation(cfg):
     assert state["day_overrides"][tue]["user"]
     assert not any(s["sport"] == "run" for s in state["day_overrides"][tue]["sessions"])
     assert 1 in view["applied_cmds"]
+
+
+def test_weight_command_and_body_view(cfg):
+    from garmin_mcp.coach import body
+
+    state = {"weights": {}}
+    assert body.record(state, "2026-10-01", "78,6".replace(",", "."))
+    assert not body.record(state, "2026-10-02", 400)
+    assert body.target_kg(cfg.body, date(2026, 9, 28)) == 78.0
+    assert body.target_kg(cfg.body, date(2027, 6, 1)) == 85.0
+    wellness = {f"2026-10-0{i}": {"kcal_total": 3000} for i in range(1, 8)}
+    v = body.view(cfg.body, state["weights"], wellness, date(2026, 10, 8))
+    assert v["kcal_target"] == 3500 and v["protein_g"] == round(78.6 * 2)
+    assert v["series"][-1]["date"] == "2026-10-08"

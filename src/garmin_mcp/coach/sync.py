@@ -13,7 +13,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from . import adapt, commands, crypto, garmin_source, notify
+from . import adapt, body, commands, crypto, garmin_source, notify
 from .config import Config, load_config
 from .evaluate import SPORT_LABELS, evaluate, match_session
 from .load import acwr, daily_loads, pmc
@@ -218,7 +218,11 @@ def apply_commands(state: dict, plan_days: dict, today: date, now: datetime, cmd
     effective = {d: effective_sessions(plan_days, state, d) for d in span}
     editor = commands.Editor(effective, today)
     for cmd in cmds:
-        editor.apply(cmd)
+        if cmd.get("type") == "weight":
+            if body.record(state, cmd.get("date") or today.isoformat(), cmd.get("kg")):
+                log(state, now, "gewicht", f"{cmd.get('date')}: {float(cmd['kg']):.1f} kg")
+        else:
+            editor.apply(cmd)
         if cmd.get("ts"):
             state.setdefault("applied_cmds", []).append(cmd["ts"])
     state["applied_cmds"] = state.get("applied_cmds", [])[-50:]
@@ -271,6 +275,16 @@ def send_evaluation(cfg, state, act, ev, plan_days, series, now) -> None:
         body.append(f"**Als Nächstes:** {nxt}")
     notify.send(ev["headline"], "\n".join(body), tags=[ev["tag"], "runner" if act["sport"] == "run" else "muscle"])
     log(state, now, "bewertung", ev["headline"])
+
+
+def weight_reminder(cfg: Config, state: dict, today: date, now: datetime) -> None:
+    iso = today.isoformat()
+    if now.hour < cfg.body.get("reminder_hour", 7) or iso in state.get("weights", {}) or state["sent"].get("weight") == iso:
+        return
+    state["sent"]["weight"] = iso
+    target = body.target_kg(cfg.body, today)
+    notify.send("Gewicht eintragen", f"Guten Morgen! Nach dem Aufstehen wiegen und im Dashboard eintragen.\nZielkurve heute: **{target:.1f} kg**".replace(".", ",", 1),
+                tags=["scales"])
 
 
 def morning_brief(cfg, state, today, now, plan_days, series) -> None:
@@ -475,6 +489,7 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
         "sailing": [{"title": b["title"], "start": b["start"].isoformat(), "end": b["end"].isoformat(), "tentative": b["tentative"],
                      "regatta_from": b["regatta_from"].isoformat() if b["regatta_from"] else None} for b in cfg.sailing],
         "activities": activities,
+        "body": body.view(cfg.body, state.get("weights", {}), state["wellness"], today),
         "commands": {"server": (os.getenv("NTFY_SERVER") or "https://ntfy.sh").rstrip("/"), "topic": commands.command_topic()},
         "applied_cmds": state.get("applied_cmds", [])[-50:],
         "log": list(reversed(state["log"]))[:25],
@@ -498,6 +513,7 @@ def run_sync(cfg: Config, client, state: dict | None, now: datetime, push: bool 
     rate_activities(cfg, state, plan_days, series, now, push)
     if push:
         morning_brief(cfg, state, today, now, plan_days, series)
+        weight_reminder(cfg, state, today, now)
         weekly_review(cfg, state, today, now, plan_days)
     state["updated"] = now.isoformat()
     return state, build_view(cfg, state, today, now, plan, series)
@@ -565,9 +581,15 @@ def cmd_demo(args) -> int:
     # Replay the days so adaptations and ratings build up like in production.
     start = now - timedelta(days=21)
     t = start.replace(hour=5, minute=30)
+    import random
+
+    rng = random.Random(3)
     while t <= now:
         client.now = t
-        state, view = run_sync(cfg, client, state, t, push=False)
+        days_in = (t.date() - cfg.plan_start).days
+        kg = cfg.body["start_kg"] + max(0, days_in) * 0.06 + rng.uniform(-0.4, 0.4)
+        cmds = [{"type": "weight", "date": t.date().isoformat(), "kg": round(kg, 1)}] if t.hour < 7 and rng.random() > 0.1 else []
+        state, view = run_sync(cfg, client, state, t, push=False, cmds=cmds)
         t += timedelta(hours=6)
     state, view = run_sync(cfg, client, state, now, push=False)
     out = Path(args.out)

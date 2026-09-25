@@ -127,6 +127,33 @@ SUN = {
 }
 
 
+# Arnold split (A chest/back, B shoulders/arms, C legs) for the 78 → 85 kg goal.
+GYM = {
+    "A": ("Kraft A – Brust & Rücken", "Arnold-Split: Bankdrücken, Klimmzüge, Schrägbank KH, Rudern LH, Pullover, Dips – 4×6–10"),
+    "B": ("Kraft B – Schultern & Arme", "Arnold-Split: Schulterdrücken, Seitheben, Face Pulls, Curls, French Press, Bi/Tri-Supersätze – 4×8–12"),
+    "C": ("Kraft C – Beine & Rumpf", "Kniebeuge, rumänisches Kreuzheben, Bulgarian Split Squats, Wadenheben, Nordic Curls – 4×5–8 sauber"),
+}
+LEGS_RACE_FOCUS = "Beine auf Erhalt: Kniebeuge, RDL, Split Squats – 3×5 schwer, kein Muskelversagen (Laufqualität geht vor)"
+STABI = ("Stabi – Rumpf & Hüfte", "Planks, Side Planks, Dead Bug, Pallof Press, Copenhagen Plank, einbeinige Glute Bridge – 3 Runden")
+BODYWEIGHT = ("Kraftausdauer & Prophylaxe", "Körpergewicht-Zirkel 40''/20'': Ausfallschritte, Step-downs, einbeiniges RDL, exzentrisches Wadenheben, "
+              "Tibialis Raises, Liegestütze, Hüft- & Fußmobility – 3–4 Runden")
+MOBILITY = ("Stabi & Mobility", "15–20' abends: Rumpf, Hüfte, Schulter – Faszienrolle")
+ACTIVATION = ("Aktivierung", "15' Mobility & Aktivierung vor dem Auslaufen")
+
+
+def _gym(day: date, letter: str, minutes: float, phase: str | None = None) -> dict:
+    title, detail = GYM[letter]
+    if letter == "C" and phase in ("build", "specific", "taper"):
+        detail = LEGS_RACE_FOCUS
+    s = _other(day, "strength", f"gym_{letter.lower()}", title, detail, minutes)
+    return s
+
+
+def _stabi(day: date, minutes: float = 30, kind: str = "stabi") -> dict:
+    title, detail = {"stabi": STABI, "mobility": MOBILITY, "activation": ACTIVATION, "bodyweight": BODYWEIGHT}[kind]
+    return _other(day, "strength", kind, title, detail, minutes)
+
+
 def monday_of(d: date) -> date:
     return d - timedelta(days=d.weekday())
 
@@ -232,7 +259,7 @@ def _week_targets(cfg: Config, weeks: list[dict], w: dict) -> tuple[float, float
 def build_week(cfg: Config, weeks: list[dict], w: dict, paces: dict, scale: float = 1.0) -> dict:
     km, hours = _week_targets(cfg, weeks, w)
     prev_sailing = sum(1 for i in range(1, 8) if sailing_day(cfg, w["start"] - timedelta(days=i)))
-    reentry = prev_sailing >= 5 and not w["race_week"]
+    reentry = prev_sailing >= 5 and not w["race_week"] and not w["deload"]  # a deload already eases back in
     if reentry:
         # Back from a long sailing block: don't jump straight to full volume.
         km, hours = km * 0.85, hours * 0.85
@@ -253,6 +280,9 @@ def build_week(cfg: Config, weeks: list[dict], w: dict, paces: dict, scale: floa
         race["duration_min"] = round(cfg.target_seconds / 60)
         days[6].append(race)
         days[2].append(_other(d[2], "bike", "easy", "Rad locker", "Beine lockern, Z1", 45))
+        days[0] += [_gym(d[0], "A", 40), _stabi(d[0], 20, "mobility")]
+        days[2].append(_gym(d[2], "B", 35))
+        days[4].append(_stabi(d[4], 20, "mobility"))
     else:
         split = {"tue": 0.24, "thu": 0.24, "sat": 0.18, "sun": 0.34}
         long_km = min(km * split["sun"], cfg.long_run_cap_km)
@@ -272,26 +302,28 @@ def build_week(cfg: Config, weeks: list[dict], w: dict, paces: dict, scale: floa
             days[6].append(_run(d[6], s[0], s[1], long_km, s[2], s[3], paces, True))
         days[5].append(_run(d[5], "Lockerer Lauf + Steigerungen", "locker, am Ende 5×20\" Steigerungen", km * split["sat"], "easy", "easy", paces, False))
 
-        strength_min = {"reset": 45, "base1": 60, "base2": 60, "build": 55, "specific": 45, "taper": 30}[phase]
-        n_strength = 1 if phase == "taper" else 2
-        focus_a = "Maximalkraft Beine/Hüfte: Kniebeuge, Kreuzheben, Split Squats, Wadenheben" if phase in ("base1", "base2") else "Kraft-Erhalt: Kniebeuge, Kreuzheben rumänisch, Step-ups – 2–3 Sätze schwer"
-        focus_b = "Rumpf & Stabi + Sprungkraft (Pogo Jumps, Box Jumps, Skippings)"
-        days[1].append(_other(d[1], "strength", "strength", "Krafttraining A", focus_a, strength_min))
-        if n_strength == 2:
-            days[4].append(_other(d[4], "strength", "strength", "Krafttraining B", focus_b, strength_min))
+        # Mo: A + Stabi + Schwimmen · Di: Q1 + C · Mi: B + Rad · Do: Q2 + Stabi
+        # Fr: A + Kraftausdauer · Sa: locker + B · So: lang + Rad locker
+        gym_min = {"reset": 45, "base1": 60, "base2": 60, "build": 60, "specific": 55, "taper": 40}[phase]
+        if w["deload"]:
+            gym_min = 45
+        days[0] += [_gym(d[0], "A", gym_min), _stabi(d[0], 30)]
+        days[1].append(_gym(d[1], "C", gym_min, phase))
+        days[2].append(_gym(d[2], "B", gym_min))
+        days[3].append(_stabi(d[3], 30))
+        days[4] += [_gym(d[4], "A", gym_min), _stabi(d[4], 45, "bodyweight")]
+        days[5].append(_gym(d[5], "B", gym_min))
+        if phase == "taper":
+            days[1] = [x for x in days[1] if x["profile"] != "gym_c"]  # no heavy legs before the race
+        swim = _other(d[0], "swim", "easy", "Schwimmen", "Locker & Technik, 2–2,5 km, Zone 1–2", 45 if not w["deload"] else 35)
+        days[0].append(swim)
 
-        run_min = sum(s["duration_min"] for day in days for s in day if s["sport"] == "run")
-        strength_total = strength_min * n_strength
-        cross = max(0.0, hours * 60 - run_min - strength_total)
-        wed = min(cross * 0.6, 150)
-        fri = min(cross * 0.4, 75)
-        sat = max(0.0, cross - wed - fri)
-        if wed >= 30:
-            days[2].append(_other(d[2], "bike", "z2", "Rad Grundlage", "GA1, Trittfrequenz 85–95, Puls Zone 2", wed))
-        if fri >= 20:
-            days[4].append(_other(d[4], "row", "z2", "Rudern/Rad locker", "Zone 1–2, locker bleiben", fri))
-        if sat >= 30:
-            days[5].append(_other(d[5], "bike", "z2", "Rad locker (optional)", "Zone 1–2", min(sat, 120)))
+        fixed = sum(x["duration_min"] for day in days for x in day)
+        bike = max(0.0, hours * 60 - fixed)
+        wed = min(max(bike * 0.6, 45), 120)
+        sun = min(max(bike - wed, 40), 75)
+        days[2].append(_other(d[2], "bike", "z2", "Rad Grundlage", "GA1, Trittfrequenz 85–95, Puls Zone 2", wed))
+        days[6].append(_other(d[6], "bike", "z2", "Rad locker – Regeneration", "Zone 1, lockeres Kurbeln nach dem langen Lauf", sun))
 
     sailing = _apply_sailing(cfg, d, days, paces)
 
@@ -330,12 +362,13 @@ def _sail(day: date, regatta: bool, title: str, tentative: bool) -> dict:
 
 
 def _apply_sailing(cfg: Config, d: list[date], days: list[list[dict]], paces: dict) -> list[str]:
-    """Give sailing days priority: clear them, keep short runs, move key runs.
+    """Give sailing days priority and fit a reduced programme around them.
 
-    Regatta days only get an optional 20' activation jog. Training days on the
-    water get at most two short morning runs per week. Key runs that fall on a
+    Regatta days: only a 15' activation. Training days on the water: 15–20'
+    stabi/mobility every evening, 2–3 short morning runs and 2–3 shortened
+    gym sessions (Arnold split rotation) per week. Key runs that fall on a
     sailing day move to the nearest free day of the same week that keeps a day
-    without key run on both sides; if there is none they are dropped.
+    without key run on both sides; otherwise they are dropped.
     """
     flags = [sailing_day(cfg, x) for x in d]
     if not any(flags):
@@ -351,15 +384,18 @@ def _apply_sailing(cfg: Config, d: list[date], days: list[list[dict]], paces: di
         displaced += [(i, s) for s in days[i] if s.get("key") and s["sport"] == "run" and s["profile"] != "race"]
         days[i] = [_sail(d[i], flag["regatta"], block["title"], block["tentative"])]
         if flag["regatta"]:
-            opt = _run(d[i], "Optional: Aktivierung", "20' ganz locker + Mobility vor dem Auslaufen", 3.5, "recovery", "recovery", paces, False)
-            opt["optional"] = True
-            days[i].append(opt)
+            days[i].append(_stabi(d[i], 15, "activation"))
         else:
+            days[i].append(_stabi(d[i], 20, "mobility"))
             camp_idx.append(i)
-    picks = (camp_idx[1:] or camp_idx)[::3][:2]
-    for n, i in enumerate(picks):
+    # Morning runs on every other training day (max 3), gym on the days in between (max 3).
+    run_days = camp_idx[::2][:3]
+    gym_days = [i for i in camp_idx if i not in run_days][:3]
+    for n, i in enumerate(run_days):
         detail = "35' locker morgens vor dem Segeln" + (", am Ende 5×20\" Steigerungen" if n == 0 else "")
-        days[i].append(_run(d[i], "Morgenlauf", detail, 6.5, "easy", "easy", paces, False))
+        days[i].append(_run(d[i], "Morgenlauf", detail, 6.0, "easy", "easy", paces, False))
+    for n, i in enumerate(gym_days):
+        days[i].append(_gym(d[i], "ABC"[n % 3], 45))
 
     def has_key(j: int) -> bool:
         return 0 <= j < 7 and any(s.get("key") and s["sport"] == "run" for s in days[j])

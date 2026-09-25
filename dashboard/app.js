@@ -18,6 +18,8 @@
     row: { icon: "🚣", label: "Rudern" }, swim: { icon: "🏊", label: "Schwimmen" }, sail: { icon: "⛵", label: "Segeln" },
     other: { icon: "⚡", label: "Training" },
   };
+  const PROFILE_ICON = { stabi: "🧘", mobility: "🧘", activation: "🧘", bodyweight: "🤸" };
+  const iconOf = (s) => PROFILE_ICON[s.profile] || (SPORT[s.sport] || SPORT.other).icon;
   // Sport colours follow the categorical chart palette; every chip also carries an icon, so colour is never the only cue.
   const PHASE_COLOR = { reset: "var(--text-muted)", base1: "var(--series-3)", base2: "var(--series-1)", build: "var(--series-7)", specific: "var(--series-2)", taper: "var(--series-4)" };
   const LEVEL = { green: ["var(--good)", "Bereit"], yellow: ["var(--warning)", "Vorsicht"], red: ["var(--critical)", "Erholung"] };
@@ -103,7 +105,7 @@
     ].join(" ");
     const meta = [sizeOf(s), s.pace_label && s.profile !== "hills" && s.sport === "run" ? s.pace_label : null].filter(Boolean).join(" · ");
     return `<div class="session">
-      <div class="sport-ico ${s.sport === "sail" ? "sail" : s.key ? "key" : ""}" aria-hidden="true">${sp.icon}</div>
+      <div class="sport-ico ${s.sport === "sail" ? "sail" : s.key ? "key" : ""}" aria-hidden="true">${iconOf(s)}</div>
       <div>
         <div class="t">${esc(s.title)} ${badges}</div>
         <div class="d">${esc(s.detail)}</div>
@@ -186,7 +188,7 @@
     const sessions = t.sessions.length ? t.sessions.map((s) => {
       const sp = sportOf(s.sport);
       return `<div class="today-item" style="--sc:${sportVar(s.sport)}">
-        <div class="ti-ico">${sp.icon}</div>
+        <div class="ti-ico">${iconOf(s)}</div>
         <div class="ti-body"><div class="ti-t">${esc(s.title)}${s.key ? ' <span class="badge key">Schlüssel</span>' : ""}${s.optional ? ' <span class="badge opt">optional</span>' : ""}</div>
           <div class="ti-d">${esc(s.detail)}</div>
           <div class="ti-m">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
@@ -223,6 +225,68 @@
         </div>
       </div>
     </section>`;
+  }
+
+  function weightCard(compact = true) {
+    const b = DATA.body;
+    if (!b) return "";
+    const pend = pendingList().filter((c) => c.type === "weight");
+    const pendToday = pend.find((c) => c.date === DATA.today.date);
+    const todayKg = pendToday ? pendToday.kg : b.today_kg;
+    const status = { on_track: ["var(--good)", "Im Plan"], behind: ["var(--warning)", "Unter der Kurve"], ahead: ["var(--serious)", "Über der Kurve"] }[b.status];
+    const wk = b.week_change;
+    const wkCls = wk == null ? "" : Math.abs(wk - b.rate_kg_week) <= 0.25 ? "up" : "down";
+    return `<section class="card weight">
+      <header class="card-head"><h3>Gewicht</h3><span class="muted">Ziel ${de(b.target_kg)} kg · ${dateFmt(b.goal_date, { day: "2-digit", month: "2-digit", year: "2-digit" })} · +${de(b.rate_kg_week)} kg/Woche</span></header>
+      <div class="w-top">
+        <div class="w-today">
+          <div class="k">Heute</div>
+          ${todayKg != null ? `<div class="w-big num">${de(todayKg)}<small> kg</small></div><div class="muted w-state">${pendToday ? "⏳ wird gespeichert" : "✓ eingetragen"}</div>` : ""}
+          <form class="w-form ${todayKg != null ? "hidden" : ""}" id="w-form">
+            <input id="w-input" class="w-input num" type="number" inputmode="decimal" step="0.1" min="35" max="160" placeholder="${de(b.current_kg)}" aria-label="Gewicht in kg">
+            <button class="btn-s" type="submit">Speichern</button>
+          </form>
+          ${todayKg != null ? `<button class="w-edit" type="button" id="w-edit">ändern</button>` : ""}
+        </div>
+        <div class="w-stats">
+          <div><span>7-Tage-Schnitt</span><b class="num">${de(b.current_kg)} kg</b></div>
+          <div><span>Zielkurve heute</span><b class="num">${de(b.target_today)} kg</b></div>
+          <div><span>Letzte 7 Tage</span><b class="num">${wk == null ? "–" : `${wk >= 0 ? "+" : ""}${de(wk, 2)} kg`}</b>${wk == null ? "" : `<em class="${wkCls}">Ziel +${de(b.rate_kg_week)}</em>`}</div>
+          <div><span>Status</span><b><i class="dot" style="background:${status[0]}"></i>${status[1]}</b></div>
+        </div>
+      </div>
+      <div class="w-food">
+        <div><span>Kalorien</span><b class="num">${b.kcal_target ? b.kcal_target.toLocaleString("de-DE") : "–"}</b><small>${b.tdee ? `Verbrauch ${b.tdee.toLocaleString("de-DE")} + ${b.surplus_kcal}` : "Verbrauch aus Garmin fehlt noch"}</small></div>
+        <div><span>Eiweiß</span><b class="num">${b.protein_g} g</b><small>2 g/kg</small></div>
+        <div><span>Kohlenhydrate</span><b class="num">${b.carbs_g[0]}–${b.carbs_g[1]} g</b><small>5–7 g/kg</small></div>
+        <div><span>Fett</span><b class="num">~${b.fat_g} g</b><small>1 g/kg</small></div>
+      </div>
+      <div class="legend"><span><i style="background:var(--series-1)"></i>Gewicht</span><span><i style="background:var(--series-2)"></i>7-Tage-Schnitt</span><span><i class="box" style="background:color-mix(in srgb, var(--series-3) 25%, transparent)"></i>Zielkorridor</span></div>
+      <div class="chart" id="${compact ? "chart-weight" : "chart-weight-big"}"></div>
+    </section>`;
+  }
+
+  function drawWeight(el, days) {
+    if (!el || !DATA.body) return;
+    const series = DATA.body.series.slice(-days);
+    const pend = Object.fromEntries(pendingList().filter((c) => c.type === "weight").map((c) => [c.date, c.kg]));
+    lineChart(el, series.map((x) => x.date), [
+      { label: "Gewicht", color: "var(--series-1)", values: series.map((x) => pend[x.date] ?? x.kg) },
+      { label: "7-Tage-Schnitt", color: "var(--series-2)", values: series.map((x) => x.avg7) },
+    ], { band: series.map((x) => [x.target - 0.5, x.target + 0.5]), bandColor: "var(--series-3)", unit: "kg", height: 180, decimals: 1,
+         extra: (i) => [["Zielkurve", de(series[i].target) + " kg"]] });
+  }
+
+  function bindWeight(root) {
+    const form = root.querySelector("#w-form");
+    if (!form) return;
+    root.querySelector("#w-edit")?.addEventListener("click", () => { form.classList.remove("hidden"); root.querySelector("#w-input").focus(); });
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const kg = parseFloat(String(root.querySelector("#w-input").value).replace(",", "."));
+      if (!(kg >= 35 && kg <= 160)) return toast("Bitte ein Gewicht zwischen 35 und 160 kg eingeben.", "err");
+      sendCommand({ type: "weight", date: DATA.today.date, kg: Math.round(kg * 10) / 10 }, `Gewicht ${de(kg)} kg`, { kg });
+    });
   }
 
   function weekDone() {
@@ -268,7 +332,7 @@
       const size = s.distance_km ? `${de(s.distance_km)} km` : `${s.duration_min}'`;
       const cls = [s.status || (done ? "done" : ""), s.key ? "key" : "", s.optional ? "opt" : ""].join(" ");
       const mark = s.status === "done" || done ? (s.score != null ? `<b class="cs ${scoreClass(s.score)}">${s.score}</b>` : `<b class="cs">✓</b>`) : s.status === "missed" ? `<b class="cs miss">✕</b>` : "";
-      return `<div class="chip-s ${cls} ${s.date && pendingFor(s.date, s.id) ? "pending" : ""}" style="--sc:${sportVar(s.sport)}"><span class="ci">${sp.icon}</span><span class="ct">${esc(s.title || s.name)}</span><span class="cz num">${size}</span>${mark}</div>`;
+      return `<div class="chip-s ${cls} ${s.date && pendingFor(s.date, s.id) ? "pending" : ""}" style="--sc:${sportVar(s.sport)}"><span class="ci">${iconOf(s)}</span><span class="ct">${esc(s.title || s.name)}</span><span class="cz num">${size}</span>${mark}</div>`;
     };
     const rows = DATA.calendar.map((w, wi) => {
       const cells = w.days.map((d, di) => {
@@ -299,7 +363,7 @@
     const applied = new Set(DATA?.applied_cmds || []);
     return list.filter((c) => !applied.has(c.ts) && Date.now() - c.ts < 6 * 3600e3);
   }
-  const pendingFor = (date, sid) => pendingList().find((c) => c.date === date && (!c.session_id || c.session_id === sid));
+  const pendingFor = (date, sid) => pendingList().find((c) => c.type !== "weight" && c.date === date && (!c.session_id || c.session_id === sid));
 
   async function encryptJSON(obj, passphrase) {
     const enc = new TextEncoder();
@@ -320,7 +384,7 @@
     setTimeout(() => t.remove(), 4200);
   }
 
-  async function sendCommand(cmd, label) {
+  async function sendCommand(cmd, label, extra = {}) {
     cmd.ts = Date.now();
     const demo = !!window.__COACH_DEMO__ || new URLSearchParams(location.search).has("demo") || !DATA.commands?.topic;
     try {
@@ -331,11 +395,13 @@
         if (!r.ok) throw new Error(`Senden fehlgeschlagen (${r.status}).`);
       }
       const list = pendingList();
-      list.push({ ts: cmd.ts, date: cmd.date, session_id: cmd.session_id || null, type: cmd.type, label });
+      list.push({ ts: cmd.ts, date: cmd.date, session_id: cmd.session_id || null, type: cmd.type, label, ...extra });
       store.set("coach-pending", JSON.stringify(list));
       document.querySelector(".sheet-backdrop")?.click();
       renderers[current]();
-      toast(demo ? `Vorschau: „${label}“ – im echten Dashboard wird der Plan jetzt angepasst.` : `Gesendet: ${label}. Der Plan wird in bis zu 15 Minuten angepasst, du bekommst eine Push.`, "ok");
+      const isWeight = cmd.type === "weight";
+      toast(demo ? `Vorschau: „${label}“ – im echten Dashboard wird das jetzt gespeichert.`
+        : isWeight ? `${label} gespeichert – erscheint beim nächsten Abgleich im Verlauf.` : `Gesendet: ${label}. Der Plan wird in bis zu 15 Minuten angepasst, du bekommst eine Push.`, "ok");
     } catch (err) {
       toast(err.message || "Senden fehlgeschlagen.", "err");
     }
@@ -347,7 +413,7 @@
     const open = d.sessions.filter((s) => s.status !== "done" && s.sport !== "sail");
     if (!open.length) return "";
     const perSession = open.map((s) => `<div class="cp-row" style="--sc:${sportVar(s.sport)}">
-        <span class="cp-name">${sportOf(s.sport).icon} ${esc(s.title)}</span>
+        <span class="cp-name">${iconOf(s)} ${esc(s.title)}</span>
         <span class="cp-btns"><button class="btn-s" data-cmd="move" data-sid="${esc(s.id)}" data-label="${esc(s.title)} verschieben">Verschieben</button>
         <button class="btn-s ghost" data-cmd="drop" data-sid="${esc(s.id)}" data-label="${esc(s.title)} streichen">Streichen</button></span></div>`).join("");
     const feel = d.date === todayIso || d.date === addDays(todayIso, 1);
@@ -395,7 +461,7 @@
       const open = d.sessions.filter((s) => s.status !== "done");
       const done = d.sessions.filter((s) => s.status === "done");
       const items = open.map((s) => `<div class="up-item ${s.key ? "key" : ""} ${s.optional ? "opt" : ""}" style="--sc:${sportVar(s.sport)}">
-          <div class="up-top"><span class="up-ico">${sportOf(s.sport).icon}</span><span class="up-sport">${sportOf(s.sport).label}</span>${s.key ? '<span class="up-key" title="Schlüsseleinheit">◆</span>' : ""}</div>
+          <div class="up-top"><span class="up-ico">${iconOf(s)}</span><span class="up-sport">${PROFILE_ICON[s.profile] ? (s.profile === "bodyweight" ? "Kraftausdauer" : "Stabi") : sportOf(s.sport).label}</span>${s.key ? '<span class="up-key" title="Schlüsseleinheit">◆</span>' : ""}</div>
           <div class="up-t">${esc(s.title)}</div>
           <div class="up-d">${esc(s.detail)}</div>
           <div class="up-m num">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
@@ -415,7 +481,7 @@
   }
 
   function renderToday() {
-    $("#view-today").innerHTML = upcoming() + `<div class="home-grid">${dayCheck()}${weekDone()}</div>` + calendar()
+    $("#view-today").innerHTML = upcoming() + `<div class="home-grid">${dayCheck()}${weekDone()}</div>` + weightCard() + calendar()
       + `<p class="muted stand">Stand ${new Date(DATA.generated_at).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" })} · Fitness ${de(DATA.metrics.ctl, 0)} · Ermüdung ${de(DATA.metrics.atl, 0)} · Umfangsfaktor ${Math.round((DATA.metrics.scale ?? 1) * 100)} %</p>`;
     $("#view-today").onclick = (e) => {
       const act = e.target.closest("[data-act]");
@@ -427,6 +493,8 @@
       const up = e.target.closest(".up-day");
       if (up) openDay(DATA.calendar.flatMap((w) => w.days).find((d) => d.date === up.dataset.day));
     };
+    bindWeight($("#view-today"));
+    drawWeight($("#chart-weight"), 42);
     $("#view-today").onkeydown = (e) => { if (e.key === "Enter" && e.target.classList.contains("cal-cell")) e.target.click(); };
   }
 
@@ -439,7 +507,7 @@
       const items = d.sessions.map((s) => {
         const sp = SPORT[s.sport] || SPORT.other;
         return `<div class="mini ${s.sport === "sail" ? "sail" : ""} ${s.status === "missed" ? "missed" : ""}" style="--sc:${sportVar(s.sport)}">
-          <div class="l"><div class="t">${sp.icon} ${esc(s.title)} ${s.key ? '<span class="badge key">S</span>' : ""}${s.optional ? ' <span class="badge opt">opt.</span>' : ""}</div>
+          <div class="l"><div class="t">${iconOf(s)} ${esc(s.title)} ${s.key ? '<span class="badge key">S</span>' : ""}${s.optional ? ' <span class="badge opt">opt.</span>' : ""}</div>
           <div class="d">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}${s.adjusted ? " · ↻ angepasst" : ""}</div></div>
           ${stateLabel(s)}</div>`;
       });
@@ -516,7 +584,7 @@
   function renderAnalysis() {
     const paces = DATA.paces.map((p) => `<tr><td>${esc(p.label)}</td><td class="r num">${p.now}</td><td class="r num muted">${p.goal}</td></tr>`).join("");
     const m = DATA.metrics;
-    $("#view-analysis").innerHTML = heroBand() + `
+    $("#view-analysis").innerHTML = heroBand() + weightCard(false) + `
       <div class="grid two" style="margin-bottom:12px">
         <div class="card"><h3>Trainingstempo</h3><p class="hint">Aus deinem aktuellen VDOT ${de(DATA.goal.vdot)} – rechts dein Zielniveau</p>
           <table><thead><tr><th>Bereich</th><th class="r">Jetzt /km</th><th class="r">Ziel /km</th></tr></thead><tbody>${paces}</tbody></table></div>
@@ -549,6 +617,8 @@
       <div class="section-title">Anpassungen des Coaches</div>
       <div class="card feed">${DATA.log.map((l) => `<div class="item"><div class="when">${new Date(l.at).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" })} · ${esc(l.kind)}</div>${esc(l.text)}</div>`).join("") || '<div class="empty">Noch keine Anpassungen.</div>'}</div>`;
 
+    bindWeight($("#view-analysis"));
+    drawWeight($("#chart-weight-big"), 120);
     const pmc = DATA.pmc;
     lineChart($("#chart-pmc"), pmc.map((p) => p.date), [
       { label: "Fitness", color: "var(--series-1)", values: pmc.map((p) => p.ctl) },
@@ -673,17 +743,18 @@
     const H = opts.height || 220, pad = { l: 34, r: 10, t: 10, b: 24 };
     const { svg, tip, width } = frame(el, H);
     const all = series.flatMap((s) => s.values).concat((opts.band || []).flat()).filter((v) => v != null);
-    const sc = niceScale(opts.band ? Math.max(0, Math.min(...all) - 5) : 0, Math.max(...all, 1));
+    const pad0 = opts.unit === "kg" ? 0.5 : 5;
+    const sc = niceScale(opts.band ? Math.max(0, Math.min(...all) - pad0) : 0, Math.max(...all, 1) + (opts.unit === "kg" ? 0.3 : 0), opts.unit === "kg" ? 5 : 4);
     const max = sc.hi, min = sc.lo;
     const x = (i) => pad.l + (i / Math.max(1, dates.length - 1)) * (width - pad.l - pad.r);
     const y = (v) => pad.t + (1 - (v - min) / (max - min)) * (H - pad.t - pad.b);
-    yAxis(svg, pad, width, y, sc.ticks, (v) => Math.round(v));
+    yAxis(svg, pad, width, y, sc.ticks, (v) => (opts.unit === "kg" ? de(v, Number.isInteger(v) ? 0 : 1) : Math.round(v)));
     const ax = node(svg, "g", { class: "axis" });
     const step = Math.max(1, Math.round(dates.length / 5));
     dates.forEach((d, i) => { if (i % step === 0) node(ax, "text", { x: x(i), y: H - 6, "text-anchor": "middle" }, shortDate(d)); });
     if (opts.band) {
       const pts = opts.band.map((b, i) => (b[0] != null && b[1] != null ? [x(i), y(b[0]), y(b[1])] : null)).filter(Boolean);
-      if (pts.length > 1) node(svg, "path", { d: "M" + pts.map((p) => `${p[0]},${p[2]}`).join("L") + "L" + pts.reverse().map((p) => `${p[0]},${p[1]}`).join("L") + "Z", fill: "var(--series-1)", opacity: 0.1 });
+      if (pts.length > 1) node(svg, "path", { d: "M" + pts.map((p) => `${p[0]},${p[2]}`).join("L") + "L" + pts.reverse().map((p) => `${p[0]},${p[1]}`).join("L") + "Z", fill: opts.bandColor || "var(--series-1)", opacity: opts.bandColor ? 0.2 : 0.1 });
     }
     series.forEach((s) => {
       let d = "", pen = false;
@@ -698,7 +769,7 @@
       if (i < 0) { tip.classList.add("hidden"); cross.setAttribute("opacity", 0); dots.forEach((d) => d.setAttribute("opacity", 0)); return; }
       cross.setAttribute("x1", x(i)); cross.setAttribute("x2", x(i)); cross.setAttribute("opacity", 0.5);
       series.forEach((s, k) => { const v = s.values[i]; dots[k].setAttribute("opacity", v == null ? 0 : 1); if (v != null) { dots[k].setAttribute("cx", x(i)); dots[k].setAttribute("cy", y(v)); } });
-      const rows = series.map((s) => [s.label, s.values[i] == null ? "–" : de(s.values[i], 0) + (opts.unit ? " " + opts.unit : ""), s.color]);
+      const rows = series.map((s) => [s.label, s.values[i] == null ? "–" : de(s.values[i], opts.decimals ?? 0) + (opts.unit ? " " + opts.unit : ""), s.color]);
       const top = Math.min(...series.map((s) => (s.values[i] == null ? H : y(s.values[i]))));
       showTip(tip, x(i) / scale, top / scale, dateFmt(dates[i], { weekday: "short", day: "2-digit", month: "2-digit" }), rows.concat(opts.extra ? opts.extra(i) : []));
     });
