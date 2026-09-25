@@ -18,6 +18,7 @@
     row: { icon: "🚣", label: "Rudern" }, swim: { icon: "🏊", label: "Schwimmen" }, sail: { icon: "⛵", label: "Segeln" },
     other: { icon: "⚡", label: "Training" },
   };
+  // Sport colours follow the categorical chart palette; every chip also carries an icon, so colour is never the only cue.
   const PHASE_COLOR = { reset: "var(--text-muted)", base1: "var(--series-3)", base2: "var(--series-1)", build: "var(--series-7)", specific: "var(--series-2)", taper: "var(--series-4)" };
   const LEVEL = { green: ["var(--good)", "Bereit"], yellow: ["var(--warning)", "Vorsicht"], red: ["var(--critical)", "Erholung"] };
 
@@ -42,6 +43,7 @@
   }
 
   async function load(passphrase) {
+    if (window.__COACH_DEMO__) return window.__COACH_DEMO__;
     const demo = new URLSearchParams(location.search).has("demo");
     if (demo) return fetchJSON("demo-data.json");
     try {
@@ -126,57 +128,184 @@
   }
 
   // ------------------------------------------------------------------ views
-  function renderToday() {
-    const t = DATA.today, g = DATA.goal, m = DATA.metrics, w = t.wellness || {};
-    const r = t.readiness;
-    const [color, word] = r ? LEVEL[r.level] : ["var(--text-muted)", "Warte auf Daten"];
-    const sessions = t.sessions.length ? t.sessions.map(sessionCard).join("") : `<div class="rest">Ruhetag – Beine hoch, gut essen, früh schlafen. 😴</div>`;
-    const progress = Math.max(0, Math.min(100, ((g.vdot - 45) / (g.goal_vdot - 45)) * 100));
+  // ------------------------------------------------------------------ home ("Heute")
+  const sportOf = (k) => SPORT[k] || SPORT.other;
+  const sportVar = (k) => `var(--c-${SPORT[k] ? k : "other"})`;
+  const weekday = (iso, len = "short") => dateFmt(iso, { weekday: len });
+  const avg = (xs) => { const v = xs.filter((x) => x != null); return v.length ? v.reduce((a, b) => a + b, 0) / v.length : null; };
+
+  function ringSvg(value, max, color, size = 76, stroke = 8) {
+    const r = (size - stroke) / 2, c = 2 * Math.PI * r, v = Math.max(0, Math.min(1, (value ?? 0) / max));
+    return `<svg width="${size}" height="${size}" viewBox="0 0 ${size} ${size}" aria-hidden="true" style="transform:rotate(-90deg)">
+      <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="var(--track)" stroke-width="${stroke}"/>
+      <circle cx="${size / 2}" cy="${size / 2}" r="${r}" fill="none" stroke="${color}" stroke-width="${stroke}" stroke-linecap="round" stroke-dasharray="${c * v} ${c}"/></svg>`;
+  }
+
+  function heroBand() {
+    const g = DATA.goal, m = DATA.metrics;
+    const now = DATA.plan.findIndex((w) => w.status === "current");
+    const segs = DATA.plan.map((w, i) => `<i class="seg ${i < now ? "past" : i === now ? "now" : ""}" style="--pc:${PHASE_COLOR[w.phase]}" title="W${w.index + 1} ${esc(w.phase_label)}"></i>`).join("");
+    const gap = g.predicted_s - g.target_s;
+    return `<section class="hero-band">
+      <div class="hero-main">
+        <div class="eyebrow">${g.week_no ? `Woche ${g.week_no} von ${g.weeks_total} · ${esc(DATA.week.phase_label)}${DATA.week.deload ? " · Entlastung" : ""}` : `Plan startet am ${dateFmt(g.plan_start, { day: "2-digit", month: "2-digit" })}`}</div>
+        <h2>Hallo ${esc(DATA.athlete)}</h2>
+        <div class="plan-strip" role="img" aria-label="Planfortschritt">${segs}</div>
+        <div class="plan-strip-legend"><span>${dateFmt(DATA.plan[0].start, { day: "2-digit", month: "2-digit" })}</span><span>🏁 ${dateFmt(g.date, { day: "2-digit", month: "2-digit" })}</span></div>
+      </div>
+      <div class="bib">
+        <div class="bib-top">${esc(g.race)}</div>
+        <div class="bib-num num">${g.days_to_go}</div>
+        <div class="bib-sub">Tage bis zum Start</div>
+        <div class="bib-row"><span>Ziel <b class="num">${esc(g.target)}</b></span><span>Prognose <b class="num">${esc(g.predicted)}</b></span></div>
+        <div class="bib-gap ${gap <= 0 ? "ok" : ""}">${gap <= 0 ? "Auf Zielkurs" : `noch ${Math.floor(gap / 60)}:${String(Math.round(gap % 60)).padStart(2, "0")} bis zum Ziel`} · VDOT ${de(g.vdot)}</div>
+      </div>
+    </section>`;
+  }
+
+  function dayCheck() {
+    const t = DATA.today, w = t.wellness || {}, m = DATA.metrics, r = t.readiness;
+    const wl = DATA.wellness.slice(0, -1).slice(-7);
+    const rhrAvg = avg(wl.map((x) => x.rhr)), hrvAvg = avg(wl.map((x) => x.hrv));
+    const sleepCol = w.sleep_score == null ? "var(--text-muted)" : w.sleep_score >= 80 ? "var(--good)" : w.sleep_score >= 60 ? "var(--warning)" : "var(--critical)";
+    const sleepWord = w.sleep_score == null ? "Keine Schlafdaten" : w.sleep_score >= 80 ? "Gut geschlafen" : w.sleep_score >= 60 ? "Okay geschlafen" : "Schlecht geschlafen";
+    const [lvlCol, lvlWord] = r ? LEVEL[r.level] : ["var(--text-muted)", "Warte auf Uhr"];
+    const bodyText = !r ? "Sobald die Uhr die Nacht synchronisiert hat, erscheint hier dein Zustand."
+      : r.level === "green" ? "Dein Körper ist erholt – die geplante Belastung passt."
+      : r.level === "yellow" ? "Leicht angeschlagen – Schlüsseleinheit etwas entschärfen."
+      : "Dein Körper braucht Erholung – heute nur locker.";
+    const trend = (v, ref, unit, upGood) => {
+      if (v == null || ref == null) return "";
+      const d = v - ref; if (Math.abs(d) < 1) return `<em class="flat">±0</em>`;
+      const good = upGood ? d > 0 : d < 0;
+      return `<em class="${good ? "up" : "down"}">${d > 0 ? "▲" : "▼"} ${Math.abs(Math.round(d))}${unit}</em>`;
+    };
     const tsbWord = m.tsb > 5 ? "frisch" : m.tsb > -10 ? "ausgewogen" : m.tsb > -25 ? "belastet" : "sehr müde";
-    $("#view-today").innerHTML = `
-      <div class="grid two">
-        <div class="card">
-          <div class="hero">
-            ${ring(r?.score, color)}
-            <div>
-              <span class="status-pill"><i style="background:${color}"></i>${word}</span>
-              <p class="reasons">${esc(r ? r.reasons.join(" · ") : "Die Uhr hat die Nacht noch nicht synchronisiert.")}</p>
-              ${t.note ? `<div class="adjusted">↻ ${esc(t.note)}</div>` : ""}
-            </div>
+    const sessions = t.sessions.length ? t.sessions.map((s) => {
+      const sp = sportOf(s.sport);
+      return `<div class="today-item" style="--sc:${sportVar(s.sport)}">
+        <div class="ti-ico">${sp.icon}</div>
+        <div class="ti-body"><div class="ti-t">${esc(s.title)}${s.key ? ' <span class="badge key">Schlüssel</span>' : ""}${s.optional ? ' <span class="badge opt">optional</span>' : ""}</div>
+          <div class="ti-d">${esc(s.detail)}</div>
+          <div class="ti-m">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
+          ${s.adjusted ? `<div class="adjusted">↻ ${esc(s.adjusted)}</div>` : ""}</div>
+        <div>${stateLabel(s)}</div></div>`;
+    }).join("") : `<div class="rest-day">🛌 Ruhetag – Beine hoch, gut essen, früh schlafen.</div>`;
+    return `<section class="card daycheck">
+      <header class="card-head"><h3>Tagescheck</h3><span class="muted">${dateFmt(t.date, { weekday: "long", day: "2-digit", month: "long" })}</span></header>
+      <div class="dc-grid">
+        <div class="dc-cell">
+          <div class="dc-label">😴 Schlaf</div>
+          <div class="dc-ring">${ringSvg(w.sleep_score, 100, sleepCol)}<div class="dc-val"><b class="num">${w.sleep_score ?? "–"}</b><span>Score</span></div></div>
+          <div class="dc-word">${sleepWord}</div>
+          <div class="dc-sub num">${w.sleep_h ? `${de(w.sleep_h)} h Schlaf` : ""}</div>
+        </div>
+        <div class="dc-cell">
+          <div class="dc-label">💪 Körper</div>
+          <div class="dc-ring">${ringSvg(r?.score, 100, lvlCol)}<div class="dc-val"><b class="num">${r?.score ?? "–"}</b><span>Readiness</span></div></div>
+          <div class="dc-word"><i class="dot" style="background:${lvlCol}"></i>${lvlWord}</div>
+          <div class="vitals">
+            <span>HRV <b class="num">${w.hrv ?? "–"}</b> ${trend(w.hrv, hrvAvg, "", true)}</span>
+            <span>Ruhepuls <b class="num">${w.rhr ?? "–"}</b> ${trend(w.rhr, rhrAvg, "", false)}</span>
+            <span>Body Battery <b class="num">${w.body_battery ?? "–"}</b></span>
+            <span>Frische <b class="num">${m.tsb > 0 ? "+" : ""}${de(m.tsb, 0)}</b> <em class="flat">${tsbWord}</em></span>
           </div>
         </div>
-        <div class="card race">
-          <div class="top">
-            <div><div class="muted" style="font-size:12px">${esc(g.race)} · ${dateFmt(g.date, { day: "2-digit", month: "long" })}</div>
-              <div class="countdown num">${g.days_to_go}<small>Tage</small></div></div>
-            <span class="chip">Woche ${g.week_no ?? "–"} / ${g.weeks_total}</span>
-          </div>
-          <div class="kv">
-            <div><div class="k">Ziel</div><div class="v num">${esc(g.target)}</div></div>
-            <div><div class="k">Prognose</div><div class="v num">${esc(g.predicted)}</div></div>
-            <div><div class="k">Zielpace</div><div class="v num">${esc(g.target_pace)}</div></div>
-          </div>
-          <div>
-            <div class="meter" role="img" aria-label="VDOT ${g.vdot} von Ziel ${g.goal_vdot}"><i style="width:${progress}%"></i></div>
-            <div class="meter-row"><span>VDOT ${de(g.vdot)}</span><span>Ziel ${de(g.goal_vdot)}</span></div>
-          </div>
+        <div class="dc-cell dc-today">
+          <div class="dc-label">📋 Heute steht an</div>
+          <p class="dc-verdict" style="--lc:${lvlCol}">${bodyText}</p>
+          ${t.note ? `<div class="adjusted">↻ ${esc(t.note)}</div>` : ""}
+          <div class="today-list">${sessions}</div>
+          ${t.next ? `<div class="dc-next">Als Nächstes → ${esc(t.next)}</div>` : ""}
         </div>
       </div>
+    </section>`;
+  }
 
-      <div class="section-title">Heute · ${dateFmt(t.date, { weekday: "long", day: "2-digit", month: "long" })}</div>
-      <div class="card">${sessions}
-        ${t.next ? `<div class="m muted" style="margin-top:10px;font-size:13px">Als Nächstes → ${esc(t.next)}</div>` : ""}</div>
-
-      <div class="section-title">Form & Erholung</div>
-      <div class="tiles six">
-        ${tile("Fitness (CTL)", de(m.ctl, 0), "", "42-Tage-Schnitt")}
-        ${tile("Ermüdung (ATL)", de(m.atl, 0), "", "7-Tage-Schnitt")}
-        ${tile("Frische (TSB)", (m.tsb > 0 ? "+" : "") + de(m.tsb, 0), "", tsbWord)}
-        ${tile("HRV", w.hrv ?? "–", "ms", w.hrv_low ? `Baseline ${w.hrv_low}–${w.hrv_high}` : "")}
-        ${tile("Schlaf", w.sleep_score ?? "–", w.sleep_h ? `· ${de(w.sleep_h)} h` : "", "Garmin Sleep Score")}
-        ${tile("Ruhepuls", w.rhr ?? "–", "bpm", w.body_battery ? `Body Battery ${w.body_battery}` : "")}
+  function weekDone() {
+    const wk = DATA.week;
+    const from = wk.start, to = addDays(wk.start, 6);
+    const done = DATA.activities.filter((a) => a.start.slice(0, 10) >= from && a.start.slice(0, 10) <= to).reverse();
+    const planned = wk.days.flatMap((d) => d.sessions).filter((s) => s.sport !== "sail" && !s.optional);
+    const doneCount = planned.filter((s) => s.status === "done").length;
+    const bySport = wk.actual.by_sport || {};
+    const total = Object.values(bySport).reduce((a, b) => a + b, 0);
+    const order = ["run", "bike", "row", "strength", "swim", "sail", "other"].filter((k) => bySport[k]);
+    const bar = total ? order.map((k) => `<i style="width:${(bySport[k] / total) * 100}%;background:${sportVar(k)}" title="${sportOf(k).label} ${de(bySport[k])} h"></i>`).join("") : "";
+    const legend = order.map((k) => `<span><i style="background:${sportVar(k)}"></i>${sportOf(k).label} <b class="num">${de(bySport[k])} h</b></span>`).join("");
+    const scores = done.map((a) => a.score).filter((s) => s != null);
+    const list = done.map((a) => {
+      const i = DATA.activities.indexOf(a);
+      const facts = [a.distance_km ? `${de(a.distance_km)} km` : null, a.duration, a.pace ? `${a.pace}/km` : null].filter(Boolean).join(" · ");
+      return `<button class="done-row" data-act="${i}" style="--sc:${sportVar(a.sport)}">
+        <span class="dr-ico">${sportOf(a.sport).icon}</span>
+        <span class="dr-body"><span class="dr-t">${esc(a.name)}</span><span class="dr-d">${weekday(a.start.slice(0, 10))} · ${esc(facts)}</span></span>
+        ${a.score != null ? scoreBadge(a.score) : `<span class="state-ico">${esc(a.rating || "✓")}</span>`}</button>`;
+    }).join("");
+    const kmPct = wk.planned_km ? Math.min(100, (wk.actual.run_km / wk.planned_km) * 100) : 0;
+    const hPct = wk.planned_h ? Math.min(100, (wk.actual.hours / wk.planned_h) * 100) : 0;
+    return `<section class="card weekdone">
+      <header class="card-head"><h3>Diese Woche erledigt</h3><span class="muted">KW ${isoWeek(wk.start)}</span></header>
+      <div class="wd-stats">
+        <div><div class="k">Einheiten</div><div class="v num">${doneCount}<small>/${planned.length}</small></div></div>
+        <div><div class="k">Laufen</div><div class="v num">${de(wk.actual.run_km)}<small>/${de(wk.planned_km, 0)} km</small></div><div class="mini-meter"><i style="width:${kmPct}%;background:var(--c-run)"></i></div></div>
+        <div><div class="k">Training</div><div class="v num">${de(wk.actual.hours)}<small>/${de(wk.planned_h)} h</small></div><div class="mini-meter"><i style="width:${hPct}%;background:var(--accent)"></i></div></div>
+        <div><div class="k">Ø Bewertung</div><div class="v num">${scores.length ? Math.round(avg(scores)) : "–"}<small>/100</small></div></div>
       </div>
-      <p class="muted" style="font-size:12px;margin:14px 4px">Stand ${new Date(DATA.generated_at).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" })} · Belastungsquote ${m.acwr ?? "–"} · Umfangsfaktor ${Math.round((m.scale ?? 1) * 100)} %</p>`;
+      ${total ? `<div class="sport-bar" role="img" aria-label="Stunden nach Sportart">${bar}</div><div class="sport-legend">${legend}</div>` : ""}
+      <div class="done-list">${list || '<div class="empty">Diese Woche noch nichts erledigt.</div>'}</div>
+    </section>`;
+  }
+
+  function calendar() {
+    const todayIso = DATA.today.date;
+    const head = ["Mo", "Di", "Mi", "Do", "Fr", "Sa", "So"].map((d) => `<div class="cal-h">${d}</div>`).join("");
+    const chip = (s, done) => {
+      const sp = sportOf(s.sport);
+      const size = s.distance_km ? `${de(s.distance_km)} km` : `${s.duration_min}'`;
+      const cls = [s.status || (done ? "done" : ""), s.key ? "key" : "", s.optional ? "opt" : ""].join(" ");
+      const mark = s.status === "done" || done ? (s.score != null ? `<b class="cs ${scoreClass(s.score)}">${s.score}</b>` : `<b class="cs">✓</b>`) : s.status === "missed" ? `<b class="cs miss">✕</b>` : "";
+      return `<div class="chip-s ${cls}" style="--sc:${sportVar(s.sport)}"><span class="ci">${sp.icon}</span><span class="ct">${esc(s.title || s.name)}</span><span class="cz num">${size}</span>${mark}</div>`;
+    };
+    const rows = DATA.calendar.map((w, wi) => {
+      const cells = w.days.map((d, di) => {
+        const items = d.sessions.map((s) => chip(s)).concat(d.unplanned.map((u) => chip({ ...u, title: u.name, status: "done" }, true))).join("");
+        const cls = [d.date === todayIso ? "today" : "", d.date < todayIso ? "past" : ""].join(" ");
+        return `<div class="cal-cell ${cls}" data-w="${wi}" data-d="${di}" role="button" tabindex="0" aria-label="${dateFmt(d.date, { weekday: "long", day: "2-digit", month: "long" })}">
+          <div class="cal-date">${dateFmt(d.date, { day: "numeric" })}${d.date.endsWith("-01") ? " " + dateFmt(d.date, { month: "short" }) : ""}</div>${items}</div>`;
+      }).join("");
+      const sum = w.actual ? `<b class="num">${de(w.actual.run_km, 0)}</b>/${w.planned_km != null ? de(w.planned_km, 0) : "–"} km` : `<b class="num">${w.planned_km != null ? de(w.planned_km, 0) : "–"}</b> km`;
+      return `<div class="cal-week ${w.start === DATA.week.start ? "current" : ""}">
+        <div class="cal-side" style="--pc:${w.phase ? PHASE_COLOR[w.phase] : "var(--text-muted)"}">
+          <div class="cw">KW ${isoWeek(w.start)}</div><div class="cp">${esc(w.phase_label)}${w.deload ? " · Entl." : ""}</div>
+          <div class="csum">${sum}</div>${w.sailing_days ? `<div class="csail">⛵ ${w.sailing_days} T</div>` : ""}</div>
+        ${cells}</div>`;
+    }).join("");
+    const legend = ["run", "bike", "row", "strength", "sail"].map((k) => `<span><i style="background:${sportVar(k)}"></i>${sportOf(k).label}</span>`).join("");
+    return `<section class="card cal">
+      <header class="card-head"><h3>Kalender</h3><div class="sport-legend">${legend}<span><i class="keymark"></i>Schlüssel</span></div></header>
+      <div class="cal-grid"><div class="cal-week cal-head"><div class="cal-h"></div>${head}</div>${rows}</div>
+      <p class="muted cal-hint">Tag antippen für Details.</p>
+    </section>`;
+  }
+
+  function openDay(d) {
+    const items = d.sessions.map((s) => sessionCard(s)).join("") + d.unplanned.map((u) => sessionCard({ ...u, title: u.name, detail: "ungeplant", status: "done" })).join("");
+    openSheet(`<h2>${dateFmt(d.date, { weekday: "long", day: "2-digit", month: "long" })}</h2>
+      ${d.note ? `<div class="adjusted">↻ ${esc(d.note)}</div>` : ""}
+      <div style="margin-top:8px">${items || '<div class="rest-day">Ruhetag</div>'}</div>`);
+  }
+
+  function renderToday() {
+    $("#view-today").innerHTML = heroBand() + `<div class="home-grid">${dayCheck()}${weekDone()}</div>` + calendar()
+      + `<p class="muted stand">Stand ${new Date(DATA.generated_at).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" })} · Fitness ${de(DATA.metrics.ctl, 0)} · Ermüdung ${de(DATA.metrics.atl, 0)} · Umfangsfaktor ${Math.round((DATA.metrics.scale ?? 1) * 100)} %</p>`;
+    $("#view-today").onclick = (e) => {
+      const act = e.target.closest("[data-act]");
+      if (act) return openActivity(DATA.activities[+act.dataset.act]);
+      const cell = e.target.closest(".cal-cell");
+      if (cell) openDay(DATA.calendar[+cell.dataset.w].days[+cell.dataset.d]);
+    };
+    $("#view-today").onkeydown = (e) => { if (e.key === "Enter" && e.target.classList.contains("cal-cell")) e.target.click(); };
   }
 
   function renderWeek() {
@@ -187,7 +316,7 @@
     const days = wk.days.map((d) => {
       const items = d.sessions.map((s) => {
         const sp = SPORT[s.sport] || SPORT.other;
-        return `<div class="mini ${s.sport === "sail" ? "sail" : ""} ${s.status === "missed" ? "missed" : ""}">
+        return `<div class="mini ${s.sport === "sail" ? "sail" : ""} ${s.status === "missed" ? "missed" : ""}" style="--sc:${sportVar(s.sport)}">
           <div class="l"><div class="t">${sp.icon} ${esc(s.title)} ${s.key ? '<span class="badge key">S</span>' : ""}${s.optional ? ' <span class="badge opt">opt.</span>' : ""}</div>
           <div class="d">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}${s.adjusted ? " · ↻ angepasst" : ""}</div></div>
           ${stateLabel(s)}</div>`;
@@ -320,18 +449,21 @@
     const zoneColors = ["var(--accent-soft)", "var(--series-1)", "var(--series-4)", "var(--series-2)", "var(--critical)"];
     const zones = total ? `<div class="zones" role="img" aria-label="Herzfrequenzzonen">${z.map((v, i) => `<i style="width:${(v / total) * 100}%;background:${zoneColors[i]}" title="Z${i + 1}"></i>`).join("")}</div>
       <div class="zone-legend">${z.map((v, i) => `<span>Z${i + 1} ${Math.round((v / total) * 100)}%</span>`).join("")}</div>` : "";
+    openSheet(`<div style="display:flex;justify-content:space-between;gap:12px;align-items:start">
+        <div><h2>${esc(a.headline || a.name)}</h2><div class="muted" style="font-size:13px">${esc(a.name)} · ${new Date(a.start.replace(" ", "T")).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" })}</div></div>
+        ${scoreBadge(a.score)}</div>
+      ${zones}
+      <div class="md" style="margin-top:12px">${a.lines.map((l) => `<p>${md(l)}</p>`).join("")}</div>
+      ${a.tips.length ? `<ul>${a.tips.map((t) => `<li>${md(t)}</li>`).join("")}</ul>` : ""}`);
+  }
+
+  function openSheet(html) {
     const back = document.createElement("div");
     back.className = "sheet-backdrop";
     const sheet = document.createElement("div");
     sheet.className = "sheet";
     sheet.setAttribute("role", "dialog");
-    sheet.innerHTML = `<div class="grab"></div>
-      <div style="display:flex;justify-content:space-between;gap:12px;align-items:start">
-        <div><h2>${esc(a.headline || a.name)}</h2><div class="muted" style="font-size:13px">${esc(a.name)} · ${new Date(a.start.replace(" ", "T")).toLocaleString("de-DE", { dateStyle: "medium", timeStyle: "short" })}</div></div>
-        ${scoreBadge(a.score)}</div>
-      ${zones}
-      <div class="md" style="margin-top:12px">${a.lines.map((l) => `<p>${md(l)}</p>`).join("")}</div>
-      ${a.tips.length ? `<ul>${a.tips.map((t) => `<li>${md(t)}</li>`).join("")}</ul>` : ""}`;
+    sheet.innerHTML = `<div class="grab"></div>${html}`;
     const onKey = (e) => { if (e.key === "Escape") close(); };
     const close = () => { back.remove(); sheet.remove(); document.removeEventListener("keydown", onKey); };
     back.onclick = close;
@@ -533,7 +665,7 @@
 
   function render() {
     const g = DATA.goal;
-    $("#title").textContent = `Hallo ${DATA.athlete}`;
+    $("#title").textContent = "HM Coach";
     $("#subtitle").textContent = g.week_no
       ? `${DATA.week.phase_label} · Woche ${g.week_no} von ${g.weeks_total}`
       : `Plan startet am ${dateFmt(g.plan_start, { day: "2-digit", month: "2-digit" })}`;
@@ -555,6 +687,6 @@
   window.addEventListener("resize", () => { clearTimeout(resizeTimer); resizeTimer = setTimeout(() => DATA && renderers[current](), 150); });
   document.addEventListener("visibilitychange", () => { if (document.visibilityState === "visible" && DATA) boot(); });
 
-  if ("serviceWorker" in navigator && location.protocol === "https:") navigator.serviceWorker.register("sw.js").catch(() => {});
+  if ("serviceWorker" in navigator && location.protocol === "https:" && !window.__COACH_DEMO__) navigator.serviceWorker.register("sw.js").catch(() => {});
   boot();
 })();

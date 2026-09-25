@@ -338,15 +338,17 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
 
     monday = monday_of(today)
     week = next((w for w in plan if w["start"] == monday.isoformat()), None)
-    week_days = []
-    for i in range(7):
-        d = monday + timedelta(days=i)
+    def day_view(d: date) -> dict:
         iso = d.isoformat()
         sessions = [session_view(s) for s in effective_sessions(plan_days, state, iso)]
-        extra = [{"id": a["id"], "name": a["name"], "sport": a["sport"], "score": None}
-                 for a in acts.values() if a["date"] == iso and evals.get(a["id"], {}).get("session_id") is None]
-        week_days.append({"date": iso, "weekday": WEEKDAYS[i], "sessions": sessions, "unplanned": extra,
-                          "note": state["day_overrides"].get(iso, {}).get("note")})
+        extra = [{"id": a["id"], "name": a["name"], "sport": a["sport"], "score": evals.get(a["id"], {}).get("score"),
+                  "distance_km": round(a.get("distance_m", 0) / 1000, 1), "duration_min": round(a.get("duration_s", 0) / 60)}
+                 for a in sorted(acts.values(), key=lambda a: a["start"])
+                 if a["date"] == iso and evals.get(a["id"], {}).get("session_id") is None]
+        return {"date": iso, "weekday": WEEKDAYS[d.weekday()], "sessions": sessions, "unplanned": extra,
+                "note": state["day_overrides"].get(iso, {}).get("note")}
+
+    week_days = [day_view(monday + timedelta(days=i)) for i in range(7)]
 
     def actual_week(start: str) -> dict:
         s = date.fromisoformat(start)
@@ -375,6 +377,23 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
         if status != "future":
             item["actual"] = actual_week(w["start"])
         plan_view.append(item)
+
+    # Calendar: last week, this week and the next three.
+    calendar = []
+    for k in range(-1, 4):
+        start = monday + timedelta(weeks=k)
+        pw = next((w for w in plan if w["start"] == start.isoformat()), None)
+        calendar.append({
+            "start": start.isoformat(),
+            "phase": pw["phase"] if pw else None,
+            "phase_label": pw["phase_label"] if pw else "Vorbereitung",
+            "deload": pw["deload"] if pw else False,
+            "sailing_days": pw["sailing_days"] if pw else 0,
+            "planned_km": pw["run_km"] if pw else None,
+            "planned_h": pw["hours"] if pw else None,
+            "actual": actual_week(start.isoformat()) if start <= monday else None,
+            "days": [day_view(start + timedelta(days=i)) for i in range(7)],
+        })
 
     # Weekly volume history incl. weeks before the plan started.
     history = []
@@ -422,6 +441,7 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
                  "deload": week["deload"] if week else False, "planned_km": week["run_km"] if week else 0,
                  "planned_h": week["hours"] if week else 0, "actual": actual_week(monday.isoformat()), "days": week_days},
         "plan": plan_view,
+        "calendar": calendar,
         "history": history,
         "pmc": series[-120:],
         "metrics": {**{k: v for k, v in state["metrics"].items() if k != "updated"}, "ctl": last["ctl"], "atl": last["atl"],
@@ -546,7 +566,7 @@ def cmd_login(args) -> int:
     state_dir = Path(args.state_dir)
     write_blob(state_dir / "tokens", {"tokens": garmin_source.dump_tokens(client), "saved": datetime.now().isoformat()}, passphrase)
     (state_dir / "login_failed").unlink(missing_ok=True)
-    notify.send("✅ Garmin verbunden", "Die Anmeldung hat geklappt. Der Coach gleicht ab jetzt alle 30 Minuten ab.", tags=["white_check_mark"])
+    notify.send("Garmin verbunden", "Die Anmeldung hat geklappt. Der Coach gleicht ab jetzt alle 30 Minuten ab.", tags=["white_check_mark"])
     print("[coach] Garmin login ok, tokens stored", file=sys.stderr)
     return 0
 

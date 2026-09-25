@@ -49,7 +49,7 @@ def ask_for_code() -> str:
     if not os.getenv("NTFY_TOPIC"):
         raise RuntimeError("Garmin verlangt einen Code, aber NTFY_TOPIC ist nicht gesetzt.")
     notify.send(
-        "🔐 Garmin-Code benötigt",
+        "Garmin-Code benötigt",
         "Garmin hat dir gerade einen **6-stelligen Code** per E-Mail/SMS geschickt.\n"
         "Tippe auf **Code senden**, gib nur die 6 Ziffern ein und schick sie ab. Du hast 10 Minuten.",
         tags=["key"], priority=5,
