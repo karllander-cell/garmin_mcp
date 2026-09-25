@@ -209,3 +209,85 @@ def test_sync_falls_back_to_password_login(tmp_path, monkeypatch, cfg):
     rc = sync.main(["sync", "--state-dir", str(tmp_path / "st"), "--site-dir", str(tmp_path / "site"), "--no-push"])
     assert rc == 0
     assert (tmp_path / "site" / "data.enc").exists()
+
+
+# ---------------------------------------------------------------- plan changes from the dashboard
+
+def _build_week(plan):
+    w = next(w for w in plan if w["phase"] == "build" and not w["sailing_days"] and not w["deload"] and not w["reentry"])
+    days = {}
+    for s in w["sessions"]:
+        days.setdefault(s["date"], []).append(s)
+    return w, days
+
+
+def test_skip_key_run_moves_with_gap(plan):
+    from garmin_mcp.coach.commands import Editor
+
+    w, days = _build_week(plan)
+    tue = date.fromisoformat(w["start"]) + timedelta(days=1)
+    key = next(s for s in days[tue.isoformat()] if s.get("key"))
+    ed = Editor(days, today=tue)
+    line = ed.apply({"type": "skip", "date": tue.isoformat(), "session_id": key["id"], "mode": "move"})
+    assert "→" in line or "entfällt" in line
+    assert not any(s["id"] == key["id"] for s in ed.days[tue.isoformat()])
+    moved = [(d, s) for d, ss in ed.days.items() for s in ss if s.get("adjusted", "").startswith("Von Dienstag")]
+    if moved:
+        d = date.fromisoformat(moved[0][0])
+        assert d > tue
+
+
+def test_limit_time_keeps_key_run_shortened(plan):
+    from garmin_mcp.coach.commands import Editor
+
+    w, days = _build_week(plan)
+    tue = (date.fromisoformat(w["start"]) + timedelta(days=1)).isoformat()
+    ed = Editor(days, today=date.fromisoformat(tue))
+    ed.apply({"type": "limit", "date": tue, "minutes": 45})
+    total = sum(s["duration_min"] for s in ed.days[tue])
+    assert total <= 45
+    assert all(s["sport"] != "strength" for s in ed.days[tue])
+
+
+def test_day_off_and_feel_bad_and_past_ignored(plan):
+    from garmin_mcp.coach.commands import Editor
+
+    w, days = _build_week(plan)
+    thu = date.fromisoformat(w["start"]) + timedelta(days=3)
+    ed = Editor(days, today=thu)
+    ed.apply({"type": "day_off", "date": thu.isoformat()})
+    assert not any(s["sport"] != "sail" for s in ed.days[thu.isoformat()])
+    assert ed.apply({"type": "day_off", "date": (thu - timedelta(days=2)).isoformat()}) is None
+    sun = (thu + timedelta(days=3)).isoformat()
+    ed.apply({"type": "feel_bad", "date": sun})
+    assert all(not s.get("key") or s["profile"] == "easy" for s in ed.days[sun])
+
+
+def test_fetch_ignores_foreign_messages(monkeypatch):
+    from garmin_mcp.coach import commands
+
+    monkeypatch.setenv("NTFY_TOPIC", "t")
+    good = crypto.encrypt_json({"type": "limit", "date": "2027-01-05", "minutes": 30}, "pw")
+    bad = crypto.encrypt_json({"type": "day_off", "date": "2027-01-05"}, "other")
+    lines = "\n".join(json.dumps({"event": "message", "id": f"m{i}", "message": m}) for i, m in enumerate([bad, "hello", good]))
+    monkeypatch.setattr(commands.requests, "get", lambda *a, **k: type("R", (), {"text": lines, "raise_for_status": lambda self: None})())
+    state = {}
+    cmds = commands.fetch(state, "pw")
+    assert cmds == [{"type": "limit", "date": "2027-01-05", "minutes": 30}]
+    assert state["cmd_since"] == "m2"
+
+
+def test_user_override_survives_daily_adaptation(cfg):
+    now = datetime(2027, 1, 12, 5, 30)
+    client = FakeGarmin(cfg, now)
+    state, _ = run_sync(cfg, client, None, now - timedelta(days=1), push=False)
+    tue = now.date().isoformat()
+    state["readiness"].pop(tue, None)
+    state, view = run_sync(cfg, client, state, now.replace(hour=4), push=False,
+                           cmds=[{"type": "day_off", "date": tue, "ts": 1}])
+    assert state["day_overrides"][tue]["user"]
+    client.now = now.replace(hour=9)
+    state, view = run_sync(cfg, client, state, client.now, push=False)
+    assert state["day_overrides"][tue]["user"]
+    assert not any(s["sport"] == "run" for s in state["day_overrides"][tue]["sessions"])
+    assert 1 in view["applied_cmds"]

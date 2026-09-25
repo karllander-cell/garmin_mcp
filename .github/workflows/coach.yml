@@ -1,12 +1,12 @@
 name: Garmin Coach
 
-# Syncs Garmin every 30 minutes (06–23 Uhr), adapts the plan, rates new
+# Syncs Garmin every 15 minutes (06–23 Uhr), adapts the plan, rates new
 # sessions, pushes to ntfy and redeploys the dashboard to GitHub Pages.
 # Scheduled runs only fire from the default branch.
 
 on:
   schedule:
-    - cron: "*/30 4-21 * * *"
+    - cron: "*/15 4-21 * * *"
   workflow_dispatch:
   push:
     branches: [main, master]

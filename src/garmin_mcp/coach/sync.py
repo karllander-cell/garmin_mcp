@@ -13,7 +13,7 @@ from datetime import date, datetime, timedelta
 from pathlib import Path
 from zoneinfo import ZoneInfo
 
-from . import adapt, crypto, garmin_source, notify
+from . import adapt, commands, crypto, garmin_source, notify
 from .config import Config, load_config
 from .evaluate import SPORT_LABELS, evaluate, match_session
 from .load import acwr, daily_loads, pmc
@@ -198,13 +198,36 @@ def daily_adaptation(cfg: Config, state: dict, today: date, now: datetime, plan_
     state["readiness"][iso] = status
     for d in sorted(state["readiness"])[:-60]:
         state["readiness"].pop(d)
-    overrides = adapt.adapt_day(today, plan_days, status)
+    week = {(monday_of(today) + timedelta(days=i)).isoformat() for i in range(7)}
+    effective = {d: effective_sessions(plan_days, state, d) for d in week}
+    overrides = adapt.adapt_day(today, effective, status)
     for d, ov in overrides.items():
+        if (state["day_overrides"].get(d) or {}).get("user"):
+            continue  # the athlete already rearranged this day by hand
         state["day_overrides"][d] = ov
         if d == iso and ov.get("note"):
             log(state, now, "tag", f"{WEEKDAYS_LONG[today.weekday()]}: {ov['note']}")
     for d in sorted(state["day_overrides"])[:-60]:
         state["day_overrides"].pop(d)
+
+
+def apply_commands(state: dict, plan_days: dict, today: date, now: datetime, cmds: list[dict], push: bool) -> None:
+    if not cmds:
+        return
+    span = [(today - timedelta(days=1) + timedelta(days=i)).isoformat() for i in range(60)]
+    effective = {d: effective_sessions(plan_days, state, d) for d in span}
+    editor = commands.Editor(effective, today)
+    for cmd in cmds:
+        editor.apply(cmd)
+        if cmd.get("ts"):
+            state.setdefault("applied_cmds", []).append(cmd["ts"])
+    state["applied_cmds"] = state.get("applied_cmds", [])[-50:]
+    for iso in editor.changed:
+        state["day_overrides"][iso] = {"sessions": editor.days[iso], "note": "Von dir angepasst", "user": True}
+    for line in editor.notes:
+        log(state, now, "wunsch", line)
+    if push and editor.notes:
+        notify.send("Plan angepasst", "\n".join(f"• {n}" for n in editor.notes), tags=["arrows_counterclockwise"])
 
 
 def rate_activities(cfg: Config, state: dict, plan_days: dict, series: list[dict], now: datetime, push: bool) -> None:
@@ -452,6 +475,8 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
         "sailing": [{"title": b["title"], "start": b["start"].isoformat(), "end": b["end"].isoformat(), "tentative": b["tentative"],
                      "regatta_from": b["regatta_from"].isoformat() if b["regatta_from"] else None} for b in cfg.sailing],
         "activities": activities,
+        "commands": {"server": (os.getenv("NTFY_SERVER") or "https://ntfy.sh").rstrip("/"), "topic": commands.command_topic()},
+        "applied_cmds": state.get("applied_cmds", [])[-50:],
         "log": list(reversed(state["log"]))[:25],
         "last_week": state.get("last_week_stats"),
     }
@@ -459,7 +484,8 @@ def build_view(cfg: Config, state: dict, today: date, now: datetime, plan: list[
 
 # --------------------------------------------------------------------------- entry points
 
-def run_sync(cfg: Config, client, state: dict | None, now: datetime, push: bool = True) -> tuple[dict, dict]:
+def run_sync(cfg: Config, client, state: dict | None, now: datetime, push: bool = True,
+             cmds: list[dict] | None = None) -> tuple[dict, dict]:
     today = now.date()
     state = state or new_state(cfg, now)
     sync_garmin(client, cfg, state, today)
@@ -468,6 +494,7 @@ def run_sync(cfg: Config, client, state: dict | None, now: datetime, push: bool 
     plan = current_plan(cfg, state, today)
     plan_days = sessions_by_day(plan)
     daily_adaptation(cfg, state, today, now, plan_days, series)
+    apply_commands(state, plan_days, today, now, cmds or [], push)
     rate_activities(cfg, state, plan_days, series, now, push)
     if push:
         morning_brief(cfg, state, today, now, plan_days, series)
@@ -517,8 +544,9 @@ def cmd_sync(args) -> int:
         return 1
     (state_dir / "login_failed").unlink(missing_ok=True)
 
-    state = read_blob(state_dir / "state", passphrase)
-    state, view = run_sync(cfg, client, state, now, push=not args.no_push)
+    state = read_blob(state_dir / "state", passphrase) or new_state(cfg, now)
+    cmds = commands.fetch(state, passphrase) if passphrase else []
+    state, view = run_sync(cfg, client, state, now, push=not args.no_push, cmds=cmds)
     write_blob(state_dir / "state", state, passphrase)
     if passphrase:
         write_blob(state_dir / "tokens", {"tokens": garmin_source.dump_tokens(client), "saved": now.isoformat()}, passphrase)
@@ -566,7 +594,7 @@ def cmd_login(args) -> int:
     state_dir = Path(args.state_dir)
     write_blob(state_dir / "tokens", {"tokens": garmin_source.dump_tokens(client), "saved": datetime.now().isoformat()}, passphrase)
     (state_dir / "login_failed").unlink(missing_ok=True)
-    notify.send("Garmin verbunden", "Die Anmeldung hat geklappt. Der Coach gleicht ab jetzt alle 30 Minuten ab.", tags=["white_check_mark"])
+    notify.send("Garmin verbunden", "Die Anmeldung hat geklappt. Der Coach gleicht ab jetzt alle 15 Minuten ab.", tags=["white_check_mark"])
     print("[coach] Garmin login ok, tokens stored", file=sys.stderr)
     return 0
 

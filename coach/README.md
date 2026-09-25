@@ -14,9 +14,10 @@ Segeln hat Priorität – die Termine aus der *Team HL Planungstabelle 26/27* si
 | **Tempo** | Trainingstempi kommen aus dem VDOT. Die Garmin-Laktatschwelle hebt den VDOT schrittweise an (Prognose im Dashboard). |
 | **Bewertung** | Jede neue Einheit wird mit der geplanten verglichen (Umfang, HF-Zonen, Training Effect, Tempo) → Score 0–100 + Tipps. |
 | **Push (ntfy)** | Nach jeder Einheit die Bewertung · morgens um 6 Uhr der Tagesplan mit Readiness-Ampel · sonntags 19 Uhr die Wochenbilanz. |
+| **Plan anpassen** | Im Dashboard einen Tag antippen → *Verschieben*, *Streichen*, *Nur X Min Zeit*, *Fühle mich nicht gut* oder *Tag fällt aus*. Der Befehl geht verschlüsselt an das ntfy-Thema `<NTFY_TOPIC>-plan`; beim nächsten Abgleich baut der Coach die Woche um und schickt eine Push. Deine Änderungen haben Vorrang vor der automatischen Tagesanpassung. |
 | **Dashboard** (`dashboard/`) | PWA für den Homescreen: Heute, Woche, Plan, Analyse (Fitness/Ermüdung, Frische, HRV, Schlaf), Einheiten. Daten sind mit deiner Passphrase verschlüsselt (AES-GCM). |
 
-Alles läuft alle 30 Minuten (06–23 Uhr) in GitHub Actions (`.github/workflows/coach.yml`).
+Alles läuft alle 15 Minuten (06–23 Uhr) in GitHub Actions (`.github/workflows/coach.yml`).
 
 ## Einrichtung (einmalig, geht komplett am iPad/Handy)
 

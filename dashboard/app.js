@@ -23,6 +23,7 @@
   const LEVEL = { green: ["var(--good)", "Bereit"], yellow: ["var(--warning)", "Vorsicht"], red: ["var(--critical)", "Erholung"] };
 
   let DATA = null;
+  let PASS = null;
 
   // ------------------------------------------------------------------ data & crypto
   async function decrypt(envelope, passphrase) {
@@ -49,6 +50,7 @@
     try {
       const env = await fetchJSON("data.enc");
       const pass = passphrase || store.get("coach-pass");
+      PASS = pass;
       if (!pass) throw Object.assign(new Error("locked"), { locked: true });
       return await decrypt(env, pass);
     } catch (err) {
@@ -188,7 +190,7 @@
         <div class="ti-body"><div class="ti-t">${esc(s.title)}${s.key ? ' <span class="badge key">Schlüssel</span>' : ""}${s.optional ? ' <span class="badge opt">optional</span>' : ""}</div>
           <div class="ti-d">${esc(s.detail)}</div>
           <div class="ti-m">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
-          ${s.adjusted ? `<div class="adjusted">↻ ${esc(s.adjusted)}</div>` : ""}</div>
+          ${pendingFor(t.date, s.id) ? `<div class="adjusted pending">⏳ Änderung gesendet – wird angepasst</div>` : s.adjusted ? `<div class="adjusted">↻ ${esc(s.adjusted)}</div>` : ""}</div>
         <div>${stateLabel(s)}</div></div>`;
     }).join("") : `<div class="rest-day">🛌 Ruhetag – Beine hoch, gut essen, früh schlafen.</div>`;
     return `<section class="card daycheck">
@@ -216,6 +218,7 @@
           <p class="dc-verdict" style="--lc:${lvlCol}">${bodyText}</p>
           ${t.note ? `<div class="adjusted">↻ ${esc(t.note)}</div>` : ""}
           <div class="today-list">${sessions}</div>
+          ${t.sessions.some((s) => s.status !== "done" && s.sport !== "sail") ? `<button class="btn-s adjust-today" data-openday="${t.date}">✎ Heute anpassen</button>` : ""}
           ${t.next ? `<div class="dc-next">Als Nächstes → ${esc(t.next)}</div>` : ""}
         </div>
       </div>
@@ -265,7 +268,7 @@
       const size = s.distance_km ? `${de(s.distance_km)} km` : `${s.duration_min}'`;
       const cls = [s.status || (done ? "done" : ""), s.key ? "key" : "", s.optional ? "opt" : ""].join(" ");
       const mark = s.status === "done" || done ? (s.score != null ? `<b class="cs ${scoreClass(s.score)}">${s.score}</b>` : `<b class="cs">✓</b>`) : s.status === "missed" ? `<b class="cs miss">✕</b>` : "";
-      return `<div class="chip-s ${cls}" style="--sc:${sportVar(s.sport)}"><span class="ci">${sp.icon}</span><span class="ct">${esc(s.title || s.name)}</span><span class="cz num">${size}</span>${mark}</div>`;
+      return `<div class="chip-s ${cls} ${s.date && pendingFor(s.date, s.id) ? "pending" : ""}" style="--sc:${sportVar(s.sport)}"><span class="ci">${sp.icon}</span><span class="ct">${esc(s.title || s.name)}</span><span class="cz num">${size}</span>${mark}</div>`;
     };
     const rows = DATA.calendar.map((w, wi) => {
       const cells = w.days.map((d, di) => {
@@ -289,11 +292,100 @@
     </section>`;
   }
 
+  // ------------------------------------------------------------------ plan changes ("Plan anpassen")
+  function pendingList() {
+    let list = [];
+    try { list = JSON.parse(store.get("coach-pending") || "[]"); } catch { list = []; }
+    const applied = new Set(DATA?.applied_cmds || []);
+    return list.filter((c) => !applied.has(c.ts) && Date.now() - c.ts < 6 * 3600e3);
+  }
+  const pendingFor = (date, sid) => pendingList().find((c) => c.date === date && (!c.session_id || c.session_id === sid));
+
+  async function encryptJSON(obj, passphrase) {
+    const enc = new TextEncoder();
+    const salt = crypto.getRandomValues(new Uint8Array(16)), iv = crypto.getRandomValues(new Uint8Array(12));
+    const base = await crypto.subtle.importKey("raw", enc.encode(passphrase), "PBKDF2", false, ["deriveKey"]);
+    const key = await crypto.subtle.deriveKey({ name: "PBKDF2", salt, iterations: 250000, hash: "SHA-256" }, base, { name: "AES-GCM", length: 256 }, false, ["encrypt"]);
+    const ct = new Uint8Array(await crypto.subtle.encrypt({ name: "AES-GCM", iv }, key, enc.encode(JSON.stringify(obj))));
+    const b64 = (u) => btoa(String.fromCharCode(...u));
+    return JSON.stringify({ v: 1, kdf: "PBKDF2-SHA256", iter: 250000, salt: b64(salt), iv: b64(iv), ct: b64(ct) });
+  }
+
+  function toast(text, kind = "") {
+    const t = document.createElement("div");
+    t.className = `toast ${kind}`;
+    t.setAttribute("role", "status");
+    t.textContent = text;
+    document.body.appendChild(t);
+    setTimeout(() => t.remove(), 4200);
+  }
+
+  async function sendCommand(cmd, label) {
+    cmd.ts = Date.now();
+    const demo = !!window.__COACH_DEMO__ || new URLSearchParams(location.search).has("demo") || !DATA.commands?.topic;
+    try {
+      if (!demo) {
+        if (!PASS) throw new Error("Bitte zuerst mit deiner Passphrase entsperren.");
+        const body = await encryptJSON(cmd, PASS);
+        const r = await fetch(`${DATA.commands.server}/${DATA.commands.topic}`, { method: "POST", body });
+        if (!r.ok) throw new Error(`Senden fehlgeschlagen (${r.status}).`);
+      }
+      const list = pendingList();
+      list.push({ ts: cmd.ts, date: cmd.date, session_id: cmd.session_id || null, type: cmd.type, label });
+      store.set("coach-pending", JSON.stringify(list));
+      document.querySelector(".sheet-backdrop")?.click();
+      renderers[current]();
+      toast(demo ? `Vorschau: „${label}“ – im echten Dashboard wird der Plan jetzt angepasst.` : `Gesendet: ${label}. Der Plan wird in bis zu 15 Minuten angepasst, du bekommst eine Push.`, "ok");
+    } catch (err) {
+      toast(err.message || "Senden fehlgeschlagen.", "err");
+    }
+  }
+
+  function changePanel(d) {
+    const todayIso = DATA.today.date;
+    if (d.date < todayIso) return "";
+    const open = d.sessions.filter((s) => s.status !== "done" && s.sport !== "sail");
+    if (!open.length) return "";
+    const perSession = open.map((s) => `<div class="cp-row" style="--sc:${sportVar(s.sport)}">
+        <span class="cp-name">${sportOf(s.sport).icon} ${esc(s.title)}</span>
+        <span class="cp-btns"><button class="btn-s" data-cmd="move" data-sid="${esc(s.id)}" data-label="${esc(s.title)} verschieben">Verschieben</button>
+        <button class="btn-s ghost" data-cmd="drop" data-sid="${esc(s.id)}" data-label="${esc(s.title)} streichen">Streichen</button></span></div>`).join("");
+    const feel = d.date === todayIso || d.date === addDays(todayIso, 1);
+    return `<div class="change-panel">
+      <h4>Plan anpassen</h4>
+      <p class="muted">Sag dem Coach, was ${d.date === todayIso ? "heute" : "an diesem Tag"} nicht klappt. Er baut die Woche um.</p>
+      <div class="cp-block"><div class="cp-label">Schaffe ich nicht</div>${perSession}</div>
+      <div class="cp-block"><div class="cp-label">Nur wenig Zeit</div>
+        <div class="cp-time">${[20, 30, 45, 60, 90].map((m) => `<button class="btn-s time" data-cmd="limit" data-min="${m}" data-label="Nur ${m} Min Zeit">${m}'</button>`).join("")}</div></div>
+      <div class="cp-block cp-day">
+        ${feel ? `<button class="btn-s warn" data-cmd="feel_bad" data-label="Fühle mich nicht gut">🤒 Fühle mich nicht gut</button>` : ""}
+        <button class="btn-s ghost" data-cmd="day_off" data-label="Ganzer Tag fällt aus">📵 Ganzer Tag fällt aus</button>
+      </div>
+      <label class="cp-note-l" for="cp-note">Notiz (optional)</label>
+      <input id="cp-note" class="cp-note" type="text" maxlength="80" placeholder="z. B. Uni bis 19 Uhr, Knie zwickt …">
+    </div>`;
+  }
+
   function openDay(d) {
     const items = d.sessions.map((s) => sessionCard(s)).join("") + d.unplanned.map((u) => sessionCard({ ...u, title: u.name, detail: "ungeplant", status: "done" })).join("");
     openSheet(`<h2>${dateFmt(d.date, { weekday: "long", day: "2-digit", month: "long" })}</h2>
       ${d.note ? `<div class="adjusted">↻ ${esc(d.note)}</div>` : ""}
-      <div style="margin-top:8px">${items || '<div class="rest-day">Ruhetag</div>'}</div>`);
+      <div style="margin-top:8px">${items || '<div class="rest-day">Ruhetag</div>'}</div>
+      ${changePanel(d)}`);
+    const sheet = document.querySelector(".sheet");
+    sheet.addEventListener("click", (e) => {
+      const b = e.target.closest("[data-cmd]");
+      if (!b) return;
+      const note = (sheet.querySelector("#cp-note")?.value || "").trim();
+      const kind = b.dataset.cmd;
+      const cmd = kind === "move" || kind === "drop"
+        ? { type: "skip", mode: kind, session_id: b.dataset.sid, date: d.date }
+        : kind === "limit" ? { type: "limit", minutes: +b.dataset.min, date: d.date } : { type: kind, date: d.date };
+      if (note) cmd.note = note;
+      sheet.querySelectorAll("[data-cmd]").forEach((x) => (x.disabled = true));
+      b.textContent = "Sende …";
+      sendCommand(cmd, b.dataset.label);
+    });
   }
 
   function upcoming() {
@@ -307,7 +399,7 @@
           <div class="up-t">${esc(s.title)}</div>
           <div class="up-d">${esc(s.detail)}</div>
           <div class="up-m num">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
-          ${s.adjusted ? `<div class="up-adj">↻ angepasst</div>` : ""}</div>`).join("");
+          ${pendingFor(d.date, s.id) ? `<div class="up-adj pending">⏳ wird angepasst</div>` : s.adjusted ? `<div class="up-adj">↻ angepasst</div>` : ""}</div>`).join("");
       const doneNote = done.length ? `<div class="up-done">✓ ${done.length} erledigt</div>` : "";
       const label = i === 0 ? "Heute" : i === 1 ? "Morgen" : weekday(d.date, "long");
       return `<div class="up-day ${i === 0 ? "today" : ""}" data-day="${d.date}">
@@ -330,6 +422,8 @@
       if (act) return openActivity(DATA.activities[+act.dataset.act]);
       const cell = e.target.closest(".cal-cell");
       if (cell) return openDay(DATA.calendar[+cell.dataset.w].days[+cell.dataset.d]);
+      const od = e.target.closest("[data-openday]");
+      if (od) return openDay(DATA.calendar.flatMap((w) => w.days).find((d) => d.date === od.dataset.openday));
       const up = e.target.closest(".up-day");
       if (up) openDay(DATA.calendar.flatMap((w) => w.days).find((d) => d.date === up.dataset.day));
     };
