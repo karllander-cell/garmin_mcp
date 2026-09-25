@@ -149,7 +149,7 @@
     return `<section class="hero-band">
       <div class="hero-main">
         <div class="eyebrow">${g.week_no ? `Woche ${g.week_no} von ${g.weeks_total} · ${esc(DATA.week.phase_label)}${DATA.week.deload ? " · Entlastung" : ""}` : `Plan startet am ${dateFmt(g.plan_start, { day: "2-digit", month: "2-digit" })}`}</div>
-        <h2>Hallo ${esc(DATA.athlete)}</h2>
+        <h2>Auf dem Weg zu ${esc(g.target)}</h2>
         <div class="plan-strip" role="img" aria-label="Planfortschritt">${segs}</div>
         <div class="plan-strip-legend"><span>${dateFmt(DATA.plan[0].start, { day: "2-digit", month: "2-digit" })}</span><span>🏁 ${dateFmt(g.date, { day: "2-digit", month: "2-digit" })}</span></div>
       </div>
@@ -296,14 +296,42 @@
       <div style="margin-top:8px">${items || '<div class="rest-day">Ruhetag</div>'}</div>`);
   }
 
+  function upcoming() {
+    const todayIso = DATA.today.date;
+    const days = DATA.calendar.flatMap((w) => w.days).filter((d) => d.date >= todayIso).slice(0, 7);
+    const cols = days.map((d, i) => {
+      const open = d.sessions.filter((s) => s.status !== "done");
+      const done = d.sessions.filter((s) => s.status === "done");
+      const items = open.map((s) => `<div class="up-item ${s.key ? "key" : ""} ${s.optional ? "opt" : ""}" style="--sc:${sportVar(s.sport)}">
+          <div class="up-top"><span class="up-ico">${sportOf(s.sport).icon}</span><span class="up-sport">${sportOf(s.sport).label}</span>${s.key ? '<span class="up-key" title="Schlüsseleinheit">◆</span>' : ""}</div>
+          <div class="up-t">${esc(s.title)}</div>
+          <div class="up-d">${esc(s.detail)}</div>
+          <div class="up-m num">${esc(sizeOf(s))}${s.pace_label && s.sport === "run" && s.profile !== "hills" ? " · " + esc(s.pace_label) : ""}</div>
+          ${s.adjusted ? `<div class="up-adj">↻ angepasst</div>` : ""}</div>`).join("");
+      const doneNote = done.length ? `<div class="up-done">✓ ${done.length} erledigt</div>` : "";
+      const label = i === 0 ? "Heute" : i === 1 ? "Morgen" : weekday(d.date, "long");
+      return `<div class="up-day ${i === 0 ? "today" : ""}" data-day="${d.date}">
+        <div class="up-head"><b>${label}</b><span>${dateFmt(d.date, { day: "2-digit", month: "2-digit" })}</span></div>
+        ${items || (done.length ? "" : '<div class="up-rest">Ruhetag</div>')}${doneNote}</div>`;
+    }).join("");
+    const plannedKm = days.flatMap((d) => d.sessions).filter((s) => s.sport === "run" && !s.optional && s.status !== "done").reduce((a, s) => a + (s.distance_km || 0), 0);
+    const keys = days.flatMap((d) => d.sessions).filter((s) => s.key && s.status !== "done").length;
+    return `<section class="card upcoming">
+      <header class="card-head"><h3>Anstehende Trainings</h3><span class="muted">nächste 7 Tage · ${de(plannedKm, 0)} km Laufen · ${keys} Schlüsseleinheit${keys === 1 ? "" : "en"}</span></header>
+      <div class="up-strip">${cols}</div>
+    </section>`;
+  }
+
   function renderToday() {
-    $("#view-today").innerHTML = heroBand() + `<div class="home-grid">${dayCheck()}${weekDone()}</div>` + calendar()
+    $("#view-today").innerHTML = upcoming() + `<div class="home-grid">${dayCheck()}${weekDone()}</div>` + calendar()
       + `<p class="muted stand">Stand ${new Date(DATA.generated_at).toLocaleString("de-DE", { dateStyle: "short", timeStyle: "short" })} · Fitness ${de(DATA.metrics.ctl, 0)} · Ermüdung ${de(DATA.metrics.atl, 0)} · Umfangsfaktor ${Math.round((DATA.metrics.scale ?? 1) * 100)} %</p>`;
     $("#view-today").onclick = (e) => {
       const act = e.target.closest("[data-act]");
       if (act) return openActivity(DATA.activities[+act.dataset.act]);
       const cell = e.target.closest(".cal-cell");
-      if (cell) openDay(DATA.calendar[+cell.dataset.w].days[+cell.dataset.d]);
+      if (cell) return openDay(DATA.calendar[+cell.dataset.w].days[+cell.dataset.d]);
+      const up = e.target.closest(".up-day");
+      if (up) openDay(DATA.calendar.flatMap((w) => w.days).find((d) => d.date === up.dataset.day));
     };
     $("#view-today").onkeydown = (e) => { if (e.key === "Enter" && e.target.classList.contains("cal-cell")) e.target.click(); };
   }
@@ -392,7 +420,22 @@
   }
 
   function renderAnalysis() {
-    $("#view-analysis").innerHTML = `
+    const paces = DATA.paces.map((p) => `<tr><td>${esc(p.label)}</td><td class="r num">${p.now}</td><td class="r num muted">${p.goal}</td></tr>`).join("");
+    const m = DATA.metrics;
+    $("#view-analysis").innerHTML = heroBand() + `
+      <div class="grid two" style="margin-bottom:12px">
+        <div class="card"><h3>Trainingstempo</h3><p class="hint">Aus deinem aktuellen VDOT ${de(DATA.goal.vdot)} – rechts dein Zielniveau</p>
+          <table><thead><tr><th>Bereich</th><th class="r">Jetzt /km</th><th class="r">Ziel /km</th></tr></thead><tbody>${paces}</tbody></table></div>
+        <div class="card"><h3>Leistungswerte</h3><p class="hint">Aus Garmin und deinem Training</p>
+          <div class="perf-kv">
+            <div><span>VO2max</span><b class="num">${m.vo2max ? de(m.vo2max) : "–"}</b></div>
+            <div><span>Laktatschwelle</span><b class="num">${m.lt_pace ? `${Math.floor(m.lt_pace / 60)}:${String(m.lt_pace % 60).padStart(2, "0")} /km` : "–"}</b></div>
+            <div><span>Schwellenpuls</span><b class="num">${m.lt_hr ?? "–"}${m.lt_hr ? " bpm" : ""}</b></div>
+            <div><span>Fitness (CTL)</span><b class="num">${de(m.ctl, 0)}</b></div>
+            <div><span>Ermüdung (ATL)</span><b class="num">${de(m.atl, 0)}</b></div>
+            <div><span>Belastungsquote</span><b class="num">${m.acwr ?? "–"}</b></div>
+          </div></div>
+      </div>
       <div class="card">
         <h3>Fitness & Ermüdung</h3><p class="hint">Trainingsbelastung der letzten 120 Tage (Garmin Load)</p>
         <div class="legend"><span><i style="background:var(--series-1)"></i>Fitness (CTL)</span><span><i style="background:var(--series-2)"></i>Ermüdung (ATL)</span></div>
