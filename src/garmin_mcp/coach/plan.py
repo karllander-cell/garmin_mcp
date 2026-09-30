@@ -326,6 +326,7 @@ def build_week(cfg: Config, weeks: list[dict], w: dict, paces: dict, scale: floa
         days[6].append(_other(d[6], "bike", "z2", "Rad locker – Regeneration", "Zone 1, lockeres Kurbeln nach dem langen Lauf", sun))
 
     sailing = _apply_sailing(cfg, d, days, paces)
+    _apply_manual_days(cfg, d, days, paces)
 
     sessions = [s for day in days for s in day]
     training = [s for s in sessions if s["sport"] != "sail" and not s.get("optional")]
@@ -344,6 +345,34 @@ def build_week(cfg: Config, weeks: list[dict], w: dict, paces: dict, scale: floa
         "sailing": sorted({b for b in sailing}),
         "sessions": sessions,
     }
+
+
+def _apply_manual_days(cfg: Config, d: list[date], days: list[list[dict]], paces: dict) -> None:
+    """Hand-planned days from ``manual_days`` in athlete.json win over the generated plan.
+
+    Each entry is ``{"mode": "replace"|"append", "sessions": [...]}``; a session
+    needs ``sport``, ``title`` and ``duration_min`` and may set ``profile``,
+    ``detail``, ``distance_km``, ``pace_key``, ``key`` and ``optional``.
+    """
+    for i, day in enumerate(d):
+        entry = cfg.manual_days.get(day.isoformat())
+        if not entry:
+            continue
+        new = []
+        for n, spec in enumerate(entry.get("sessions", [])):
+            if spec["sport"] == "run" and spec.get("distance_km"):
+                s = _run(day, spec["title"], spec.get("detail", ""), spec["distance_km"], spec.get("pace_key", "easy"),
+                         spec.get("profile", "easy"), paces, bool(spec.get("key")))
+                s["duration_min"] = spec.get("duration_min", s["duration_min"])
+            else:
+                s = _other(day, spec["sport"], spec.get("profile", spec["sport"]), spec["title"], spec.get("detail", ""), spec["duration_min"])
+                s["key"] = bool(spec.get("key"))
+            s["id"] = f"{s['id']}-m{n}"
+            if spec.get("optional"):
+                s["optional"] = True
+            s["adjusted"] = entry.get("note", "Von Hand angepasst")
+            new.append(s)
+        days[i] = new if entry.get("mode", "replace") == "replace" else days[i] + new
 
 
 def _sail(day: date, regatta: bool, title: str, tentative: bool) -> dict:

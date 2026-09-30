@@ -33,6 +33,12 @@
       "end": "2026-09-27"
     },
     {
+      "title": "J70 Junioren-Bundesliga",
+      "start": "2026-10-03",
+      "end": "2026-10-04",
+      "regatta_from": "2026-10-03"
+    },
+    {
       "title": "Training Vilamoura",
       "start": "2026-10-17",
       "end": "2026-11-01"
@@ -91,5 +97,120 @@
     "surplus_kcal": 500,
     "protein_g_per_kg": 2.0,
     "reminder_hour": 7
-  }
+  },
+  "manual_days": {
+    "2026-09-30": {
+      "note": "Woche umgestellt: 100 km Ausfahrt Do, J70-Bundesliga am WE",
+      "sessions": [
+        {
+          "sport": "strength",
+          "profile": "gym_b",
+          "title": "Kraft B – Schultern & Arme",
+          "duration_min": 60,
+          "detail": "Schulterdrücken 4×8, Seitheben 3×12, Face Pulls 3×15, Curls 3×10, French Press 3×10, Bi/Tri-Supersatz 2×12 – 2 Wdh. im Tank"
+        },
+        {
+          "sport": "strength",
+          "profile": "stabi",
+          "title": "Stabi – Rumpf & Hüfte",
+          "duration_min": 25,
+          "detail": "Plank 45'', Side Plank 30'' je Seite, Dead Bug 10, Pallof Press 10, Glute Bridge einbeinig 12 – 3 Runden"
+        },
+        {
+          "sport": "strength",
+          "profile": "mobility",
+          "title": "Mobility & Faszienrolle",
+          "duration_min": 15,
+          "optional": true,
+          "detail": "Hüftbeuger, Waden, Oberschenkel – Beine für die Ausfahrt morgen lockern"
+        }
+      ]
+    },
+    "2026-10-01": {
+      "note": "Woche umgestellt: 100 km Ausfahrt Do, J70-Bundesliga am WE",
+      "sessions": [
+        {
+          "sport": "bike",
+          "profile": "z2",
+          "title": "100 km Ausfahrt mit Freunden",
+          "duration_min": 210,
+          "detail": "Grundlage Zone 2, Anstiege ruhig treten, 60–80 g Kohlenhydrate pro Stunde + 500–750 ml pro Stunde trinken"
+        },
+        {
+          "sport": "strength",
+          "profile": "mobility",
+          "title": "Mobility nach der Ausfahrt",
+          "duration_min": 15,
+          "detail": "Hüfte, Rücken, Waden – danach Eiweiß + Kohlenhydrate essen"
+        }
+      ]
+    },
+    "2026-10-02": {
+      "note": "Woche umgestellt: 100 km Ausfahrt Do, J70-Bundesliga am WE",
+      "sessions": [
+        {
+          "sport": "strength",
+          "profile": "gym_a",
+          "title": "Kraft A – Brust & Rücken",
+          "duration_min": 60,
+          "detail": "Schwerpunkt Brust (Mo war Rücken): Bankdrücken 4×6–8, Schrägbank KH 3×10, Dips 3×8–10, Rudern KH 3×10, Face Pulls 3×15"
+        },
+        {
+          "sport": "run",
+          "profile": "easy",
+          "title": "Lockerer Lauf + Steigerungen",
+          "distance_km": 8.0,
+          "duration_min": 45,
+          "detail": "45' locker Zone 2, am Ende 6×20'' Steigerungen – nur wenn die Beine sich gut anfühlen",
+          "optional": true
+        }
+      ]
+    },
+    "2026-10-04": {
+      "mode": "append",
+      "note": "Optional nach dem zweiten Regattatag",
+      "sessions": [
+        {
+          "sport": "strength",
+          "profile": "gym_b",
+          "title": "Optional: Kraft B leicht (Oberkörper)",
+          "duration_min": 45,
+          "optional": true,
+          "detail": "Nur wenn du dich frisch fühlst: 3 Sätze je Übung, keine Beine – sonst lieber Sauna/Mobility und früh schlafen"
+        }
+      ]
+    }
+  },
+  "manual_activities": [
+    {
+      "date": "2026-09-28",
+      "sport": "strength",
+      "name": "Krafttraining Rücken (manuell)",
+      "duration_min": 60,
+      "time": "18:00"
+    },
+    {
+      "date": "2026-09-28",
+      "sport": "swim",
+      "name": "Schwimmen 2.800 m (manuell)",
+      "duration_min": 55,
+      "distance_km": 2.8,
+      "time": "16:00"
+    },
+    {
+      "date": "2026-09-29",
+      "sport": "run",
+      "name": "Lauf 8,5 km Z2 + 6×20'' (manuell)",
+      "duration_min": 50,
+      "distance_km": 8.5,
+      "time": "16:00"
+    },
+    {
+      "date": "2026-09-29",
+      "sport": "strength",
+      "name": "Beine + Stabi (manuell)",
+      "duration_min": 85,
+      "time": "18:00"
+    }
+  ]
 }

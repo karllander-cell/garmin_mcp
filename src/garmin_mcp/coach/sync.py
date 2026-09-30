@@ -120,6 +120,7 @@ def sync_garmin(client, cfg: Config, state: dict, today: date) -> None:
     since = today - timedelta(days=120 if not acts else 3)
     for act in garmin_source.fetch_activities(client, since, today):
         acts[act["id"]] = act
+    merge_manual_activities(cfg, acts)
     cutoff = (today - timedelta(days=KEEP_DAYS)).isoformat()
     for aid in [a for a, v in acts.items() if v["date"] < cutoff]:
         acts.pop(aid)
@@ -138,6 +139,27 @@ def sync_garmin(client, cfg: Config, state: dict, today: date) -> None:
     if not last or date.fromisoformat(last) <= today - timedelta(days=3):
         state["metrics"].update(garmin_source.fetch_metrics(client, today))
         state["metrics"]["updated"] = today.isoformat()
+
+
+def merge_manual_activities(cfg: Config, acts: dict) -> None:
+    """Add hand-logged sessions (``manual_activities``) unless Garmin has a real one that day.
+
+    Used while the watch does not sync; once Garmin delivers an activity of the
+    same sport on the same date, the manual entry is dropped again.
+    """
+    for n, m in enumerate(cfg.manual_activities):
+        aid = f"manual-{m['date']}-{m['sport']}-{n}"
+        real = any(a["date"] == m["date"] and a["sport"] == m["sport"] and not a["id"].startswith("manual-") for a in acts.values())
+        if real:
+            acts.pop(aid, None)
+            continue
+        acts[aid] = {k: v for k, v in {
+            "id": aid, "name": m.get("name", "Manuell eingetragen"), "type": "manual", "sport": m["sport"],
+            "start": f"{m['date']} {m.get('time', '12:00')}:00", "date": m["date"],
+            "duration_s": m["duration_min"] * 60, "elapsed_s": m["duration_min"] * 60,
+            "distance_m": m.get("distance_km", 0) * 1000, "avg_hr": m.get("avg_hr"),
+            "training_load": m.get("load"), "manual": True,
+        }.items() if v is not None}
 
 
 def load_series(cfg: Config, state: dict, today: date) -> list[dict]:

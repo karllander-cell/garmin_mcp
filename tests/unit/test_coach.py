@@ -314,3 +314,26 @@ def test_weight_command_and_body_view(cfg):
     v = body.view(cfg.body, state["weights"], wellness, date(2026, 10, 8))
     assert v["kcal_target"] == 3500 and v["protein_g"] == round(78.6 * 2)
     assert v["series"][-1]["date"] == "2026-10-08"
+
+
+def test_manual_activities_yield_to_real_garmin_data(cfg):
+    from dataclasses import replace
+
+    from garmin_mcp.coach.sync import merge_manual_activities
+
+    c = replace(cfg, manual_activities=[{"date": "2026-09-29", "sport": "run", "duration_min": 50, "distance_km": 8.5}])
+    acts = {}
+    merge_manual_activities(c, acts)
+    assert list(acts) == ["manual-2026-09-29-run-0"] and acts["manual-2026-09-29-run-0"]["distance_m"] == 8500
+    acts["123"] = {"id": "123", "date": "2026-09-29", "sport": "run"}
+    merge_manual_activities(c, acts)
+    assert list(acts) == ["123"]
+
+
+def test_manual_days_override_plan(cfg):
+    from dataclasses import replace
+
+    c = replace(cfg, manual_days={"2026-10-01": {"sessions": [{"sport": "bike", "title": "100 km", "duration_min": 210}]}})
+    w = build_plan(c, c.start_vdot)[0]
+    thu = [s for s in w["sessions"] if s["date"] == "2026-10-01"]
+    assert [s["title"] for s in thu] == ["100 km"]
