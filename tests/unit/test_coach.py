@@ -73,7 +73,8 @@ def test_sailing_days_have_priority(cfg, plan):
                 assert not any(s.get("key") for s in sessions), iso
                 assert not any(s["sport"] in ("bike", "row", "swim") for s in sessions), iso
                 if any(s["profile"] == "sail" and s["title"].startswith("Regatta") for s in sessions):
-                    assert {s["profile"] for s in sessions} <= {"sail", "activation"}, iso
+                    planned = [s for s in sessions if not s.get("optional")]  # hand-added optional extras are allowed
+                    assert {s["profile"] for s in planned} <= {"sail", "activation"}, iso
     assert sail_days > 50
 
 
