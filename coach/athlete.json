@@ -154,15 +154,6 @@
           "title": "Kraft A – Brust & Rücken",
           "duration_min": 60,
           "detail": "Schwerpunkt Brust (Mo war Rücken): Bankdrücken 4×6–8, Schrägbank KH 3×10, Dips 3×8–10, Rudern KH 3×10, Face Pulls 3×15"
-        },
-        {
-          "sport": "run",
-          "profile": "easy",
-          "title": "Lockerer Lauf + Steigerungen",
-          "distance_km": 8.0,
-          "duration_min": 45,
-          "detail": "45' locker Zone 2, am Ende 6×20'' Steigerungen – nur wenn die Beine sich gut anfühlen",
-          "optional": true
         }
       ]
     },
@@ -177,6 +168,21 @@
           "duration_min": 45,
           "optional": true,
           "detail": "Nur wenn du dich frisch fühlst: 3 Sätze je Übung, keine Beine – sonst lieber Sauna/Mobility und früh schlafen"
+        }
+      ]
+    },
+    "2026-10-03": {
+      "mode": "append",
+      "note": "Langer Lauf auf Samstag früh verschoben",
+      "sessions": [
+        {
+          "sport": "run",
+          "profile": "long",
+          "title": "Langer Lauf (früh, vor der Regatta)",
+          "distance_km": 11.0,
+          "duration_min": 65,
+          "key": true,
+          "detail": "Ganz locker Zone 2 (5:15–5:45/km), keine Steigerungen. Mind. 2 h vor dem ersten Start fertig sein, vorher kleines Frühstück (Toast/Banane), danach Frühstück mit Eiweiß + Kohlenhydraten und viel trinken."
         }
       ]
     }

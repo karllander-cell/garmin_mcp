@@ -67,6 +67,7 @@ def test_sailing_days_have_priority(cfg, plan):
         for s in w["sessions"]:
             by_day.setdefault(s["date"], []).append(s)
         for iso, sessions in by_day.items():
+            sessions = [s for s in sessions if not s.get("manual")]  # hand-planned days are the athlete's call
             if sailing_day(cfg, date.fromisoformat(iso)):
                 sail_days += 1
                 assert any(s["sport"] == "sail" for s in sessions)

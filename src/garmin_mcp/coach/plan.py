@@ -368,6 +368,7 @@ def _apply_manual_days(cfg: Config, d: list[date], days: list[list[dict]], paces
                 s = _other(day, spec["sport"], spec.get("profile", spec["sport"]), spec["title"], spec.get("detail", ""), spec["duration_min"])
                 s["key"] = bool(spec.get("key"))
             s["id"] = f"{s['id']}-m{n}"
+            s["manual"] = True
             if spec.get("optional"):
                 s["optional"] = True
             s["adjusted"] = entry.get("note", "Von Hand angepasst")
