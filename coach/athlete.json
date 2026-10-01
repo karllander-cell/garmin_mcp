@@ -146,7 +146,7 @@
       ]
     },
     "2026-10-02": {
-      "note": "Woche umgestellt: 100 km Ausfahrt Do, J70-Bundesliga am WE",
+      "note": "Langer Lauf auf Freitagabend gelegt (alternativ Sa früh)",
       "sessions": [
         {
           "sport": "strength",
@@ -154,6 +154,15 @@
           "title": "Kraft A – Brust & Rücken",
           "duration_min": 60,
           "detail": "Schwerpunkt Brust (Mo war Rücken): Bankdrücken 4×6–8, Schrägbank KH 3×10, Dips 3×8–10, Rudern KH 3×10, Face Pulls 3×15"
+        },
+        {
+          "sport": "run",
+          "profile": "long",
+          "title": "Langer Lauf (abends)",
+          "distance_km": 11.0,
+          "duration_min": 65,
+          "key": true,
+          "detail": "Ganz locker Zone 2 (5:15–5:45/km), keine Steigerungen – Beine sind von der Ausfahrt vorbelastet, Puls im Blick behalten. Danach gut essen und früh schlafen für die Regatta."
         }
       ]
     },
@@ -170,21 +179,6 @@
           "detail": "Nur wenn du dich frisch fühlst: 3 Sätze je Übung, keine Beine – sonst lieber Sauna/Mobility und früh schlafen"
         }
       ]
-    },
-    "2026-10-03": {
-      "mode": "append",
-      "note": "Langer Lauf auf Samstag früh verschoben",
-      "sessions": [
-        {
-          "sport": "run",
-          "profile": "long",
-          "title": "Langer Lauf (früh, vor der Regatta)",
-          "distance_km": 11.0,
-          "duration_min": 65,
-          "key": true,
-          "detail": "Ganz locker Zone 2 (5:15–5:45/km), keine Steigerungen. Mind. 2 h vor dem ersten Start fertig sein, vorher kleines Frühstück (Toast/Banane), danach Frühstück mit Eiweiß + Kohlenhydraten und viel trinken."
-        }
-      ]
     }
   },
   "manual_activities": [
@@ -198,25 +192,41 @@
     {
       "date": "2026-09-28",
       "sport": "swim",
-      "name": "Schwimmen 2.800 m (manuell)",
-      "duration_min": 55,
+      "name": "Schwimmen 2.800 m (Strava)",
+      "duration_min": 60,
       "distance_km": 2.8,
-      "time": "16:00"
+      "time": "16:35"
     },
     {
       "date": "2026-09-29",
       "sport": "run",
-      "name": "Lauf 8,5 km Z2 + 6×20'' (manuell)",
-      "duration_min": 50,
-      "distance_km": 8.5,
-      "time": "16:00"
+      "name": "Lauf 8,6 km Z2 + 6×20'' (Strava)",
+      "duration_min": 49,
+      "distance_km": 8.64,
+      "time": "17:30"
     },
     {
       "date": "2026-09-29",
       "sport": "strength",
-      "name": "Beine + Stabi (manuell)",
-      "duration_min": 85,
-      "time": "18:00"
+      "name": "Beine + Stabi (Strava)",
+      "duration_min": 52,
+      "time": "19:14"
+    },
+    {
+      "date": "2026-09-30",
+      "sport": "strength",
+      "name": "Kraft B + Stabi (Strava)",
+      "duration_min": 35,
+      "time": "15:58"
+    },
+    {
+      "date": "2026-10-01",
+      "sport": "bike",
+      "name": "Ausfahrt 84,7 km (Strava)",
+      "duration_min": 164,
+      "distance_km": 84.7,
+      "avg_hr": 139,
+      "time": "11:07"
     }
   ]
 }
